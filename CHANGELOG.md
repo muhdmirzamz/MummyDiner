@@ -1,6 +1,6 @@
-**CHANGELOG*
+###CHANGELOG
 
-###19 February 2015(estimate) - v0.2.0-alpha
+**19 February 2015(estimate) - v0.2.0-alpha**
 - Added waitress sprite
 - Added customer sprite
 - Added tables
@@ -12,5 +12,5 @@
 - Added debug mode
 
 
-###1 January 2015(estimate) - v0.1.0-alpha:
+**1 January 2015(estimate) - v0.1.0-alpha:**
 - started development
