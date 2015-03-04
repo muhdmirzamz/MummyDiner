@@ -15,41 +15,24 @@
 
 using namespace sf;
 
-enum ButtonType {
-	RECTANGLE,
-	CIRCLE
-};
-
 class ButtonClass {
 	public:
 		ButtonClass();
 	
-		void chooseButton(ButtonType button);
 		void setButton(float x, float y, float w, float h);
-		void setButton(float x, float y, float radius);
 		void setColor(Uint8 r, Uint8 g, Uint8 b);
 	
-		float getRadius();
 		float getLeftOfButton();
 		float getRightOfButton();
 		float getTopOfButton();
 		float getBottomOfButton();
 	
-		RectangleShape* getButton();
-		CircleShape* getCircleButton();
+		void render(RenderWindow &window);
 	
 	private:
-		ButtonType _buttonType;
-	
-		RectangleShape _rectangleButtonObj;
-		RectangleShape *_rectangleButton;
-	
-		CircleShape _circleButtonObj;
-		CircleShape *_circleButton;
+		RectangleShape _button;
 	
 		Color _color;
-	
-		float _radius;
 	
 		float _leftOfButton;
 		float _rightOfButton;

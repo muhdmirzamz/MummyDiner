@@ -23,6 +23,9 @@
 
 #define DEBUG_MODE 1
 
+#define QUICKSAND_REGULAR_FONT "fonts/Quicksand-Regular.ttf"
+#define LATO_LIGHT_FONT "fonts/Lato-Light.ttf"
+
 enum state {
 	NO_STATE,
 	EXIT,

@@ -73,6 +73,7 @@ int main(int argc, const char * argv[]) {
 	}
 	
 	delete gameState;
+	gameState = NULL;
 	
     return 0;
 }

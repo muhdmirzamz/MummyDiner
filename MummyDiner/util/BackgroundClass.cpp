@@ -9,12 +9,12 @@
 #include "BackgroundClass.h"
 
 BackgroundClass::BackgroundClass() {
-	_rectangleBackground = &_rectangleBackgroundObj;
+
 }
 
 void BackgroundClass::setBackground(float x, float y, float w, float h) {
-	_rectangleBackground->setPosition(x, y);
-	_rectangleBackground->setSize(Vector2f(w, h));
+	_rectangleBackground.setPosition(x, y);
+	_rectangleBackground.setSize(Vector2f(w, h));
 }
 
 void BackgroundClass::setColor(Uint8 r, Uint8 g, Uint8 b) {
@@ -22,9 +22,9 @@ void BackgroundClass::setColor(Uint8 r, Uint8 g, Uint8 b) {
 	_color.g = g;
 	_color.b = b;
 
-	_rectangleBackground->setFillColor(_color);
+	_rectangleBackground.setFillColor(_color);
 }
 
-RectangleShape* BackgroundClass::getBackground() {
-	return _rectangleBackground;
+void BackgroundClass::render(RenderWindow &window) {
+	window.draw(_rectangleBackground);
 }

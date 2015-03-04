@@ -21,12 +21,10 @@ class BackgroundClass {
 	
 		void setBackground(float x, float y, float w, float h);
 		void setColor(Uint8 r, Uint8 g, Uint8 b);
-	
-		RectangleShape* getBackground();
+		void render(RenderWindow &window);
 	
 	private:
-		RectangleShape _rectangleBackgroundObj;
-		RectangleShape *_rectangleBackground;
+		RectangleShape _rectangleBackground;
 	
 		Color _color;
 };

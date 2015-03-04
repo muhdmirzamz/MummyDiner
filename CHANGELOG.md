@@ -1,5 +1,7 @@
 ###CHANGELOG
 
+- Rewrote debug mode
+
 **19 February 2015(estimate) - v0.2.0-alpha**
 - Added waitress sprite
 - Added customer sprite

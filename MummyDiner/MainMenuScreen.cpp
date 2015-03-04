@@ -25,7 +25,7 @@ static bool stateChange;
 MainMenuScreen::MainMenuScreen() {
 	// title
 	_title = &_titleObj;
-	_title->setText("Quicksand-Regular.ttf", 80, "MummyDiner", 60, 20);
+	_title->setText(QUICKSAND_REGULAR_FONT , 80, "MummyDiner", 60, 20);
 	_title->setColor(200, 0, 250);
 
 	// start button
@@ -40,7 +40,7 @@ MainMenuScreen::MainMenuScreen() {
 	
 	// start text
 	_startText = &_startTextObj;
-	_startText->setText("Lato-Light.ttf", TEXT_SIZE, "Start", _horizontalCenterOfButton, _verticalCenterOfButton);
+	_startText->setText(LATO_LIGHT_FONT, TEXT_SIZE, "Start", _horizontalCenterOfButton, _verticalCenterOfButton);
 	_startText->setColor(255, 255, 255);
 	
 	// settings button
