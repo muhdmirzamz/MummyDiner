@@ -24,39 +24,13 @@ static bool stateChange;
 
 MainMenuScreen::MainMenuScreen() {
 	// title
-	_title = &_titleObj;
-	_title->setText(QUICKSAND_REGULAR_FONT , 80, "MummyDiner", 60, 20);
-	_title->setColor(200, 0, 250);
+	_title.set(QUICKSAND_REGULAR_FONT, 80, "MummyDiner", 60, 20, 200, 0, 250);
 
 	// start button
-	_startButton = &_startButtonObj;
-	_startButton->chooseButton(CIRCLE);
-	_startButton->setButton(50, BUTTON_Y_AXIS, BUTTON_RATIO);
-	_startButton->setColor(200, 0, 0);
-	
-	// finding out center of start button to place start text
-	_horizontalCenterOfButton = _startButton->getLeftOfButton() + (_startButton->getRadius() / 2) + 15;
-	_verticalCenterOfButton = _startButton->getTopOfButton() + (_startButton->getRadius() / 2) + 20;
-	
-	// start text
-	_startText = &_startTextObj;
-	_startText->setText(LATO_LIGHT_FONT, TEXT_SIZE, "Start", _horizontalCenterOfButton, _verticalCenterOfButton);
-	_startText->setColor(255, 255, 255);
+	_startButton.set(50, 200, 100, 100, 0, 255, 0, "Start", 0, 0, 0);
 	
 	// settings button
-	_settingsButton = &_settingsButtonObj;
-	_settingsButton->chooseButton(CIRCLE);
-	_settingsButton->setButton(400, BUTTON_Y_AXIS, BUTTON_RATIO);
-	_settingsButton->setColor(200, 0, 0);
-	
-	// redefine variables to position "settings text"
-	_horizontalCenterOfButton = _settingsButton->getLeftOfButton() + (_settingsButton->getRadius() / 2);
-	_verticalCenterOfButton = _settingsButton->getTopOfButton() + (_settingsButton->getRadius() / 2) + 20;
-	
-	// settings text
-	_settingsText = &_settingsTextObj;
-	_settingsText->setText("Lato-Light.ttf", TEXT_SIZE, "Settings", _horizontalCenterOfButton, _verticalCenterOfButton);
-	_settingsText->setColor(255, 255, 255);
+	_settingsButton.set(250, 200, 100, 100, 0, 255, 0, "Settings", 0, 0, 0);
 	
 	//clockPointer = &clockObj;
 	clockPointer = &clockObj;

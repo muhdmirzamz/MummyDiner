@@ -9,41 +9,37 @@
 #include "ButtonClass.h"
 
 ButtonClass::ButtonClass() {
-
+	
 }
 
-void ButtonClass::setButton(float x, float y, float w, float h) {
+void ButtonClass::set(float x, float y, float w, float h, Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue, string text, Uint8 textRed, Uint8 textGreen, Uint8 textBlue) {
 	_button.setPosition(x, y);
 	_button.setSize(Vector2f(w, h));
 	
 	_leftOfButton = _button.getPosition().x;
-	_rightOfButton = _leftOfButton + w;
+	_widthOfButton = _leftOfButton + w;
 	_topOfButton = _button.getPosition().y;
-	_bottomOfButton = _topOfButton + h;
+	_heightOfButton = _topOfButton + h;
+	
+	_button.setFillColor(Color(buttonRed, buttonGreen, buttonBlue));
+	
+	_text.set("fonts/Quicksand-Regular.ttf", 10, text, CENTER_OF_BUTTON_X_AXIS, CENTER_OF_BUTTON_Y_AXIS, textRed, textGreen, textBlue);
 }
 
-void ButtonClass::setColor(Uint8 r, Uint8 g, Uint8 b) {
-	_color.r = r;
-	_color.g = g;
-	_color.b = b;
-
-	_button.setFillColor(_color);
-}
-
-float ButtonClass::getLeftOfButton() {
+float ButtonClass::getLeftSide() {
 	return _leftOfButton;
 }
 
-float ButtonClass::getRightOfButton() {
-	return _rightOfButton;
+float ButtonClass::getWidth() {
+	return _widthOfButton;
 }
 
-float ButtonClass::getTopOfButton() {
+float ButtonClass::getTop() {
 	return _topOfButton;
 }
 
-float ButtonClass::getBottomOfButton() {
-	return _bottomOfButton;
+float ButtonClass::getHeight() {
+	return _heightOfButton;
 }
 
 void ButtonClass::render(RenderWindow &window) {

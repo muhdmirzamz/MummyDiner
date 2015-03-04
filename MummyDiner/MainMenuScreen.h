@@ -24,20 +24,10 @@ class MainMenuScreen: public GameState {
 		static void startFPSTimer();
 	
 	private:
-		TextClass _titleObj;
-		TextClass *_title;
-	
-		float _horizontalCenterOfButton;
-		float _verticalCenterOfButton;
-		ButtonClass _startButtonObj;
-		ButtonClass *_startButton;
-		TextClass _startTextObj;
-		TextClass *_startText;
-	
-		ButtonClass _settingsButtonObj;
-		ButtonClass *_settingsButton;
-		TextClass _settingsTextObj;
-		TextClass *_settingsText;
+		TextClass _title;
+
+		ButtonClass _startButton;
+		ButtonClass _settingsButton;
 };
 
 #endif /* defined(__MummyDiner__MainMenuScreen__) */

@@ -9,27 +9,19 @@
 #include "TextClass.h"
 
 TextClass::TextClass() {
-	_font = &_fontObj;
-	_text = &_textObj;
+
 }
 
-void TextClass::setText(const char *file, int charaterSize, string text, float x, float y) {
-	_font->loadFromFile(file);
-	_text->setFont(*_font);
-	_text->setCharacterSize(charaterSize);
-	_text->setString(text);
-	_text->setPosition(x, y);
+void TextClass::set(const char *file, int fontSize, string text, float x, float y, Uint8 r, Uint8 g, Uint8 b) {
+	_font.loadFromFile(file);
+	_text.setFont(_font);
+	_text.setCharacterSize(fontSize);
+	_text.setString(text);
+	_text.setPosition(x, y);
+	_text.setColor(Color(r, g, b));
 }
 
-void TextClass::setColor(Uint8 r, Uint8 g, Uint8 b) {
-	_color.r = r;
-	_color.g = g;
-	_color.b = b;
-
-	_text->setColor(_color);
-}
-
-Text* TextClass::getText() {
-	return _text;
+void TextClass::render(RenderWindow &window) {
+	window.draw(_text);
 }
 

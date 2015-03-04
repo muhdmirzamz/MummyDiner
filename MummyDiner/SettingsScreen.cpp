@@ -9,11 +9,7 @@
 #include "SettingsScreen.h"
 
 SettingsScreen::SettingsScreen() {
-	_rect = &_rectObj;
-
-	_rect->chooseButton(RECTANGLE);
-	_rect->setButton(200, 200, 200, 200);
-	_rect->setColor(0, 0, 255);
+	_button.set(200, 200, 200, 200, 0, 0, 255, "This is a button", 255, 0, 100);
 }
 
 void SettingsScreen::handleEvent() {
@@ -39,7 +35,7 @@ void SettingsScreen::update() {
 }
 
 void SettingsScreen::render() {
-	window.draw(*_rect->getButton());
+	_button.render(window);
 
 	window.display();
 }

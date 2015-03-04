@@ -22,8 +22,7 @@ class SettingsScreen: public GameState {
 		void render();
 	
 	private:
-		ButtonClass _rectObj;
-		ButtonClass *_rect;
+		ButtonClass _button;
 };
 
 #endif /* defined(__MummyDiner__SettingsScreen__) */

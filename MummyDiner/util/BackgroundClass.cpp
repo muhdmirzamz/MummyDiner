@@ -12,19 +12,13 @@ BackgroundClass::BackgroundClass() {
 
 }
 
-void BackgroundClass::setBackground(float x, float y, float w, float h) {
-	_rectangleBackground.setPosition(x, y);
-	_rectangleBackground.setSize(Vector2f(w, h));
-}
-
-void BackgroundClass::setColor(Uint8 r, Uint8 g, Uint8 b) {
-	_color.r = r;
-	_color.g = g;
-	_color.b = b;
-
-	_rectangleBackground.setFillColor(_color);
+void BackgroundClass::set(float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b) {
+	_background.setPosition(x, y);
+	_background.setSize(Vector2f(w, h));
+	
+	_background.setFillColor(Color(r, g, b));
 }
 
 void BackgroundClass::render(RenderWindow &window) {
-	window.draw(_rectangleBackground);
+	window.draw(_background);
 }

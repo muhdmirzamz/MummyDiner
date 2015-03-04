@@ -9,10 +9,6 @@
 #include "DebugMode.h"
 
 DebugMode::DebugMode() {
-	_color.r = 0;
-	_color.g = 0;
-	_color.b = 0;
-	
 	_font.loadFromFile("fonts/Lato-Light.ttf");
 	_fontSize = 15;
 	
@@ -20,36 +16,36 @@ DebugMode::DebugMode() {
 }
 
 // add debug properties here
-void DebugMode::setDebugMode() {
+void DebugMode::set() {
 	setTextAndPosition(_fps, "FPS: ", 10, 10, _fpsValue);
-}
-
-void DebugMode::setTextAndPosition(Text variable, string text, float variableX, float variableY, Text variableValue) {
-	// the text
-	variable.setFont(_font);
-	variable.setString(text);
-	variable.setCharacterSize(_fontSize);
-	variable.setStyle(Text::Bold);
-	variable.setColor(_color);
-	
-	// the value, except the value
-	variableValue.setFont(_font);
-	variableValue.setCharacterSize(_fontSize);
-	variableValue.setStyle(Text::Bold);
-	variableValue.setColor(_color);
-	
-	variable.setPosition(variableX, variableY);
-	variableValue.setPosition(POSITION_VALUE, variableY); // set the value a bit to the right side, same y position though
 }
 
 // set the value of any changing / dynamic debug properties
 // one example: FPS
-void DebugMode::setFPSValue(int value) {
+void DebugMode::setFPSValue(float value) {
 	_fpsValue.setString(to_string(value)); // change numeric value to string
 }
 
-void DebugMode::showDebugMode(RenderWindow &window) {
+void DebugMode::show(RenderWindow &window) {
 	window.draw(_fps);
 	window.draw(_fpsValue);
 }
 
+// dealing with two things
+// the text and the value side by side
+void DebugMode::setTextAndPosition(Text variableLabel, string label, float variableX, float variableY, Text variableValue) {
+	setText(variableLabel);
+	variableLabel.setString(label);
+	
+	setText(variableValue);
+	
+	variableLabel.setPosition(variableX, variableY);
+	variableValue.setPosition(VALUE_X_POS, variableY); // set the value a bit to the right side, same y position though
+}
+
+void DebugMode::setText(Text variable) {
+	variable.setFont(_font);
+	variable.setCharacterSize(_fontSize);
+	variable.setStyle(Text::Bold);
+	variable.setColor(Color(0, 0, 0));
+}

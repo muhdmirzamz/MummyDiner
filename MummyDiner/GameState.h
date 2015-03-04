@@ -15,7 +15,6 @@
 #include <SFML/Graphics.hpp>
 
 #include <util/DebugMode.h>
-
 #include <util/TextClass.h>
 #include <util/ButtonClass.h>
 #include <util/BackgroundClass.h>
@@ -59,14 +58,6 @@ class GameState {
 		RenderWindow window;
 		Event event;
 		Color color;
-	
-		// debugging symbols
-		DebugMode _mouseXPosDebugObj;
-		DebugMode *_mouseXPosDebug;
-		DebugMode _mouseYPosDebugObj;
-		DebugMode *_mouseYPosDebug;
-		DebugMode _fpsDebugObj;
-		DebugMode *_fpsDebug;
 	
 	private:
 		int _tempState;

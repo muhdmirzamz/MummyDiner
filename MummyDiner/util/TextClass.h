@@ -20,18 +20,12 @@ class TextClass {
 	public:
 		TextClass();
 	
-		void setText(const char *file, int charaterSize, string text, float x, float y);
-		void setColor(Uint8 r, Uint8 g, Uint8 b);
-		Text* getText();
+		void set(const char *file, int fontSize, string text, float x, float y, Uint8 r, Uint8 g, Uint8 b);
+		void render(RenderWindow &window);
 	
 	private:
-		Font _fontObj;
-		Font *_font;
-	
-		Text _textObj;
-		Text *_text;
-	
-		Color _color;
+		Font _font;
+		Text _text;
 };
 
 #endif /* defined(__MummyDiner__TextClass__) */

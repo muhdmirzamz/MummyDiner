@@ -13,7 +13,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#define POSITION_VALUE (variableX + _valuePositionOffset)
+#define VALUE_X_POS (variableX + _valuePositionOffset)
 
 using namespace sf;
 using namespace std;
@@ -22,14 +22,16 @@ class DebugMode {
 	public:
 		DebugMode();
 	
-		void setDebugMode();
-		void setTextAndPosition(Text variable, string text, float variableX, float variableY, Text variableValue); // might be a private function
+		void set();
 	
-		void setFPSValue(int value);
+		void setFPSValue(float value);
 
-		void showDebugMode(RenderWindow &window);
+		void show(RenderWindow &window);
 	
 	private:
+		void setTextAndPosition(Text variable, string label, float variableX, float variableY, Text variableValue); // might be a private function
+		void setText(Text variable);
+	
 		Font _font;
 		int _fontSize;
 	
@@ -37,8 +39,6 @@ class DebugMode {
 		Text _fpsValue;
 		// player position
 		// mouse position
-	
-		Color _color;
 	
 		int _valuePositionOffset;
 };

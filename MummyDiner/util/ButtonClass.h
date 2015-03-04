@@ -13,31 +13,35 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "TextClass.h"
+
+#define CENTER_OF_BUTTON_X_AXIS (_leftOfButton + (_widthOfButton / 4))
+#define CENTER_OF_BUTTON_Y_AXIS (_topOfButton + (_heightOfButton / 4))
+
 using namespace sf;
 
 class ButtonClass {
 	public:
 		ButtonClass();
 	
-		void setButton(float x, float y, float w, float h);
-		void setColor(Uint8 r, Uint8 g, Uint8 b);
+		void set(float x, float y, float w, float h, Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue, string text, Uint8 textRed, Uint8 textGreen, Uint8 textBlue);
 	
-		float getLeftOfButton();
-		float getRightOfButton();
-		float getTopOfButton();
-		float getBottomOfButton();
+		float getLeftSide();
+		float getWidth();
+		float getTop();
+		float getHeight();
 	
 		void render(RenderWindow &window);
 	
 	private:
+		TextClass _text;
+	
 		RectangleShape _button;
 	
-		Color _color;
-	
 		float _leftOfButton;
-		float _rightOfButton;
+		float _widthOfButton;
 		float _topOfButton;
-		float _bottomOfButton;
+		float _heightOfButton;
 };
 
 #endif /* defined(__MummyDiner__ButtonClass__) */

@@ -19,14 +19,11 @@ class BackgroundClass {
 	public:
 		BackgroundClass();
 	
-		void setBackground(float x, float y, float w, float h);
-		void setColor(Uint8 r, Uint8 g, Uint8 b);
+		void set(float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b);
 		void render(RenderWindow &window);
 	
 	private:
-		RectangleShape _rectangleBackground;
-	
-		Color _color;
+		RectangleShape _background;
 };
 
 #endif /* defined(__MummyDiner__BackgroundClass__) */
