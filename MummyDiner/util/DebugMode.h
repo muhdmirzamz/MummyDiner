@@ -13,7 +13,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <util/BackgroundClass.h>
+#define POSITION_VALUE (variableX + _valuePositionOffset)
 
 using namespace sf;
 using namespace std;
@@ -22,39 +22,25 @@ class DebugMode {
 	public:
 		DebugMode();
 	
-		void setText(string text, int size);
-		void setTextPosition(float textX, float valueX, float y);
-		void setValue(int value, int size);
-		Text* getText();
-		Text* getValue();
+		void setDebugMode();
+		void setTextAndPosition(Text variable, string text, float variableX, float variableY, Text variableValue); // might be a private function
 	
-		void setBackgroundPosition(int x, int y, int w, int h);
-		void drawBackground(Uint8 r, Uint8 g, Uint8 b);
-		RectangleShape* getBackground();
+		void setFPSValue(int value);
+
+		void showDebugMode(RenderWindow &window);
 	
 	private:
-		Font _fontObj;
-		Font *_font;
+		Font _font;
+		int _fontSize;
 	
-		/*
-			This file contains several components
-			one for debug name
-			one for debug value
-			one for debug background position
-			usage of this class can be used with only one object
-			
-			took a little help from background class
-		*/
-		Text _variableNameObj;
-		Text *_variableName;
-	
-		Text _variableValueObj;
-		Text *_variableValue;
-	
-		BackgroundClass _backgroundObj;
-		BackgroundClass *_background;
+		Text _fps;
+		Text _fpsValue;
+		// player position
+		// mouse position
 	
 		Color _color;
+	
+		int _valuePositionOffset;
 };
 
 #endif /* defined(__MummyDiner__DebugMode__) */

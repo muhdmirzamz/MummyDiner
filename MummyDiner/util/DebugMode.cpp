@@ -9,60 +9,47 @@
 #include "DebugMode.h"
 
 DebugMode::DebugMode() {
-	_font = &_fontObj;
-	
-	_variableName = &_variableNameObj;
-	_variableValue = &_variableValueObj;
-	
-	_background = &_backgroundObj;
-}
-
-void DebugMode::setText(string text, int size) {
 	_color.r = 0;
 	_color.g = 0;
 	_color.b = 0;
-
-	_font->loadFromFile("Lato-Light.ttf");
 	
-	_variableName->setFont(*_font);
-	_variableName->setString(text);
-	_variableName->setCharacterSize(size);
-	_variableName->setStyle(Text::Bold);
-	_variableName->setColor(_color);
+	_font.loadFromFile("fonts/Lato-Light.ttf");
+	_fontSize = 15;
+	
+	_valuePositionOffset = 10;
 }
 
-void DebugMode::setTextPosition(float textX, float valueX, float y) {
-	_variableName->setPosition(textX, y);
-	_variableValue->setPosition(valueX, y);
+// add debug properties here
+void DebugMode::setDebugMode() {
+	setTextAndPosition(_fps, "FPS: ", 10, 10, _fpsValue);
 }
 
-void DebugMode::setValue(int value, int size) {
-	_variableValue->setFont(*_font);
-	_variableValue->setString(to_string(value));
-	_variableValue->setCharacterSize(size);
-	_variableValue->setStyle(Text::Bold);
-
-	_variableValue->setColor(_color);
+void DebugMode::setTextAndPosition(Text variable, string text, float variableX, float variableY, Text variableValue) {
+	// the text
+	variable.setFont(_font);
+	variable.setString(text);
+	variable.setCharacterSize(_fontSize);
+	variable.setStyle(Text::Bold);
+	variable.setColor(_color);
+	
+	// the value, except the value
+	variableValue.setFont(_font);
+	variableValue.setCharacterSize(_fontSize);
+	variableValue.setStyle(Text::Bold);
+	variableValue.setColor(_color);
+	
+	variable.setPosition(variableX, variableY);
+	variableValue.setPosition(POSITION_VALUE, variableY); // set the value a bit to the right side, same y position though
 }
 
-Text* DebugMode::getText() {
-	return _variableName;
+// set the value of any changing / dynamic debug properties
+// one example: FPS
+void DebugMode::setFPSValue(int value) {
+	_fpsValue.setString(to_string(value)); // change numeric value to string
 }
 
-Text* DebugMode::getValue() {
-	return _variableValue;
+void DebugMode::showDebugMode(RenderWindow &window) {
+	window.draw(_fps);
+	window.draw(_fpsValue);
 }
 
-void DebugMode::setBackgroundPosition(int x, int y, int w, int h) {
-	_background->setBackground(x, y, w, h);
-}
-
-void DebugMode::drawBackground(Uint8 r, Uint8 g, Uint8 b) {
-	_background->setColor(r, g, b);
-}
-
-RectangleShape* DebugMode::getBackground() {
-	// get the rectangle
-	// not the Background object
-	return _background->getBackground();
-}
