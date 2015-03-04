@@ -1,6 +1,6 @@
 ###CHANGELOG
 
-**4 March 2015 - v0.3.0-alpha
+**4 March 2015 - v0.3.0-alpha**
 - Rewrote debug mode
 - Refactored button class
 - Refactored text class
