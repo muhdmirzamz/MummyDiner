@@ -8,73 +8,58 @@
 
 #include "SpriteClass.h"
 
-static int SPRITE_SPEED = 1;
-
 SpriteClass::SpriteClass() {
-	_spriteImg = &_spriteImgObj;
-	_spriteTexture = &_spriteTextureObj;
-	_sprite = &_spriteObj;
+
 }
 
-void SpriteClass::loadSprite(const char *file) {
-	_spriteImg->loadFromFile(file);
-	_spriteImg->createMaskFromColor(_color.White);
-	_spriteTexture->loadFromImage(*_spriteImg);
-	_sprite->setTexture(*_spriteTexture);
-}
+void SpriteClass::set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y) {
+	_speed = 1;
 
-void SpriteClass::cropSprite(int x, int y, int w, int h, float xScale, float yScale) {
-	_spriteRect.left = x;
-	_spriteRect.top = y;
-	_spriteRect.width = w;
-	_spriteRect.height = h;
-
-	_sprite->scale(xScale, yScale);
+	// load file into image
+	_image.loadFromFile(file);
+	_image.createMaskFromColor(Color(255, 255, 255));
 	
-	_sprite->setTextureRect(_spriteRect);
+	// load image into texture
+	_texture.loadFromImage(_image);
+	
+	// load texture to sprite
+	_sprite.setTexture(_texture);
+	
+	// crop and scale sprite using rectangle
+	_cropRect.left = cropX;
+	_cropRect.top = cropY;
+	_cropRect.width = cropW;
+	_cropRect.height = cropH;
+	_sprite.scale(0.1, 0.1);
+	
+	// apply rectangle to texture
+	_sprite.setTextureRect(_cropRect);
+	
+	_sprite.setPosition(x, y);
 }
 
 void SpriteClass::positionSprite(float x, float y) {
-	_sprite->setPosition(x, y);
-	
-	_spriteXPos = x;
-	_spriteYPos = y;
+	_sprite.setPosition(x, y);
 }
 
-void SpriteClass::moveSpriteUp() {
-	_sprite->move(0, -SPRITE_SPEED);
+float SpriteClass::getXPos() {
+	return _sprite.getPosition().x;
 }
 
-void SpriteClass::moveSpriteDown() {
-	_sprite->move(0, SPRITE_SPEED);
+float SpriteClass::getYPos() {
+	return _sprite.getPosition().y;
 }
 
-void SpriteClass::moveSpriteLeft() {
-	_sprite->move(-SPRITE_SPEED, 0);
-}
-
-void SpriteClass::moveSpriteRight() {
-	_sprite->move(SPRITE_SPEED, 0);
-}
-
-float SpriteClass::getSpriteXPos() {
-	return _sprite->getPosition().x;
-}
-
-float SpriteClass::getSpriteYPos() {
-	return _sprite->getPosition().y;
-}
-
-float SpriteClass::getSpriteWidth() {
+float SpriteClass::getWidth() {
 	// have to multiply the width with the scale
 	// sprite will still take the original width when scaled down
-	return _sprite->getTextureRect().width * _sprite->getScale().x;
+	return _sprite.getTextureRect().width * _sprite.getScale().x;
 }
 
-float SpriteClass::getSpriteHeight() {
-	return _sprite->getTextureRect().height * _sprite->getScale().y;
+float SpriteClass::getHeight() {
+	return _sprite.getTextureRect().height * _sprite.getScale().y;
 }
 
-Sprite* SpriteClass::getSprite() {
-	return _sprite;
+void SpriteClass::render(RenderWindow &window) {
+	window.draw(_sprite);
 }

@@ -19,39 +19,24 @@ class SpriteClass {
 	public:
 		SpriteClass();
 	
-		void loadSprite(const char *file);
-		void cropSprite(int x, int y, int w, int h, float xScale, float yScale);
-		void positionSprite(float x, float y);
+		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y);
+		virtual void positionSprite(float x, float y);
 	
-		void moveSpriteUp();
-		void moveSpriteDown();
-		void moveSpriteLeft();
-		void moveSpriteRight();
+		virtual float getXPos();
+		virtual float getYPos();
 	
-		float getSpriteXPos();
-		float getSpriteYPos();
+		virtual float getWidth();
+		virtual float getHeight();
 	
-		float getSpriteWidth();
-		float getSpriteHeight();
+		virtual void render(RenderWindow &window);
 	
-		Sprite* getSprite();
+	protected:
+		Image _image;
+		Texture _texture;
+		IntRect _cropRect;
+		Sprite _sprite;
 	
-	private:
-		Image _spriteImgObj;
-		Image *_spriteImg;
-	
-		Texture _spriteTextureObj;
-		Texture *_spriteTexture;
-	
-		Sprite _spriteObj;
-		Sprite *_sprite;
-	
-		IntRect _spriteRect;
-	
-		Color _color;
-	
-		float _spriteXPos;
-		float _spriteYPos;
+		float _speed; // maybe good for future feature in speed variations
 	
 		bool spriteMovedUp;
 		bool spriteMovedDown;
