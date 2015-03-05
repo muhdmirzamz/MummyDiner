@@ -18,7 +18,8 @@
 #include <util/TextClass.h>
 #include <util/ButtonClass.h>
 #include <util/BackgroundClass.h>
-#include <util/SpriteClass.h>
+
+#include <sprite/SpriteClass.h>
 
 #define DEBUG_MODE 1
 

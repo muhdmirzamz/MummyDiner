@@ -23,7 +23,7 @@ typedef struct {
 	int y = 40;
 } customerTopRightCoordinate;
 
-typedef struct {
+typedef struct
 	int x = 140;
 	int y = 190;
 } customerBottomLeftCoordinate;
