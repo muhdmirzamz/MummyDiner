@@ -20,7 +20,7 @@ class Chef: public SpriteClass {
 		Chef();
 	
 		void cook();
-		static void startCooking();
+		void startCooking();
 };
 
 #endif /* defined(__MummyDiner__Chef__) */

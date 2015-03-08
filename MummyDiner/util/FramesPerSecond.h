@@ -11,4 +11,37 @@
 
 #include <stdio.h>
 
+#include <SFML/System.hpp>
+
+using namespace sf;
+
+class FramesPerSecond {
+	public:
+		FramesPerSecond();
+	
+		void startCounting();
+		void stopCounting();
+	
+		void hasReachedStartOfFrame();
+		void hasReachedEndOfFrame();
+	
+		float getFPS();
+	
+	private:
+		void calculateStartTime();
+		void calculateEndTime();
+		void incrementFrames();
+		void calculateFPS();
+		void capFPS();
+	
+		int _stillLooping;
+		Clock _clock;
+	
+		float _frames;
+		Time _startTime;
+		Time _endTime;
+	
+		bool _endOfFrameReached;
+};
+
 #endif /* defined(__MummyDiner__FramesPerSecond__) */

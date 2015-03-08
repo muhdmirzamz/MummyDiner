@@ -42,6 +42,50 @@ void SpriteClass::positionSprite(float x, float y) {
 	_sprite.setPosition(x, y);
 }
 
+void SpriteClass::moveUp() {
+	
+}
+
+void SpriteClass::moveDown() {
+	
+}
+
+void SpriteClass::moveLeft() {
+	
+}
+
+void SpriteClass::moveRight() {
+	
+}
+
+void SpriteClass::handleWindowCollision() {
+	
+}
+
+void SpriteClass::takeOrder() { // needs integration with order list system
+
+}
+
+void SpriteClass::cook() {
+	
+}
+
+void SpriteClass::startCooking() {
+	
+}
+
+void SpriteClass::spawn() {
+	
+}
+
+void SpriteClass::startWaiting() {
+	
+}
+
+void SpriteClass::order() {
+	
+}
+
 float SpriteClass::getXPos() {
 	return _sprite.getPosition().x;
 }

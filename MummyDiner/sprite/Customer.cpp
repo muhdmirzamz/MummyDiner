@@ -11,3 +11,18 @@
 Customer::Customer() {
 	
 }
+
+void Customer::spawn() {
+/*
+	srand((int)time(NULL));
+	_randomTable = rand() % 4 + 1;
+*/
+}
+
+void Customer::startWaiting() {
+	
+}
+
+void Customer::order() {
+	
+}

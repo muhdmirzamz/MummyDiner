@@ -19,9 +19,29 @@ class SpriteClass {
 	public:
 		SpriteClass();
 	
+		// normal sprite
 		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y);
 		virtual void positionSprite(float x, float y);
+
+		// waitress
+		virtual void moveUp();
+		virtual void moveDown();
+		virtual void moveLeft();
+		virtual void moveRight();
+		
+		virtual void handleWindowCollision();
+		virtual void takeOrder(); // needs integration with order list system
 	
+		// chef
+		virtual void cook();
+		virtual void startCooking();
+	
+		// customer
+		virtual void spawn();
+		virtual void startWaiting();
+		virtual void order();
+	
+		// normal sprite
 		virtual float getXPos();
 		virtual float getYPos();
 	
@@ -38,10 +58,12 @@ class SpriteClass {
 	
 		float _speed; // maybe good for future feature in speed variations
 	
+		/*
 		bool spriteMovedUp;
 		bool spriteMovedDown;
 		bool spriteMovedLeft;
 		bool spriteMovedRight;
+		*/
 };
 
 #endif /* defined(__MummyDiner__Sprite__) */

@@ -8,8 +8,6 @@
 
 #include "Chef.h"
 
-static Thread cookThread(Chef::startCooking);
-
 Chef::Chef() {
 
 }
@@ -18,6 +16,8 @@ void Chef::cook() {
 	// use a boolean flag to check if thread is running,
 	// that might help you think of something
 	// the next time you try to solve this problem
+	
+	// this function may not be needed
 }
 
 void Chef::startCooking() {
