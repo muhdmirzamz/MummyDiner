@@ -21,9 +21,7 @@ class MainMenuScreen: public GameState {
 		void update();
 		void render();
 	
-		static void startFPSTimer();
-	
-	private:
+	private:	
 		TextClass _title;
 
 		ButtonClass _startButton;

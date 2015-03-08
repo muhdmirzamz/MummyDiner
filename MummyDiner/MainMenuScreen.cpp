@@ -8,88 +8,51 @@
 
 #include "MainMenuScreen.h"
 
-const float BUTTON_Y_AXIS = 200;
-const float BUTTON_RATIO = 100;
-const float TEXT_SIZE = 30;
-
-static Thread fpsThread(MainMenuScreen::startFPSTimer);
-static Clock clockObj;
-static Clock *clockPointer;
-static Time startTime;
-static Time endTime;
-static float frames;
-static float fps;
-static bool timerStart;
-static bool stateChange;
+static FramesPerSecond fps;
+static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 MainMenuScreen::MainMenuScreen() {
-	// title
 	_title.set(QUICKSAND_REGULAR_FONT, 80, "MummyDiner", 60, 20, 200, 0, 250);
-
-	// start button
-	_startButton.set(50, 200, 100, 100, 0, 255, 0, "Start", 0, 0, 0);
+	_startButton.set(60, 300, 100, 100, 0, 255, 0, "Start", 0, 0, 0);
+	_settingsButton.set(470, 300, 100, 100, 0, 255, 0, "Settings", 0, 0, 0);
 	
-	// settings button
-	_settingsButton.set(250, 200, 100, 100, 0, 255, 0, "Settings", 0, 0, 0);
-	
-	//clockPointer = &clockObj;
-	clockPointer = &clockObj;
-	fps = 0;
+	// initialise mouse position
+	_mouseXPos = 0;
+	_mouseYPos = 0;
 	
 #if DEBUG_MODE == 1
-	_mouseXPosDebug = &_mouseXPosDebugObj;
-	_mouseXPosDebug->setText("Mouse X-Pos: ", 15);
-	_mouseXPosDebug->setTextPosition(10, 150, 10);
-	
-	_mouseYPosDebug = &_mouseYPosDebugObj;
-	_mouseYPosDebug->setText("Mouse Y-Pos: ", 15);
-	_mouseYPosDebug->setTextPosition(10, 150, 50);
-	
-	_fpsDebug = &_fpsDebugObj;
-	_fpsDebug->setText("FPS: ", 15);
-	_fpsDebug->setTextPosition(10, 150, 90);
+	_debug.set();
 #endif
 	
 	fpsThread.launch();
 }
 
 void MainMenuScreen::handleEvent() {
-	timerStart = true;
+	fps.hasReachedStartOfFrame();
 
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
-			stateChange = true;
+			fps.stopCounting();
 		
 			cleanup();
 			
 			setState(EXIT);
 		}
-		
-		if (event.type == event.MouseMoved) {
+
 #if DEBUG_MODE == 1
-			_mouseXPosDebug->setValue(event.mouseMove.x, 15);
-			_mouseYPosDebug->setValue(event.mouseMove.y, 15);
-#endif
+		if (event.type == event.MouseMoved) {
+			_debug.setMousePosition(MOUSE_X, MOUSE_Y);
 		}
+#endif
 		
 		if (event.type == event.MouseButtonPressed) {
-			if (event.mouseButton.x >= _startButton->getLeftOfButton() && event.mouseButton.x <= _startButton->getRightOfButton()) {
-				if (event.mouseButton.y >= _startButton->getTopOfButton() && event.mouseButton.y <= _startButton->getBottomOfButton()) {
-					stateChange = true;
-				
+			if (MOUSE_X_CLICK >= _startButton.getLeftSide() && MOUSE_X_CLICK <= _startButton.getWidth()) {
+				if (MOUSE_Y_CLICK >= _startButton.getTop() && MOUSE_Y_CLICK <= _startButton.getHeight()) {
+					fps.stopCounting();
+					
 					cleanup();
 					
 					setState(LEVEL);
-				}
-			}
-		
-			if (event.mouseButton.x >= _settingsButton->getLeftOfButton() && event.mouseButton.x <= _settingsButton->getRightOfButton()) {
-				if (event.mouseButton.y >= _settingsButton->getTopOfButton() && event.mouseButton.y <= _settingsButton->getBottomOfButton()) {
-					stateChange = true;
-				
-					cleanup();
-				
-					setState(SETTINGS);
 				}
 			}
 		}
@@ -98,62 +61,22 @@ void MainMenuScreen::handleEvent() {
 
 void MainMenuScreen::update() {
 	window.clear(color.White);
-
-	timerStart = false;
+	
+	fps.hasReachedEndOfFrame();
 	
 #if DEBUG_MODE == 1
-	_fpsDebug->setValue(fps, 15);
+	_debug.setFPSValue(fps.getFPS());
 #endif
 }
 
 void MainMenuScreen::render() {
-	window.draw(*_title->getText());
-	
-	window.draw(*_startButton->getCircleButton());
-	window.draw(*_startText->getText());
-	
-	window.draw(*_settingsButton->getCircleButton());
-	window.draw(*_settingsText->getText());
+	_title.render(window);
+	_startButton.render(window);
+	_settingsButton.render(window);
 	
 #if DEBUG_MODE == 1
-	window.draw(*_mouseXPosDebug->getText());
-	window.draw(*_mouseXPosDebug->getValue());
-	
-	window.draw(*_mouseYPosDebug->getText());
-	window.draw(*_mouseYPosDebug->getValue());
-	
-	window.draw(*_fpsDebug->getText());
-	window.draw(*_fpsDebug->getValue());
+	_debug.show(window);
 #endif
 	
 	window.display();
-}
-
-void MainMenuScreen::startFPSTimer() {
-#if DEBUG_MODE == 1
-	int i = 0;
-#endif
-
-	while (!stateChange) {
-		// let this run
-		// putting an if statement on this causes FPS to go haywire
-		// issue fixed
-		startTime = clockPointer->getElapsedTime();
-		
-		if (!timerStart) {
-			endTime = clockPointer->getElapsedTime();
-			++frames;
-			
-			fps = frames / (clockPointer->getElapsedTime().asMilliseconds() / 1000);
-			
-			// if frame finishes early
-			if ((endTime.asMilliseconds() - startTime.asMilliseconds()) < (1000 / 60)) {
-				sleep(milliseconds((1000 / 60) - (endTime.asMilliseconds() - startTime.asMilliseconds())));
-			}
-		}
-#if DEBUG_MODE == 1
-		++i;
-		printf("%d\n", i);
-#endif
-	}
 }
