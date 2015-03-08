@@ -14,17 +14,26 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <util/DebugMode.h>
-#include <util/TextClass.h>
-#include <util/ButtonClass.h>
-#include <util/BackgroundClass.h>
+#include "util/DebugMode.h"
+#include "util/FramesPerSecond.h"
+#include "util/TextClass.h"
+#include "util/ButtonClass.h"
+#include "util/BackgroundClass.h"
 
-#include <sprite/SpriteClass.h>
+#include "sprite/SpriteClass.h"
+#include "sprite/Waitress.h"
+#include "sprite/Customer.h"
+#include "sprite/Chef.h"
 
 #define DEBUG_MODE 1
 
 #define QUICKSAND_REGULAR_FONT "fonts/Quicksand-Regular.ttf"
 #define LATO_LIGHT_FONT "fonts/Lato-Light.ttf"
+
+#define MOUSE_X event.mouseMove.x
+#define MOUSE_Y event.mouseMove.y
+#define MOUSE_X_CLICK event.mouseButton.x
+#define MOUSE_Y_CLICK event.mouseButton.y
 
 enum state {
 	NO_STATE,
@@ -46,7 +55,7 @@ class GameState {
 	
 		void setState(int state);
 		int getState();
-	
+
 		virtual	void handleEvent();
 		virtual void spawnCustomer();
 		virtual	void moveCharacter();
@@ -59,6 +68,11 @@ class GameState {
 		RenderWindow window;
 		Event event;
 		Color color;
+	
+		DebugMode _debug;
+	
+		int _mouseXPos;
+		int _mouseYPos;
 	
 	private:
 		int _tempState;

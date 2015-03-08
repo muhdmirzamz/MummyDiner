@@ -10,7 +10,7 @@
 
 GameState::GameState() {
 	window.create(VideoMode(SCREEN_W, SCREEN_H), "MummyDiner");
-	
+
 	_tempState = NO_STATE;
 }
 
