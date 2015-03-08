@@ -13,6 +13,7 @@
 
 #include "GameState.h"
 
+/*
 typedef struct {
 	int x = 140;
 	int y = 40;
@@ -39,11 +40,7 @@ enum {
 	BOTTOM_LEFT_COORDINATE = 3,
 	BOTTOM_RIGHT_COORDINATE = 4
 };
-
-enum {
-	BOY_CUSTOMER = 1,
-	GIRL_CUSTOMER = 2
-};
+*/
 
 class LevelScreen: public GameState {
 	public:
@@ -56,77 +53,24 @@ class LevelScreen: public GameState {
 		void update();
 		void render();
 	
-		//static void startFPSTimer();
-		static void startCustomerTimer();
-	
 	private:
-		SpriteClass _waitressObj;
 		SpriteClass *_waitress;
+		Waitress _waitressObj;
 	
-		SpriteClass _topLeftTableObj;
-		SpriteClass *_topLeftTable;
-		SpriteClass _topLeftCustomerObj;
-		SpriteClass *_topLeftCustomer;
-		customerTopLeftCoordinate _topLeftCoordinateObj;
-		customerTopLeftCoordinate *_topLeftCoordinate;
-	
-		SpriteClass _topRightTableObj;
-		SpriteClass *_topRightTable;
-		SpriteClass _topRightCustomerObj;
-		SpriteClass *_topRightCustomer;
-		customerTopRightCoordinate _topRightCoordinateObj;
-		customerTopRightCoordinate *_topRightCoordinate;
-	
-		SpriteClass _bottomLeftTableObj;
-		SpriteClass *_bottomLeftTable;
-		SpriteClass _bottomLeftCustomerObj;
-		SpriteClass *_bottomLeftCustomer;
-		customerBottomLeftCoordinate _bottomLeftCoordinateObj;
-		customerBottomLeftCoordinate *_bottomLeftCoordinate;
-	
-		SpriteClass _bottomRightTableObj;
-		SpriteClass *_bottomRightTable;
-		SpriteClass _bottomRightCustomerObj;
-		SpriteClass *_bottomRightCustomer;
-		customerBottomRightCoordinate _bottomRightCoordinateObj;
-		customerBottomRightCoordinate *_bottomRightCoordinate;
-	
-		SpriteClass _counterObj;
-		SpriteClass *_counter;
+		/*
+		SpriteClass *_customer;
+		Customer _customerObj;
+		*/
 	
 		SpriteClass _chefObj;
 		SpriteClass *_chef;
 	
-		SpriteClass _stoveObj;
-		SpriteClass *_stove;
-	
-		int _mouseXPos;
-		int _mouseYPos;
-	
-		int _randomTable;
-		int _randomCustomer;
-
-		// level class gets special debug backgrounds
-		DebugMode _topLeftBackgroundObj;
-		DebugMode *_topLeftBackground;
-	
-		DebugMode _topRightBackgroundObj;
-		DebugMode *_topRightBackground;
-	
-		DebugMode _bottomLeftBackgroundObj;
-		DebugMode *_bottomLeftBackground;
-	
-		DebugMode _bottomRightBackgroundObj;
-		DebugMode *_bottomRightBackground;
-	
-		DebugMode _bottomBackgroundObj;
-		DebugMode *_bottomBackground;
-	
-		DebugMode _spriteXPosDebugObj;
-		DebugMode *_spriteXPosDebug;
-	
-		DebugMode _spriteYPosDebugObj;
-		DebugMode *_spriteYPosDebug;
+		SpriteClass _topLeftTable;
+		SpriteClass _topRightTable;
+		SpriteClass _bottomLeftTable;
+		SpriteClass _bottomRightTable;
+		SpriteClass _counter;
+		SpriteClass _stove;
 };
 
 #endif /* defined(__MummyDiner__LevelScreen__) */
