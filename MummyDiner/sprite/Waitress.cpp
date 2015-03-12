@@ -8,14 +8,33 @@
 
 #include "Waitress.h"
 
+// readability for this class
+#define SPRITE_X_POS _sprite.getPosition().x
+#define SPRITE_Y_POS _sprite.getPosition().y
+#define SPRITE_WIDTH (_sprite.getTextureRect().width * _sprite.getScale().x)
+#define SPRITE_HEIGHT (_sprite.getTextureRect().height * _sprite.getScale().y)
+
 Waitress::Waitress() {
-	_rightOfWindow = 640;
-	_bottomOfWindow = 480;
-	
-	_leftOfWaitress = getXPos();
-	_rightOfWaitress = getXPos() + getWidth();
-	_topOfWaitress = getYPos();
-	_bottomOfWaitress = getYPos() + getHeight();
+
+}
+
+// function names mainly for readability in level class
+float Waitress::getXPos() {
+	return SPRITE_X_POS;
+}
+
+float Waitress::getYPos() {
+	return SPRITE_Y_POS;
+}
+
+float Waitress::getWidth() {
+	// have to multiply the width with the scale
+	// sprite will still take the original width when scaled down
+	return SPRITE_WIDTH;
+}
+
+float Waitress::getHeight() {
+	return SPRITE_HEIGHT;
 }
 
 void Waitress::moveUp() {
@@ -34,22 +53,29 @@ void Waitress::moveRight() {
 	_sprite.move(_speed, 0);
 }
 
-void Waitress::handleWindowCollision() {
-	if (_rightOfWaitress >= _rightOfWindow) {
+void Waitress::handleCollisionWithWindow() {
+	if (SPRITE_X_POS + SPRITE_WIDTH >= SCREEN_W) {
 		// make sure sprite stays in frame
-		positionSprite(_rightOfWindow - getWidth(), getYPos());
+		positionSprite(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
 	}
 	
-	if (_leftOfWaitress <= 0) {
-		positionSprite(0, getYPos());
+	if (SPRITE_X_POS <= 0) {
+		positionSprite(0, SPRITE_Y_POS);
 	}
 	
-	if (_topOfWaitress <= 0) {
-		positionSprite(getXPos(), 0);
+	if (SPRITE_Y_POS <= 0) {
+		positionSprite(SPRITE_X_POS, 0);
 	}
 	
-	if (_bottomOfWaitress >= _bottomOfWindow) {
-		positionSprite(getXPos(), _bottomOfWindow - getHeight());
+	if (SPRITE_Y_POS + SPRITE_HEIGHT >= SCREEN_H) {
+		positionSprite(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
+	}
+}
+
+void Waitress::handleCollisionWith(SpriteClass &object) {
+	// other collision sides to be implemented later
+	if (SPRITE_Y_POS + SPRITE_HEIGHT >= object.getYPos()) {
+		positionSprite(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
 	}
 }
 

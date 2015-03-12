@@ -10,10 +10,10 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "GameState.h"
-#include "MainMenuScreen.h"
-#include "SettingsScreen.h"
-#include "LevelScreen.h"
+// game state class already included 
+#include "state/MainMenuScreen.h"
+#include "state/SettingsScreen.h"
+#include "state/LevelScreen.h"
 
 int main(int argc, const char * argv[]) {
 	// state variables declared locally

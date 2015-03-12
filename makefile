@@ -5,13 +5,14 @@ LFLAGS=-Wall -g -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml
 
 COMPILE=$(CXX) $(CFLAGS) $^
 
-VPATH=MummyDiner:MummyDiner/util:MummyDiner/sprite
+VPATH=MummyDiner:MummyDiner/state:MummyDiner/util:MummyDiner/sprite:MummyDiner/gui
 
-UTIL_CLASSES=BackgroundClass.o ButtonClass.o DebugMode.o TextClass.o FramesPerSecond.o
+GUI_CLASSES=BackgroundClass.o ButtonClass.o TextClass.o
+UTIL_CLASSES=Utility.o FramesPerSecond.o
 SPRITE_CLASSES=SpriteClass.o Waitress.o Customer.o Chef.o
 STATE_CLASSES=GameState.o MainMenuScreen.o SettingsScreen.o LevelScreen.o
 
-Game: $(UTIL_CLASSES) $(SPRITE_CLASSES) $(STATE_CLASSES) main.o
+Game: $(GUI_CLASSES) $(UTIL_CLASSES) $(SPRITE_CLASSES) $(STATE_CLASSES) main.o
 	$(CXX) $(LFLAGS) $@ $^
 	./Game
 
@@ -51,7 +52,7 @@ FramesPerSecond.o: FramesPerSecond.cpp
 TextClass.o: TextClass.cpp
 	$(COMPILE)
 
-DebugMode.o: DebugMode.cpp
+Utility.o: Utility.cpp
 	$(COMPILE)
 
 ButtonClass.o: ButtonClass.cpp

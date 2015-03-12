@@ -9,8 +9,6 @@
 #ifndef __MummyDiner__MainMenuScreen__
 #define __MummyDiner__MainMenuScreen__
 
-#include <stdio.h>
-
 #include "GameState.h"
 
 class MainMenuScreen: public GameState {

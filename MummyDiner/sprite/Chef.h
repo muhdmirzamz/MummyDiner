@@ -9,8 +9,6 @@
 #ifndef __MummyDiner__Chef__
 #define __MummyDiner__Chef__
 
-#include <stdio.h>
-
 #include "SpriteClass.h"
 
 using namespace sf;

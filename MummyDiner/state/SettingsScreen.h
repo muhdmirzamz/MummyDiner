@@ -9,8 +9,6 @@
 #ifndef __MummyDiner__SettingsScreen__
 #define __MummyDiner__SettingsScreen__
 
-#include <stdio.h>
-
 #include "GameState.h"
 
 class SettingsScreen: public GameState {

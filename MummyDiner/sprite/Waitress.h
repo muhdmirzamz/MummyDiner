@@ -9,30 +9,27 @@
 #ifndef __MummyDiner__Waitress__
 #define __MummyDiner__Waitress__
 
-#include <stdio.h>
-
 #include "SpriteClass.h"
 
 class Waitress: public SpriteClass {
 	public:
 		Waitress();
 	
+		float getXPos();
+		float getYPos();
+	
+		float getWidth();
+		float getHeight();
+	
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
 	
-		void handleWindowCollision();
+		void handleCollisionWithWindow();
+		void handleCollisionWith(SpriteClass &object);
+	
 		void takeOrder(); // needs integration with order list system
-	
-	private:
-		int _rightOfWindow; // AKA window width
-		int _bottomOfWindow; // AKA window height
-	
-		int _leftOfWaitress;
-		int _rightOfWaitress;
-		int _topOfWaitress;
-		int _bottomOfWaitress;
 };
 
 #endif /* defined(__MummyDiner__Waitress__) */

@@ -29,7 +29,7 @@ void ButtonClass::set(float x, float y, float w, float h, Uint8 buttonRed, Uint8
 	
 	_button.setFillColor(Color(buttonRed, buttonGreen, buttonBlue));
 	
-	_text.set("fonts/Quicksand-Regular.ttf", FONT_SIZE, text, CENTER_OF_BUTTON_X_AXIS, CENTER_OF_BUTTON_Y_AXIS, textRed, textGreen, textBlue);
+	_text.set(QUICKSAND_REGULAR_FONT, FONT_SIZE, text, CENTER_OF_BUTTON_X_AXIS, CENTER_OF_BUTTON_Y_AXIS, textRed, textGreen, textBlue);
 }
 
 float ButtonClass::getLeftSide() {

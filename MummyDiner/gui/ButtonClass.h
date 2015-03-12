@@ -13,7 +13,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "TextClass.h"
+#include "../util/Utility.h"
+#include "TextClass.h" // make use of your own text wrapper class
 
 using namespace sf;
 

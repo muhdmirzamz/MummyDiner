@@ -10,7 +10,8 @@
 //#include <math.h>
 #include "LevelScreen.h"
 
-static FramesPerSecond _fps;
+static FramesPerSecond fps;
+static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 #define TABLE_CROP_SETTINGS 300, 10, 600, 700
 
@@ -18,81 +19,93 @@ LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
 	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 10, 10);
 	_chef = &_chefObj;
-	_chef->set("images/chef.bmp", 450, 10, 400, 690, 450, 380);
+	_chef->set("images/chef.bmp", 450, 10, 400, 700, 500, 375, 0.15, 0.15);
 	
 	_topLeftTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 80, 50);
 	_topRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 50);
 	_bottomLeftTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 80, 200);
 	_bottomRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 200);
-	_counter.set("images/counter.bmp", 0, 200, SCREEN_W, 50, 0, 330);
-	_stove.set("images/stove.bmp", 450, 10, 550, 650, SCREEN_W - _stove.getWidth() - 50, 400);
+	_counter.set("images/counter.bmp", 0, 200, SCREEN_W, 40, 0, 330, 1.0, 1.0);
+	_stove.set("images/stove.bmp", 450, 10, 550, 650, SCREEN_W - _stove.getWidth() - 70, 400);
 	
-	// set mouse position to waitress position to initialise
-	_mouseXPos = _waitress->getXPos();
-	_mouseYPos = _waitress->getYPos();
+	// use different variables for setting sprite's next position
+	// not using the variables used for tracking mouse position
+	_mouseClickX = _waitress->getXPos();
+	_mouseClickY = _waitress->getYPos();
 	
 #if DEBUG_MODE == 1
 	_debug.set();
 #endif
+	
+	fpsThread.launch();
 }
 
 void LevelScreen::handleEvent() {
+	fps.hasReachedStartOfFrame();
+
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
+			fps.stopCounting();
+		
 			cleanup();
 		
 			setState(EXIT);
 		}
 		
-		if (event.type == event.MouseMoved) {
 #if DEBUG_MODE == 1
-			// mouse position
-#endif
+		if (event.type == event.MouseMoved) {
+			_debug.setMousePosition(MOUSE_X, MOUSE_Y);
 		}
+#endif
 		
 		if (event.type == event.MouseButtonPressed) {
+			// set sprite destination position
+			_mouseClickX = MOUSE_X_CLICK;
+			_mouseClickY = MOUSE_Y_CLICK;
 			
-			_mouseXPos = event.mouseButton.x;
-			_mouseYPos = event.mouseButton.y;
 #if DEBUG_MODE == 1
-		// sprite position
+			_debug.setSpritePosition(_mouseClickX, _mouseClickY);
 #endif
 		}
 	}
 }
 
 void LevelScreen::spawnCustomer() {
-
+	
 }
 
 void LevelScreen::moveCharacter() {
-	if (_waitress->getXPos() >= _mouseXPos) {
+	// use mouse variables as guides for sprite to reach destination position
+	if (_waitress->getXPos() >= _mouseClickX) {
 		_waitress->moveLeft();
 	}
 
-	if (_waitress->getXPos() <= _mouseXPos) {
+	if (_waitress->getXPos() <= _mouseClickX) {
 		_waitress->moveRight();
 	}
 	
-	if (_waitress->getYPos() >= _mouseYPos) {
+	if (_waitress->getYPos() >= _mouseClickY) {
 		_waitress->moveUp();
 	}
 
-	if (_waitress->getYPos() <= _mouseYPos) {
+	if (_waitress->getYPos() <= _mouseClickY) {
 		_waitress->moveDown();
 	}
 }
 
 void LevelScreen::checkCollision() {
-	_waitress->handleWindowCollision();
+	_waitress->handleCollisionWithWindow();
+	_waitress->handleCollisionWith(_counter);
 }
 
 void LevelScreen::update() {
-#if DEBUG_MODE == 1
-	_debug.setFPSValue(_fps.getFPS());
-#endif
-
 	window.clear(color.White);
+	
+	fps.hasReachedEndOfFrame();
+
+#if DEBUG_MODE == 1
+	_debug.setFPSValue(fps.getFPS());
+#endif
 }
 
 void LevelScreen::render() {

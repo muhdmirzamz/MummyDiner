@@ -13,6 +13,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../util/Utility.h"
+
 using namespace sf;
 
 class SpriteClass {
@@ -20,16 +22,17 @@ class SpriteClass {
 		SpriteClass();
 	
 		// normal sprite
-		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y);
+		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
 		virtual void positionSprite(float x, float y);
-
 		// waitress
 		virtual void moveUp();
 		virtual void moveDown();
 		virtual void moveLeft();
 		virtual void moveRight();
 		
-		virtual void handleWindowCollision();
+		virtual void handleCollisionWithWindow();
+		virtual void handleCollisionWith(SpriteClass &object);
+	
 		virtual void takeOrder(); // needs integration with order list system
 	
 		// chef

@@ -1,6 +1,7 @@
 //
 //  DebugMode.h
 //  MummyDiner
+//	contains most macros and constants
 //
 //  Created by Muhd Mirza on 13/1/15.
 //  Copyright (c) 2015 Muhd Mirza. All rights reserved.
@@ -13,22 +14,31 @@
 
 #include <SFML/Graphics.hpp>
 
+#define DEBUG_MODE 1
+
+#define QUICKSAND_REGULAR_FONT "fonts/Quicksand-Regular.ttf"
+#define LATO_LIGHT_FONT "fonts/Lato-Light.ttf"
+
+const int SCREEN_W = 640;
+const int SCREEN_H = 480;
+
 using namespace sf;
 using namespace std;
 
-class DebugMode {
+class Utility {
 	public:
-		DebugMode();
+		Utility();
 	
 		void set();
 	
-		void setFPSValue(float value);
+		void setFPSValue(int value);
 		void setMousePosition(int x, int y);
+		void setSpritePosition(int x, int y);
 
 		void show(RenderWindow &window);
 	
 	private:
-		void setTextAndPosition(Text &variable, string label, float variableY, Text &variableValue); // might be a private function
+		void setTextAndPosition(Text &variable, string label, float variableY, Text &variableValue);
 		void setText(Text &variable);
 	
 		Font _font;
@@ -42,8 +52,10 @@ class DebugMode {
 		Text _mouseYPos;
 		Text _mouseYPosValue;
 	
-		// player position
-		// mouse position
+		Text _spriteXPos;
+		Text _spriteXPosValue;
+		Text _spriteYPos;
+		Text _spriteYPosValue;
 	
 		int _valuePositionOffset;
 };

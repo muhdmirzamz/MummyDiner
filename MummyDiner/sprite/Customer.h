@@ -9,8 +9,6 @@
 #ifndef __MummyDiner__Customer__
 #define __MummyDiner__Customer__
 
-#include <stdio.h>
-
 #include "SpriteClass.h"
 
 class Customer: public SpriteClass {

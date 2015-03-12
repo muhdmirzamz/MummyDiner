@@ -9,8 +9,6 @@
 #ifndef __MummyDiner__LevelScreen__
 #define __MummyDiner__LevelScreen__
 
-#include <stdio.h>
-
 #include "GameState.h"
 
 /*
@@ -71,6 +69,9 @@ class LevelScreen: public GameState {
 		SpriteClass _bottomRightTable;
 		SpriteClass _counter;
 		SpriteClass _stove;
+	
+		int _mouseClickX;
+		int _mouseClickY;
 };
 
 #endif /* defined(__MummyDiner__LevelScreen__) */

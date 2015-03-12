@@ -12,7 +12,9 @@ SpriteClass::SpriteClass() {
 
 }
 
-void SpriteClass::set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y) {
+// coordinates in float
+// special case scenario since it is declared at the library level
+void SpriteClass::set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX, float scaleY) {
 	_speed = 1;
 
 	// load file into image
@@ -30,7 +32,7 @@ void SpriteClass::set(const char *file, int cropX, int cropY, int cropW, int cro
 	_cropRect.top = cropY;
 	_cropRect.width = cropW;
 	_cropRect.height = cropH;
-	_sprite.scale(0.1, 0.1);
+	_sprite.scale(scaleX, scaleY); // use default perimeters for sprites which does not use 0.1 as scale(in header)
 	
 	// apply rectangle to texture
 	_sprite.setTextureRect(_cropRect);
@@ -58,7 +60,11 @@ void SpriteClass::moveRight() {
 	
 }
 
-void SpriteClass::handleWindowCollision() {
+void SpriteClass::handleCollisionWithWindow() {
+	
+}
+
+void SpriteClass::handleCollisionWith(SpriteClass &object) {
 	
 }
 
@@ -87,7 +93,7 @@ void SpriteClass::order() {
 }
 
 float SpriteClass::getXPos() {
-	return _sprite.getPosition().x;
+	return _sprite.getPosition().y;
 }
 
 float SpriteClass::getYPos() {
