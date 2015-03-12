@@ -8,6 +8,12 @@
 
 #include "ButtonClass.h"
 
+// place text more to the left side of the center to make it look centralised
+// name just helps with readability and abstraction 
+#define CENTER_OF_BUTTON_X_AXIS (_leftOfButton + (_widthOfButton / 4))
+#define CENTER_OF_BUTTON_Y_AXIS (_topOfButton + (_heightOfButton / 4))
+#define FONT_SIZE 15
+
 ButtonClass::ButtonClass() {
 	
 }
@@ -16,14 +22,14 @@ void ButtonClass::set(float x, float y, float w, float h, Uint8 buttonRed, Uint8
 	_button.setPosition(x, y);
 	_button.setSize(Vector2f(w, h));
 	
-	_leftOfButton = _button.getPosition().x;
-	_widthOfButton = _leftOfButton + w;
-	_topOfButton = _button.getPosition().y;
-	_heightOfButton = _topOfButton + h;
+	_leftOfButton = x;
+	_widthOfButton = w;
+	_topOfButton = y;
+	_heightOfButton = h;
 	
 	_button.setFillColor(Color(buttonRed, buttonGreen, buttonBlue));
 	
-	_text.set("fonts/Quicksand-Regular.ttf", 10, text, CENTER_OF_BUTTON_X_AXIS, CENTER_OF_BUTTON_Y_AXIS, textRed, textGreen, textBlue);
+	_text.set(QUICKSAND_REGULAR_FONT, FONT_SIZE, text, CENTER_OF_BUTTON_X_AXIS, CENTER_OF_BUTTON_Y_AXIS, textRed, textGreen, textBlue);
 }
 
 float ButtonClass::getLeftSide() {
@@ -31,7 +37,7 @@ float ButtonClass::getLeftSide() {
 }
 
 float ButtonClass::getWidth() {
-	return _widthOfButton;
+	return _leftOfButton + _widthOfButton;
 }
 
 float ButtonClass::getTop() {
@@ -39,9 +45,11 @@ float ButtonClass::getTop() {
 }
 
 float ButtonClass::getHeight() {
-	return _heightOfButton;
+	return _topOfButton + _heightOfButton;
 }
 
+// dont forget to render text too
 void ButtonClass::render(RenderWindow &window) {
 	window.draw(_button);
+	_text.render(window);
 }

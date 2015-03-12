@@ -9,12 +9,15 @@
 #ifndef __MummyDiner__Customer__
 #define __MummyDiner__Customer__
 
-#include <stdio.h>
 #include "SpriteClass.h"
 
 class Customer: public SpriteClass {
 	public:
 		Customer();
+	
+		void spawn();
+		void startWaiting();
+		void order();
 	
 	private:
 };

@@ -13,10 +13,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "TextClass.h"
-
-#define CENTER_OF_BUTTON_X_AXIS (_leftOfButton + (_widthOfButton / 4))
-#define CENTER_OF_BUTTON_Y_AXIS (_topOfButton + (_heightOfButton / 4))
+#include "../util/Utility.h"
+#include "TextClass.h" // make use of your own text wrapper class
 
 using namespace sf;
 

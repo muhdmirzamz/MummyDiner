@@ -9,21 +9,20 @@
 #ifndef __MummyDiner__GameState__
 #define __MummyDiner__GameState__
 
-#include <stdio.h>
-#include <iostream>
+#include "../util/FramesPerSecond.h"
 
-#include <SFML/Graphics.hpp>
+#include "../gui/ButtonClass.h" // includes text class.. also the debug class
+#include "../gui/BackgroundClass.h"
 
-#include <util/DebugMode.h>
-#include <util/TextClass.h>
-#include <util/ButtonClass.h>
-#include <util/BackgroundClass.h>
-#include <util/SpriteClass.h>
+// each of these classes includes the SpriteClass class and debug class
+#include "../sprite/Waitress.h"
+#include "../sprite/Customer.h"
+#include "../sprite/Chef.h"
 
-#define DEBUG_MODE 1
-
-#define QUICKSAND_REGULAR_FONT "fonts/Quicksand-Regular.ttf"
-#define LATO_LIGHT_FONT "fonts/Lato-Light.ttf"
+#define MOUSE_X event.mouseMove.x
+#define MOUSE_Y event.mouseMove.y
+#define MOUSE_X_CLICK event.mouseButton.x
+#define MOUSE_Y_CLICK event.mouseButton.y
 
 enum state {
 	NO_STATE,
@@ -33,11 +32,6 @@ enum state {
 	LEVEL
 };
 
-const int SCREEN_W = 640;
-const int SCREEN_H = 480;
-
-using namespace sf;
-
 class GameState {
 	public:
 		GameState();
@@ -45,7 +39,7 @@ class GameState {
 	
 		void setState(int state);
 		int getState();
-	
+
 		virtual	void handleEvent();
 		virtual void spawnCustomer();
 		virtual	void moveCharacter();
@@ -58,6 +52,11 @@ class GameState {
 		RenderWindow window;
 		Event event;
 		Color color;
+	
+		Utility _debug;
+	
+		int _mouseXPos;
+		int _mouseYPos;
 	
 	private:
 		int _tempState;

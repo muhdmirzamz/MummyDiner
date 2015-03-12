@@ -9,6 +9,16 @@
 #ifndef __MummyDiner__Chef__
 #define __MummyDiner__Chef__
 
-#include <stdio.h>
+#include "SpriteClass.h"
+
+using namespace sf;
+
+class Chef: public SpriteClass {
+	public:
+		Chef();
+	
+		void cook();
+		void startCooking();
+};
 
 #endif /* defined(__MummyDiner__Chef__) */

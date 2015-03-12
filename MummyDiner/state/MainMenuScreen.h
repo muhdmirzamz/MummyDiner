@@ -9,8 +9,6 @@
 #ifndef __MummyDiner__MainMenuScreen__
 #define __MummyDiner__MainMenuScreen__
 
-#include <stdio.h>
-
 #include "GameState.h"
 
 class MainMenuScreen: public GameState {
@@ -21,9 +19,7 @@ class MainMenuScreen: public GameState {
 		void update();
 		void render();
 	
-		static void startFPSTimer();
-	
-	private:
+	private:	
 		TextClass _title;
 
 		ButtonClass _startButton;
