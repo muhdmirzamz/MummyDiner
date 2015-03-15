@@ -22,6 +22,11 @@ class BackgroundClass {
 		void set(float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b);
 		void render(RenderWindow &window);
 	
+		float getX();
+		float getY();
+		float getWidth();
+		float getHeight();
+	
 	private:
 		RectangleShape _background;
 };
