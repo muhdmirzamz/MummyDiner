@@ -15,7 +15,7 @@ Utility::Utility() {
 	_font.loadFromFile(LATO_LIGHT_FONT);
 	_fontSize = 15;
 	
-	_valuePositionOffset = 100;
+	_valuePositionOffset = 120;
 }
 
 // add debug properties here
@@ -27,6 +27,9 @@ void Utility::set() {
 	
 	setTextAndPosition(_spriteXPos, "Sprite X Pos: ", 70, _spriteXPosValue);
 	setTextAndPosition(_spriteYPos, "Sprite Y Pos: ", 90, _spriteYPosValue);
+	
+	setTextAndPosition(_timeLimit, "Time Limit: ", 110, _timeLimitValue);
+	setTextAndPosition(_time, "Time: ", 130, _timeValue);
 }
 
 // set the value of any changing / dynamic debug properties
@@ -45,6 +48,14 @@ void Utility::setSpritePosition(int x, int y) {
 	_spriteYPosValue.setString(to_string(y));
 }
 
+void Utility::setTimeLimit(int time) {
+	_timeLimitValue.setString(to_string(time));
+}
+
+void Utility::setTime(int time) {
+	_timeValue.setString(to_string(time));
+}
+
 void Utility::show(RenderWindow &window) {
 	window.draw(_fps);
 	window.draw(_fpsValue);
@@ -58,6 +69,12 @@ void Utility::show(RenderWindow &window) {
 	window.draw(_spriteXPosValue);
 	window.draw(_spriteYPos);
 	window.draw(_spriteYPosValue);
+	
+	window.draw(_timeLimit);
+	window.draw(_timeLimitValue);
+	
+	window.draw(_time);
+	window.draw(_timeValue);
 }
 
 // dealing with two things

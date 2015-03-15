@@ -34,6 +34,8 @@ class Utility {
 		void setFPSValue(int value);
 		void setMousePosition(int x, int y);
 		void setSpritePosition(int x, int y);
+		void setTimeLimit(int time);
+		void setTime(int time);
 
 		void show(RenderWindow &window);
 	
@@ -56,6 +58,12 @@ class Utility {
 		Text _spriteXPosValue;
 		Text _spriteYPos;
 		Text _spriteYPosValue;
+	
+		Text _timeLimit;
+		Text _timeLimitValue;
+	
+		Text _time;
+		Text _timeValue;
 	
 		int _valuePositionOffset;
 };
