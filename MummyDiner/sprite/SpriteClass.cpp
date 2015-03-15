@@ -84,7 +84,35 @@ void SpriteClass::spawn() {
 	
 }
 
-void SpriteClass::startWaiting() {
+void SpriteClass::startThread() {
+	
+}
+
+void SpriteClass::stopThread() {
+	
+}
+
+bool SpriteClass::timeIsUp() {
+	return false;
+}
+
+bool SpriteClass::orderIsTaken() {
+	return false;
+}
+
+bool SpriteClass::timeIsAdded() {
+	return false;
+}
+
+int SpriteClass::getTimeLeft() {
+	return false;
+}
+
+int SpriteClass::getTimeLimit() {
+	return false;
+}
+
+void SpriteClass::addTime() {
 	
 }
 

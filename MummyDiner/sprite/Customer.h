@@ -15,11 +15,22 @@ class Customer: public SpriteClass {
 	public:
 		Customer();
 	
+		void startThread();
 		void spawn();
-		void startWaiting();
+		void addTime();
+		void stopThread();
+	
+		bool timeIsUp();
+		bool orderIsTaken();
+		bool timeIsAdded();
+	
+		int getTimeLeft();
+		int getTimeLimit();
+	
 		void order();
 	
 	private:
+		bool _ordered;
 };
 
 #endif /* defined(__MummyDiner__Customer__) */
