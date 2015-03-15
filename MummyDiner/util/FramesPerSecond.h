@@ -42,6 +42,8 @@ class FramesPerSecond {
 		Time _endTime;
 	
 		bool _endOfFrameReached;
+	
+		Mutex _mutex;
 };
 
 #endif /* defined(__MummyDiner__FramesPerSecond__) */
