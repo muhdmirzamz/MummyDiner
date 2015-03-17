@@ -51,7 +51,7 @@ void Timer::restart() {
 }
 
 // opens up the flags to enable adding of time
-// renamed this function so as to avoid function name conflict with customer class
+// the only two flags that do not require a new customer to be switched back and forth
 void Timer::addMoreTime() {
 	_needTime = true;
 	_addedTime = false;
@@ -61,12 +61,13 @@ void Timer::stopCounting() {
 	_stillLooping = false;
 }
 
+// resets when there is a new customer
 void Timer::reset() {
 	_timerHasReachedLimit = false;
 	_needTime = false;
 	_addedTime = false;
 	
-	_timeLimit = 5000; // 5s
+	_timeLimit = 10000; // 5s
 }
 
 bool Timer::hasReachedLimit() {
