@@ -21,6 +21,8 @@ class Waitress: public SpriteClass {
 		float getWidth();
 		float getHeight();
 	
+		bool hasTakenFoodFromCounter();
+	
 		void moveUp();
 		void moveDown();
 		void moveLeft();
@@ -29,7 +31,12 @@ class Waitress: public SpriteClass {
 		void handleCollisionWithWindow();
 		void handleCollisionWith(SpriteClass &object);
 	
-		void takeOrder(); // needs integration with order list system
+		void takeFoodFromCounter(); // needs integration with order list system
+		void serveANewCustomer();
+	
+	private:
+	
+		bool _foodTakenFromCounter;
 };
 
 #endif /* defined(__MummyDiner__Waitress__) */

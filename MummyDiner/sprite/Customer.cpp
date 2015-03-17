@@ -25,7 +25,7 @@ static Thread customerTimer(&Timer::startCounting, &timer);
 */
 
 Customer::Customer() {
-	_ordered = false;
+	reset();
 }
 
 void Customer::startThread() {
@@ -55,11 +55,15 @@ void Customer::spawn() {
 	
 
 	timer.restart();
-	_ordered = false;
+	reset();
 }
 
 void Customer::addTime() {
 	timer.addMoreTime();
+}
+
+void Customer::getServed() {
+	_foodServed = true;
 }
 
 void Customer::stopThread() {
@@ -72,6 +76,10 @@ bool Customer::timeIsUp() {
 
 bool Customer::orderIsTaken() {
 	return _ordered;
+}
+
+bool Customer::foodIsServed() {
+	return _foodServed;
 }
 
 bool Customer::timeIsAdded() {
@@ -89,4 +97,10 @@ int Customer::getTimeLimit() {
 // use this to add more time
 void Customer::order() {
 	_ordered = true;
+}
+
+// this class resets only when there's a new customer
+void Customer::reset() {
+	_ordered = false;
+	_foodServed = false;
 }

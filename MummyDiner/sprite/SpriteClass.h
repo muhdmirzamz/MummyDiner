@@ -53,15 +53,18 @@ class SpriteClass {
 		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
 		virtual void positionSprite(float x, float y);
 		// waitress
+		virtual bool hasTakenFoodFromCounter();
+	
 		virtual void moveUp();
 		virtual void moveDown();
 		virtual void moveLeft();
 		virtual void moveRight();
-		
+	
 		virtual void handleCollisionWithWindow();
 		virtual void handleCollisionWith(SpriteClass &object);
 	
-		virtual void takeOrder(); // needs integration with order list system
+		virtual void takeFoodFromCounter(); // needs integration with order list system
+		virtual void serveANewCustomer();
 	
 		// chef
 		virtual void cook();
@@ -73,10 +76,12 @@ class SpriteClass {
 		virtual void stopThread();
 		virtual bool timeIsUp();
 		virtual bool orderIsTaken();
+		virtual bool foodIsServed();
 		virtual bool timeIsAdded();
 		virtual int getTimeLeft();
 		virtual int getTimeLimit();
 		virtual void addTime();
+		virtual void getServed();
 		virtual void order();
 	
 		// normal sprite

@@ -18,10 +18,12 @@ class Customer: public SpriteClass {
 		void startThread();
 		void spawn();
 		void addTime();
+		void getServed();
 		void stopThread();
 	
 		bool timeIsUp();
 		bool orderIsTaken();
+		bool foodIsServed();
 		bool timeIsAdded();
 	
 		int getTimeLeft();
@@ -30,7 +32,10 @@ class Customer: public SpriteClass {
 		void order();
 	
 	private:
+		void reset();
+	
 		bool _ordered;
+		bool _foodServed;
 };
 
 #endif /* defined(__MummyDiner__Customer__) */
