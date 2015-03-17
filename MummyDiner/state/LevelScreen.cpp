@@ -17,7 +17,9 @@ static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
-	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 10, 10);
+	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 300, 10);
+	_customer = &_customerObj;
+	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, _customer->topLeftCoordinate.x, _customer->topLeftCoordinate.y);
 	_chef = &_chefObj;
 	_chef->set("images/chef.bmp", 450, 10, 400, 700, 500, 375, 0.15, 0.15);
 	
@@ -27,6 +29,12 @@ LevelScreen::LevelScreen() {
 	_bottomRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 200);
 	_counter.set("images/counter.bmp", 0, 200, SCREEN_W, 40, 0, 330, 1.0, 1.0);
 	_stove.set("images/stove.bmp", 450, 10, 550, 650, SCREEN_W - _stove.getWidth() - 70, 400);
+	
+	_topLeftBackground.set(10, 10, SCREEN_W / 3, SCREEN_H / 4, 0, 255, 0);
+	_topRightBackground.set(100 + SCREEN_W / 3, 10, SCREEN_W / 3, SCREEN_H / 4, 255, 0, 0);
+	_bottomLeftBackground.set(10, 50 + SCREEN_H / 4, SCREEN_W / 3, SCREEN_H / 4, 0, 0, 255);
+	_bottomRightBackground.set(100 + SCREEN_W / 3, 50 + SCREEN_H / 4, SCREEN_W / 3, SCREEN_H / 4, 100, 100, 100);
+	_foodPickupBackground.set(200, 300, 200, 50, 200, 200, 200);
 	
 	// use different variables for setting sprite's next position
 	// not using the variables used for tracking mouse position
@@ -38,6 +46,7 @@ LevelScreen::LevelScreen() {
 #endif
 	
 	fpsThread.launch();
+	_customer->startThread();
 }
 
 void LevelScreen::handleEvent() {
@@ -45,6 +54,7 @@ void LevelScreen::handleEvent() {
 
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
+			_customer->stopThread();
 			fps.stopCounting();
 		
 			cleanup();
@@ -62,16 +72,47 @@ void LevelScreen::handleEvent() {
 			// set sprite destination position
 			_mouseClickX = MOUSE_X_CLICK;
 			_mouseClickY = MOUSE_Y_CLICK;
-			
-#if DEBUG_MODE == 1
-			_debug.setSpritePosition(_mouseClickX, _mouseClickY);
-#endif
 		}
 	}
 }
 
 void LevelScreen::spawnCustomer() {
+	if (_customer->timeIsUp()) {
+		_customer->spawn();
+	} else {
+		if (_customer->foodIsServed()) { // true once the waitress has taken food from counter and served customer
+			if (!_customer->timeIsAdded()) { // to avoid multiple increases
+				_customer->addTime();
+			}
+		} else if (_customer->orderIsTaken()) {
+			if (!_customer->timeIsAdded()) {
+				_customer->addTime();
+			}
+		}
+	}
 	
+	/*
+		 if (_customer->timeIsUp()) {
+			 _customer->spawn();
+		 } else {
+			 if (_customer->orderIsTaken()) {
+				 if (_customer->foodisServed()) {
+					 if (!_customer->timeIsAdded()) {
+						 _customer->addTime();
+					 }
+				 } else if (_customer->isDoneEating()) {
+					 _customer->spawn();
+				 } else if (!_customer->timeIsAdded()) {
+					_customer->addTime();
+				 }
+			 }
+		 }
+	*/
+	
+#if DEBUG_MODE == 1
+	_debug.setTime(_customer->getTimeLeft());
+	_debug.setTimeLimit(_customer->getTimeLimit());
+#endif
 }
 
 void LevelScreen::moveCharacter() {
@@ -91,6 +132,39 @@ void LevelScreen::moveCharacter() {
 	if (_waitress->getYPos() <= _mouseClickY) {
 		_waitress->moveDown();
 	}
+	
+	// order testing
+	if (_waitress->getXPos() + _waitress->getWidth() >= _topLeftBackground.getX() && _waitress->getXPos() <= _topLeftBackground.getX() + _topLeftBackground.getWidth()) {
+		if (_waitress->getYPos() + _waitress->getHeight() >= _topLeftBackground.getY() && _waitress->getYPos() <= _topLeftBackground.getY() + _topLeftBackground.getHeight()) {
+			if (_customer->orderIsTaken()) {
+				if (_waitress->hasTakenFoodFromCounter()) {
+					if (!_customer->foodIsServed()) {
+						_customer->getServed();
+						printf("Served\n");
+					}
+				}
+ 				
+			} else {
+				_customer->order();
+				printf("Ordered\n");
+			}
+		}
+	}
+	
+	if (_waitress->getXPos() + _waitress->getWidth() >= _foodPickupBackground.getX() && _waitress->getXPos() <= _foodPickupBackground.getX() + _foodPickupBackground.getWidth()) {
+		if (_waitress->getYPos() + _waitress->getHeight() >= _foodPickupBackground.getY() + 100 && _waitress->getYPos() <= _foodPickupBackground.getY() + _foodPickupBackground.getHeight()) {
+			if (_customer->orderIsTaken()) {
+				_waitress->takeFoodFromCounter();
+			}
+		}
+	}
+	
+#if DEBUG_MODE == 1
+	_debug.setSpritePosition(_waitress->getXPos(), _waitress->getYPos());
+	_debug.setOrderFlag(_customer->orderIsTaken());
+	_debug.setFoodFlag(_customer->foodIsServed());
+	_debug.setFoodTakenFlag(_waitress->hasTakenFoodFromCounter());
+#endif
 }
 
 void LevelScreen::checkCollision() {
@@ -109,12 +183,14 @@ void LevelScreen::update() {
 }
 
 void LevelScreen::render() {
-#if DEBUG_MODE == 1
-	_debug.show(window);
-#endif
-
+	_topLeftBackground.render(window);
+	_topRightBackground.render(window);
+	_bottomLeftBackground.render(window);
+	_bottomRightBackground.render(window);
+	_foodPickupBackground.render(window);
+	
 	_waitress->render(window);
-	// render customer
+	_customer->render(window);
 	_chef->render(window);
 	
 	_topLeftTable.render(window);
@@ -123,6 +199,10 @@ void LevelScreen::render() {
 	_bottomRightTable.render(window);
 	_counter.render(window);
 	_stove.render(window);
-
+	
+#if DEBUG_MODE == 1
+	_debug.show(window);
+#endif
+	
 	window.display();
 }

@@ -11,35 +11,6 @@
 
 #include "GameState.h"
 
-/*
-typedef struct {
-	int x = 140;
-	int y = 40;
-} customerTopLeftCoordinate;
-
-typedef struct {
-	int x = 450;
-	int y = 40;
-} customerTopRightCoordinate;
-
-typedef struct
-	int x = 140;
-	int y = 190;
-} customerBottomLeftCoordinate;
-
-typedef struct {
-	int x = 460;
-	int y = 190;
-} customerBottomRightCoordinate;
-
-enum {
-	TOP_LEFT_COORDINATE = 1,
-	TOP_RIGHT_COORDINATE = 2,
-	BOTTOM_LEFT_COORDINATE = 3,
-	BOTTOM_RIGHT_COORDINATE = 4
-};
-*/
-
 class LevelScreen: public GameState {
 	public:
 		LevelScreen();
@@ -55,10 +26,8 @@ class LevelScreen: public GameState {
 		SpriteClass *_waitress;
 		Waitress _waitressObj;
 	
-		/*
 		SpriteClass *_customer;
 		Customer _customerObj;
-		*/
 	
 		SpriteClass _chefObj;
 		SpriteClass *_chef;
@@ -69,6 +38,12 @@ class LevelScreen: public GameState {
 		SpriteClass _bottomRightTable;
 		SpriteClass _counter;
 		SpriteClass _stove;
+	
+		BackgroundClass _topLeftBackground;
+		BackgroundClass _topRightBackground;
+		BackgroundClass _bottomLeftBackground;
+		BackgroundClass _bottomRightBackground;
+		BackgroundClass _foodPickupBackground;
 	
 		int _mouseClickX;
 		int _mouseClickY;

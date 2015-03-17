@@ -44,6 +44,10 @@ void SpriteClass::positionSprite(float x, float y) {
 	_sprite.setPosition(x, y);
 }
 
+bool SpriteClass::hasTakenFoodFromCounter() {
+	return false;
+}
+
 void SpriteClass::moveUp() {
 	
 }
@@ -68,8 +72,12 @@ void SpriteClass::handleCollisionWith(SpriteClass &object) {
 	
 }
 
-void SpriteClass::takeOrder() { // needs integration with order list system
+void SpriteClass::takeFoodFromCounter() { // needs integration with order list system
 
+}
+
+void SpriteClass::serveANewCustomer() {
+	
 }
 
 void SpriteClass::cook() {
@@ -84,7 +92,43 @@ void SpriteClass::spawn() {
 	
 }
 
-void SpriteClass::startWaiting() {
+void SpriteClass::startThread() {
+	
+}
+
+void SpriteClass::stopThread() {
+	
+}
+
+bool SpriteClass::timeIsUp() {
+	return false;
+}
+
+bool SpriteClass::orderIsTaken() {
+	return false;
+}
+
+bool SpriteClass::foodIsServed() {
+	return false;
+}
+
+bool SpriteClass::timeIsAdded() {
+	return false;
+}
+
+int SpriteClass::getTimeLeft() {
+	return false;
+}
+
+int SpriteClass::getTimeLimit() {
+	return false;
+}
+
+void SpriteClass::addTime() {
+	
+}
+
+void SpriteClass::getServed() {
 	
 }
 

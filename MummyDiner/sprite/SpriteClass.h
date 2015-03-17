@@ -14,26 +14,57 @@
 #include <SFML/Graphics.hpp>
 
 #include "../util/Utility.h"
+#include "../util/Timer.h"
 
 using namespace sf;
 
 class SpriteClass {
 	public:
+		struct topLeft {
+			int x = 140;
+			int y = 40;
+		} topLeftCoordinate;
+	
+		struct topRight {
+			int x = 450;
+			int y = 40;
+		} topRightCoordinate;
+		
+		struct bottomLeft{
+			int x = 140;
+			int y = 190;
+		} bottomLeftCoordinate;
+		
+		struct bottomRight {
+			int x = 460;
+			int y = 190;
+		} bottomRightCoordinate;
+	
+		enum coordinates {
+			TOP_LEFT = 1,
+			TOP_RIGHT = 2,
+			BOTTOM_LEFT = 3,
+			BOTTOM_RIGHT = 4
+		};
+	
 		SpriteClass();
 	
 		// normal sprite
 		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
 		virtual void positionSprite(float x, float y);
 		// waitress
+		virtual bool hasTakenFoodFromCounter();
+	
 		virtual void moveUp();
 		virtual void moveDown();
 		virtual void moveLeft();
 		virtual void moveRight();
-		
+	
 		virtual void handleCollisionWithWindow();
 		virtual void handleCollisionWith(SpriteClass &object);
 	
-		virtual void takeOrder(); // needs integration with order list system
+		virtual void takeFoodFromCounter(); // needs integration with order list system
+		virtual void serveANewCustomer();
 	
 		// chef
 		virtual void cook();
@@ -41,7 +72,16 @@ class SpriteClass {
 	
 		// customer
 		virtual void spawn();
-		virtual void startWaiting();
+		virtual void startThread();
+		virtual void stopThread();
+		virtual bool timeIsUp();
+		virtual bool orderIsTaken();
+		virtual bool foodIsServed();
+		virtual bool timeIsAdded();
+		virtual int getTimeLeft();
+		virtual int getTimeLimit();
+		virtual void addTime();
+		virtual void getServed();
 		virtual void order();
 	
 		// normal sprite
@@ -60,13 +100,6 @@ class SpriteClass {
 		Sprite _sprite;
 	
 		float _speed; // maybe good for future feature in speed variations
-	
-		/*
-		bool spriteMovedUp;
-		bool spriteMovedDown;
-		bool spriteMovedLeft;
-		bool spriteMovedRight;
-		*/
 };
 
 #endif /* defined(__MummyDiner__Sprite__) */
