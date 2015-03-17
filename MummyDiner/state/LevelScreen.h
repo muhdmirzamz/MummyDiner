@@ -43,6 +43,7 @@ class LevelScreen: public GameState {
 		BackgroundClass _topRightBackground;
 		BackgroundClass _bottomLeftBackground;
 		BackgroundClass _bottomRightBackground;
+		BackgroundClass _foodPickupBackground;
 	
 		int _mouseClickX;
 		int _mouseClickY;

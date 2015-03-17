@@ -34,6 +34,7 @@ LevelScreen::LevelScreen() {
 	_topRightBackground.set(100 + SCREEN_W / 3, 10, SCREEN_W / 3, SCREEN_H / 4, 255, 0, 0);
 	_bottomLeftBackground.set(10, 50 + SCREEN_H / 4, SCREEN_W / 3, SCREEN_H / 4, 0, 0, 255);
 	_bottomRightBackground.set(100 + SCREEN_W / 3, 50 + SCREEN_H / 4, SCREEN_W / 3, SCREEN_H / 4, 100, 100, 100);
+	_foodPickupBackground.set(200, 300, 200, 50, 200, 200, 200);
 	
 	// use different variables for setting sprite's next position
 	// not using the variables used for tracking mouse position
@@ -79,8 +80,12 @@ void LevelScreen::spawnCustomer() {
 	if (_customer->timeIsUp()) {
 		_customer->spawn();
 	} else {
-		if (_customer->orderIsTaken()) {
+		if (_customer->foodIsServed()) { // true once the waitress has taken food from counter and served customer
 			if (!_customer->timeIsAdded()) { // to avoid multiple increases
+				_customer->addTime();
+			}
+		} else if (_customer->orderIsTaken()) {
+			if (!_customer->timeIsAdded()) {
 				_customer->addTime();
 			}
 		}
@@ -131,14 +136,34 @@ void LevelScreen::moveCharacter() {
 	// order testing
 	if (_waitress->getXPos() + _waitress->getWidth() >= _topLeftBackground.getX() && _waitress->getXPos() <= _topLeftBackground.getX() + _topLeftBackground.getWidth()) {
 		if (_waitress->getYPos() + _waitress->getHeight() >= _topLeftBackground.getY() && _waitress->getYPos() <= _topLeftBackground.getY() + _topLeftBackground.getHeight()) {
-			if (!_customer->orderIsTaken()) {
+			if (_customer->orderIsTaken()) {
+				if (_waitress->hasTakenFoodFromCounter()) {
+					if (!_customer->foodIsServed()) {
+						_customer->getServed();
+						printf("Served\n");
+					}
+				}
+ 				
+			} else {
 				_customer->order();
+				printf("Ordered\n");
+			}
+		}
+	}
+	
+	if (_waitress->getXPos() + _waitress->getWidth() >= _foodPickupBackground.getX() && _waitress->getXPos() <= _foodPickupBackground.getX() + _foodPickupBackground.getWidth()) {
+		if (_waitress->getYPos() + _waitress->getHeight() >= _foodPickupBackground.getY() + 100 && _waitress->getYPos() <= _foodPickupBackground.getY() + _foodPickupBackground.getHeight()) {
+			if (_customer->orderIsTaken()) {
+				_waitress->takeFoodFromCounter();
 			}
 		}
 	}
 	
 #if DEBUG_MODE == 1
 	_debug.setSpritePosition(_waitress->getXPos(), _waitress->getYPos());
+	_debug.setOrderFlag(_customer->orderIsTaken());
+	_debug.setFoodFlag(_customer->foodIsServed());
+	_debug.setFoodTakenFlag(_waitress->hasTakenFoodFromCounter());
 #endif
 }
 
@@ -162,6 +187,7 @@ void LevelScreen::render() {
 	_topRightBackground.render(window);
 	_bottomLeftBackground.render(window);
 	_bottomRightBackground.render(window);
+	_foodPickupBackground.render(window);
 	
 	_waitress->render(window);
 	_customer->render(window);
