@@ -14,6 +14,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../util/Utility.h"
+#include "../util/Timer.h"
 
 using namespace sf;
 
@@ -41,7 +42,9 @@ class SpriteClass {
 	
 		// customer
 		virtual void spawn();
-		virtual void startWaiting();
+		virtual void startThread();
+		virtual void stopThread();
+		virtual bool hasWaited();
 		virtual void order();
 	
 		// normal sprite

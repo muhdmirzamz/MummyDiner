@@ -15,11 +15,13 @@ class Customer: public SpriteClass {
 	public:
 		Customer();
 	
+		void startThread();
 		void spawn();
-		void startWaiting();
-		void order();
+		void stopThread();
 	
-	private:
+		bool hasWaited();
+	
+		void order();
 };
 
 #endif /* defined(__MummyDiner__Customer__) */

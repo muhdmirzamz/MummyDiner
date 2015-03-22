@@ -8,8 +8,23 @@
 
 #include "Customer.h"
 
-Customer::Customer() {
+static Timer timer;
+static Thread customerTimer(&Timer::startCounting, &timer);
+
+/*
+	Treat this customer class as a "wrapper" class 
+	for controlling the timer class
 	
+	Level class needs to go through this customer class
+	to have access / control to the timer class
+*/
+
+Customer::Customer() {
+
+}
+
+void Customer::startThread() {
+	customerTimer.launch();
 }
 
 void Customer::spawn() {
@@ -17,12 +32,19 @@ void Customer::spawn() {
 	srand((int)time(NULL));
 	_randomTable = rand() % 4 + 1;
 */
+
+	timer.restart();
 }
 
-void Customer::startWaiting() {
-	
+void Customer::stopThread() {
+	timer.stopCounting();
 }
 
+bool Customer::hasWaited() {
+	return timer.hasReachedLimit();
+}
+
+// use this to add more time
 void Customer::order() {
-	
+	timer.addTime();
 }

@@ -55,10 +55,8 @@ class LevelScreen: public GameState {
 		SpriteClass *_waitress;
 		Waitress _waitressObj;
 	
-		/*
 		SpriteClass *_customer;
 		Customer _customerObj;
-		*/
 	
 		SpriteClass _chefObj;
 		SpriteClass *_chef;

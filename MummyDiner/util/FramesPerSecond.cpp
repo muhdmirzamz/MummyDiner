@@ -18,6 +18,8 @@ FramesPerSecond::FramesPerSecond() {
 }
 
 void FramesPerSecond::startCounting() {
+	Lock lock(_mutex);
+
 	_stillLooping = true;
 
 	while (_stillLooping) {

@@ -84,8 +84,16 @@ void SpriteClass::spawn() {
 	
 }
 
-void SpriteClass::startWaiting() {
+void SpriteClass::startThread() {
 	
+}
+
+void SpriteClass::stopThread() {
+	
+}
+
+bool SpriteClass::hasWaited() {
+	return false;
 }
 
 void SpriteClass::order() {

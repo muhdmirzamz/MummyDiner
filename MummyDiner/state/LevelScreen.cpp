@@ -18,6 +18,7 @@ static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
 	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 10, 10);
+	_customer = &_customerObj; // testing phase, do not set position first
 	_chef = &_chefObj;
 	_chef->set("images/chef.bmp", 450, 10, 400, 700, 500, 375, 0.15, 0.15);
 	
@@ -38,6 +39,7 @@ LevelScreen::LevelScreen() {
 #endif
 	
 	fpsThread.launch();
+	_customer->startThread();
 }
 
 void LevelScreen::handleEvent() {
@@ -45,6 +47,7 @@ void LevelScreen::handleEvent() {
 
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
+			_customer->stopThread();
 			fps.stopCounting();
 		
 			cleanup();
@@ -62,16 +65,21 @@ void LevelScreen::handleEvent() {
 			// set sprite destination position
 			_mouseClickX = MOUSE_X_CLICK;
 			_mouseClickY = MOUSE_Y_CLICK;
-			
-#if DEBUG_MODE == 1
-			_debug.setSpritePosition(_mouseClickX, _mouseClickY);
-#endif
 		}
 	}
 }
 
 void LevelScreen::spawnCustomer() {
+	// if customer has waited and order is not taken, spawn a new customer
+	if (_customer->hasWaited()) {
+		_customer->spawn();
+	}
 	
+	_customer->order();
+	
+	if (_customer->hasWaited()) {
+		_customer->spawn();
+	}
 }
 
 void LevelScreen::moveCharacter() {
@@ -91,6 +99,10 @@ void LevelScreen::moveCharacter() {
 	if (_waitress->getYPos() <= _mouseClickY) {
 		_waitress->moveDown();
 	}
+	
+#if DEBUG_MODE == 1
+	_debug.setSpritePosition(_waitress->getXPos(), _waitress->getYPos());
+#endif
 }
 
 void LevelScreen::checkCollision() {
