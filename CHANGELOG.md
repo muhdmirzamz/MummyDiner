@@ -1,5 +1,23 @@
 ###CHANGELOG
 
+**17 March 2015 - v0.5.0-alpha**
+- Added Timer class
+- Added background to detect sprite position
+- Added debug texts for timer
+- Added debug texts for ordering mechanism
+- Added pick up spot near counter
+- Customers now spawn automatically
+- Better code structure for storing customer spawning location
+- Improved code readability
+- Improved clock calculations
+- Improved timer class
+- Fixed makefile
+- Fixed sprite position when debugging
+- Fixed a bug where customer keeps on ordering, resulting in timer going on forever
+- Fixed a bug where timer will increase even when customer did not order
+- Fixed a bug where waitress can take food before order
+- Fixed a bug where waitress does not need to be in pick up counter to pick up food
+
 **12 March 2015 - v0.4.0-alpha**
 - Added smoke image
 - Waitress can now collide with objects

@@ -15,7 +15,7 @@
 #define SPRITE_HEIGHT (_sprite.getTextureRect().height * _sprite.getScale().y)
 
 Waitress::Waitress() {
-
+	_foodTakenFromCounter = false;
 }
 
 // function names mainly for readability in level class
@@ -35,6 +35,10 @@ float Waitress::getWidth() {
 
 float Waitress::getHeight() {
 	return SPRITE_HEIGHT;
+}
+
+bool Waitress::hasTakenFoodFromCounter() {
+	return _foodTakenFromCounter;
 }
 
 void Waitress::moveUp() {
@@ -79,6 +83,13 @@ void Waitress::handleCollisionWith(SpriteClass &object) {
 	}
 }
 
-void Waitress::takeOrder() {
-	
+void Waitress::takeFoodFromCounter() {
+	_foodTakenFromCounter = true;
+}
+
+// another way of declaring a function that resets properties
+// did not want to make a virtual reset() function
+// it will just mess things up
+void Waitress::serveANewCustomer() {
+	_foodTakenFromCounter = false;
 }

@@ -21,6 +21,7 @@ class Timer {
 	
 		void startCounting();
 		void restart();
+<<<<<<< HEAD
 		void addTime();
 		void addTimeLimit(int timeAdded);
 		void stopCounting();
@@ -36,6 +37,29 @@ class Timer {
 		Mutex _mutex;
 	
 		bool _addedTimeNeeded;
+=======
+		void addMoreTime();
+		void stopCounting();
+	
+		bool hasReachedLimit();
+		bool hasAddedTime();
+	
+		int getClockTime();
+		int getLimit();
+		
+	private:
+		void reset();
+	
+		Clock _clock;
+		Mutex _mutex;
+	
+		int _stillLooping;
+		bool _timerHasReachedLimit;
+		int _timeLimit;
+	
+		bool _needTime;
+		bool _addedTime;
+>>>>>>> mummydiner/v0.6.0-alpha
 };
 
 #endif /* defined(__MummyDiner__Timer__) */

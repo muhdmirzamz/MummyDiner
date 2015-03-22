@@ -34,6 +34,13 @@ class Utility {
 		void setFPSValue(int value);
 		void setMousePosition(int x, int y);
 		void setSpritePosition(int x, int y);
+	
+		void setTimeLimit(int time);
+		void setTime(int time);
+	
+		void setOrderFlag(bool order);
+		void setFoodFlag(bool food);
+		void setFoodTakenFlag(bool foodIsTaken);
 
 		void show(RenderWindow &window);
 	
@@ -56,6 +63,21 @@ class Utility {
 		Text _spriteXPosValue;
 		Text _spriteYPos;
 		Text _spriteYPosValue;
+	
+		Text _timeLimit;
+		Text _timeLimitValue;
+	
+		Text _time;
+		Text _timeValue;
+	
+		Text _order;
+		Text _orderFlag;
+	
+		Text _food;
+		Text _foodFlag;
+	
+		Text _foodTaken;
+		Text _foodTakenFlag;
 	
 		int _valuePositionOffset;
 };

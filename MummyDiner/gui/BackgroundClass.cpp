@@ -22,3 +22,19 @@ void BackgroundClass::set(float x, float y, float w, float h, Uint8 r, Uint8 g, 
 void BackgroundClass::render(RenderWindow &window) {
 	window.draw(_background);
 }
+
+float BackgroundClass::getX() {
+	return _background.getPosition().x;
+}
+
+float BackgroundClass::getY() {
+	return _background.getPosition().x;
+}
+
+float BackgroundClass::getWidth() {
+	return _background.getSize().x;
+}
+
+float BackgroundClass::getHeight() {
+	return _background.getSize().y;
+}
