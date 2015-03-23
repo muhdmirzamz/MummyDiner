@@ -17,13 +17,6 @@ class Customer: public SpriteClass {
 	
 		void startThread();
 		void spawn();
-<<<<<<< HEAD
-		void stopThread();
-	
-		bool hasWaited();
-	
-		void order();
-=======
 		void addTime();
 		void getServed();
 		void stopThread();
@@ -43,7 +36,6 @@ class Customer: public SpriteClass {
 	
 		bool _ordered;
 		bool _foodServed;
->>>>>>> mummydiner/v0.6.0-alpha
 };
 
 #endif /* defined(__MummyDiner__Customer__) */

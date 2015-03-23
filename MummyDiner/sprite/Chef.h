@@ -17,8 +17,18 @@ class Chef: public SpriteClass {
 	public:
 		Chef();
 	
+		void startThread();
+		void getReadyToCook();
 		void cook();
-		void startCooking();
+		void stopThread();
+	
+		bool isDoneCooking();
+		bool isCooking();
+	
+		int getTimeLeft();
+	
+	private:
+		bool _cooking;
 };
 
 #endif /* defined(__MummyDiner__Chef__) */

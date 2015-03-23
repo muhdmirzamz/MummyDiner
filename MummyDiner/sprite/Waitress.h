@@ -35,7 +35,6 @@ class Waitress: public SpriteClass {
 		void serveANewCustomer();
 	
 	private:
-	
 		bool _foodTakenFromCounter;
 };
 

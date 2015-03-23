@@ -8,8 +8,8 @@
 
 #include "Customer.h"
 
-static Timer timer;
-static Thread customerTimer(&Timer::startCounting, &timer);
+static CustomerTimer customerTimerObject;
+static Thread customerThread(&CustomerTimer::startCounting, &customerTimerObject);
 
 /*
 	Treat this customer class as a "wrapper" class 
@@ -17,21 +17,6 @@ static Thread customerTimer(&Timer::startCounting, &timer);
 	
 	Level class needs to go through this customer class
 	to have access / control to the timer class
-<<<<<<< HEAD
-*/
-
-Customer::Customer() {
-
-}
-
-void Customer::startThread() {
-	customerTimer.launch();
-=======
-	
-	Here's the hierarchy:
-	Level class
-	Customer class
-	Timer class
 */
 
 Customer::Customer() {
@@ -39,31 +24,19 @@ Customer::Customer() {
 }
 
 void Customer::startThread() {
-	customerTimer.launch(); // calls startCounting in Timer class
->>>>>>> mummydiner/v0.6.0-alpha
+/*
+	Here's the hierarchy:
+	Level class
+	Customer class
+	Timer class
+*/
+	customerThread.launch();
 }
 
 void Customer::spawn() {
-	srand((int)time(NULL));
-<<<<<<< HEAD
-	_randomTable = rand() % 4 + 1;
-*/
-
-	timer.restart();
-}
-
-void Customer::stopThread() {
-	timer.stopCounting();
-}
-
-bool Customer::hasWaited() {
-	return timer.hasReachedLimit();
-}
-
-// use this to add more time
-void Customer::order() {
-	timer.addTime();
-=======
+	customerTimerObject.restart();
+	reset();
+	
 	int randomPosition = rand() % 4 + 1;
 	printf("Random position: %d\n", randomPosition);
 	
@@ -82,26 +55,28 @@ void Customer::order() {
 	if (randomPosition == BOTTOM_RIGHT) {
 		positionSprite(bottomRightCoordinate.x, bottomRightCoordinate.y);
 	}
-	
+}
 
-	timer.restart();
-	reset();
+void Customer::stopThread() {
+	customerTimerObject.stopCounting();
+}
+
+// use this to add more time
+void Customer::order() {
+	_ordered = true;
+	customerTimerObject.addMoreTime();
 }
 
 void Customer::addTime() {
-	timer.addMoreTime();
+	customerTimerObject.addMoreTime();
 }
 
 void Customer::getServed() {
 	_foodServed = true;
 }
 
-void Customer::stopThread() {
-	timer.stopCounting();
-}
-
 bool Customer::timeIsUp() {
-	return timer.hasReachedLimit();
+	return customerTimerObject.hasReachedLimit();
 }
 
 bool Customer::orderIsTaken() {
@@ -113,25 +88,19 @@ bool Customer::foodIsServed() {
 }
 
 bool Customer::timeIsAdded() {
-	return timer.hasAddedTime();
+	return customerTimerObject.hasAddedTime();
 }
 
 int Customer::getTimeLeft() {
-	return timer.getClockTime();
+	return customerTimerObject.getClockTime();
 }
 
 int Customer::getTimeLimit() {
-	return timer.getLimit();
-}
-
-// use this to add more time
-void Customer::order() {
-	_ordered = true;
+	return customerTimerObject.getLimit();
 }
 
 // this class resets only when there's a new customer
 void Customer::reset() {
 	_ordered = false;
 	_foodServed = false;
->>>>>>> mummydiner/v0.6.0-alpha
 }

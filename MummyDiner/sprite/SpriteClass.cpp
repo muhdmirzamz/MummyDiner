@@ -80,12 +80,20 @@ void SpriteClass::serveANewCustomer() {
 	
 }
 
+void SpriteClass::getReadyToCook() {
+	
+}
+
 void SpriteClass::cook() {
 	
 }
 
-void SpriteClass::startCooking() {
-	
+bool SpriteClass::isCooking() {
+	return false;
+}
+
+bool SpriteClass::isDoneCooking() {
+	return false;
 }
 
 void SpriteClass::spawn() {
@@ -93,8 +101,6 @@ void SpriteClass::spawn() {
 }
 
 void SpriteClass::startThread() {
-<<<<<<< HEAD
-=======
 	
 }
 
@@ -131,16 +137,7 @@ void SpriteClass::addTime() {
 }
 
 void SpriteClass::getServed() {
->>>>>>> mummydiner/v0.6.0-alpha
 	
-}
-
-void SpriteClass::stopThread() {
-	
-}
-
-bool SpriteClass::hasWaited() {
-	return false;
 }
 
 void SpriteClass::order() {
