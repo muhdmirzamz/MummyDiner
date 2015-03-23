@@ -15,7 +15,7 @@ Utility::Utility() {
 	_font.loadFromFile(LATO_LIGHT_FONT);
 	_fontSize = 15;
 	
-	_valuePositionOffset = 120;
+	_valuePositionOffset = 150;
 }
 
 // add debug properties here
@@ -31,9 +31,12 @@ void Utility::set() {
 	setTextAndPosition(_timeLimit, "Time Limit: ", 110, _timeLimitValue);
 	setTextAndPosition(_time, "Time: ", 130, _timeValue);
 	
-	setTextAndPosition(_order, "Order: ", 150, _orderFlag);
-	setTextAndPosition(_food, "Food: ", 170, _foodFlag);
-	setTextAndPosition(_foodTaken, "Food taken: ", 190, _foodTakenFlag);
+	setTextAndPosition(_chefTimeLimit, "Chef time limit: ", 150, _chefTimeLimitValue);
+	
+	setTextAndPosition(_order, "Order: ", 170, _orderFlag);
+	setTextAndPosition(_chefCook, "Cooking: ", 190, _chefCookValue);
+	setTextAndPosition(_foodTaken, "Food taken: ", 210, _foodTakenFlag);
+	setTextAndPosition(_foodServed, "Food served: ", 230, _foodServedFlag);
 }
 
 // set the value of any changing / dynamic debug properties
@@ -64,12 +67,20 @@ void Utility::setOrderFlag(bool order) {
 	_orderFlag.setString(to_string(order));
 }
 
-void Utility::setFoodFlag(bool food) {
-	_foodFlag.setString(to_string(food));
+void Utility::setCookFlag(bool cook) {
+	_chefCookValue.setString(to_string(cook));
+}
+
+void Utility::setFoodServedFlag(bool food) {
+	_foodServedFlag.setString(to_string(food));
 }
 
 void Utility::setFoodTakenFlag(bool foodIsTaken) {
 	_foodTakenFlag.setString(to_string(foodIsTaken));
+}
+
+void Utility::setChefTimeLimit(int time) {
+	_chefTimeLimitValue.setString(to_string(time));
 }
 
 void Utility::show(RenderWindow &window) {
@@ -90,13 +101,17 @@ void Utility::show(RenderWindow &window) {
 	window.draw(_timeLimitValue);
 	window.draw(_time);
 	window.draw(_timeValue);
+	window.draw(_chefTimeLimit);
+	window.draw(_chefTimeLimitValue);
 	
 	window.draw(_order);
 	window.draw(_orderFlag);
-	window.draw(_food);
-	window.draw(_foodFlag);
+	window.draw(_chefCook);
+	window.draw(_chefCookValue);
 	window.draw(_foodTaken);
 	window.draw(_foodTakenFlag);
+	window.draw(_foodServed);
+	window.draw(_foodServedFlag);
 }
 
 // dealing with two things

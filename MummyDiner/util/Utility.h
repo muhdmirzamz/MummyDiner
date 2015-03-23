@@ -39,8 +39,11 @@ class Utility {
 		void setTime(int time);
 	
 		void setOrderFlag(bool order);
-		void setFoodFlag(bool food);
+		void setCookFlag(bool cook);
+		void setFoodServedFlag(bool food);
 		void setFoodTakenFlag(bool foodIsTaken);
+	
+		void setChefTimeLimit(int time);
 
 		void show(RenderWindow &window);
 	
@@ -73,11 +76,17 @@ class Utility {
 		Text _order;
 		Text _orderFlag;
 	
-		Text _food;
-		Text _foodFlag;
+		Text _foodServed;
+		Text _foodServedFlag;
 	
 		Text _foodTaken;
 		Text _foodTakenFlag;
+	
+		Text _chefCook;
+		Text _chefCookValue;
+	
+		Text _chefTimeLimit;
+		Text _chefTimeLimitValue;
 	
 		int _valuePositionOffset;
 };
