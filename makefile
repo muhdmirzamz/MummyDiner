@@ -8,7 +8,7 @@ COMPILE=$(CXX) $(CFLAGS) $^
 VPATH=MummyDiner:MummyDiner/state:MummyDiner/util:MummyDiner/sprite:MummyDiner/gui
 
 GUI_CLASSES=BackgroundClass.o ButtonClass.o TextClass.o
-UTIL_CLASSES=Utility.o Timer.o FramesPerSecond.o
+UTIL_CLASSES=Utility.o Timer.o CustomerTimer.o ChefTimer.o FramesPerSecond.o
 SPRITE_CLASSES=SpriteClass.o Waitress.o Customer.o Chef.o
 STATE_CLASSES=GameState.o MainMenuScreen.o SettingsScreen.o LevelScreen.o
 
@@ -60,6 +60,12 @@ FramesPerSecond.o: FramesPerSecond.cpp
 	$(COMPILE)
 
 Timer.o: Timer.cpp
+	$(COMPILE)
+
+CustomerTimer.o: CustomerTimer.cpp
+	$(COMPILE)
+
+ChefTimer.o: ChefTimer.cpp
 	$(COMPILE)
 
 Utility.o: Utility.cpp
