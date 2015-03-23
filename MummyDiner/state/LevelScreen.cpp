@@ -17,14 +17,9 @@ static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
-<<<<<<< HEAD
-	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 10, 10);
-	_customer = &_customerObj; // testing phase, do not set position first
-=======
 	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 300, 10);
 	_customer = &_customerObj;
 	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, _customer->topLeftCoordinate.x, _customer->topLeftCoordinate.y);
->>>>>>> mummydiner/v0.6.0-alpha
 	_chef = &_chefObj;
 	_chef->set("images/chef.bmp", 450, 10, 400, 700, 500, 375, 0.15, 0.15);
 	
@@ -52,6 +47,7 @@ LevelScreen::LevelScreen() {
 	
 	fpsThread.launch();
 	_customer->startThread();
+	_chef->startThread();
 }
 
 void LevelScreen::handleEvent() {
@@ -60,6 +56,7 @@ void LevelScreen::handleEvent() {
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
 			_customer->stopThread();
+			_chef->stopThread();
 			fps.stopCounting();
 		
 			cleanup();
@@ -82,20 +79,10 @@ void LevelScreen::handleEvent() {
 }
 
 void LevelScreen::spawnCustomer() {
-<<<<<<< HEAD
-	// if customer has waited and order is not taken, spawn a new customer
-	if (_customer->hasWaited()) {
-		_customer->spawn();
-	}
-	
-	_customer->order();
-	
-	if (_customer->hasWaited()) {
-		_customer->spawn();
-	}
-=======
 	if (_customer->timeIsUp()) {
 		_customer->spawn();
+		_waitress->serveANewCustomer();
+		_chef->getReadyToCook();
 	} else {
 		if (_customer->foodIsServed()) { // true once the waitress has taken food from counter and served customer
 			if (!_customer->timeIsAdded()) { // to avoid multiple increases
@@ -130,7 +117,6 @@ void LevelScreen::spawnCustomer() {
 	_debug.setTime(_customer->getTimeLeft());
 	_debug.setTimeLimit(_customer->getTimeLimit());
 #endif
->>>>>>> mummydiner/v0.6.0-alpha
 }
 
 void LevelScreen::moveCharacter() {
@@ -151,32 +137,30 @@ void LevelScreen::moveCharacter() {
 		_waitress->moveDown();
 	}
 	
-<<<<<<< HEAD
-#if DEBUG_MODE == 1
-	_debug.setSpritePosition(_waitress->getXPos(), _waitress->getYPos());
-=======
-	// order testing
+	// remember to do for the other 3 locations
 	if (_waitress->getXPos() + _waitress->getWidth() >= _topLeftBackground.getX() && _waitress->getXPos() <= _topLeftBackground.getX() + _topLeftBackground.getWidth()) {
 		if (_waitress->getYPos() + _waitress->getHeight() >= _topLeftBackground.getY() && _waitress->getYPos() <= _topLeftBackground.getY() + _topLeftBackground.getHeight()) {
 			if (_customer->orderIsTaken()) {
 				if (_waitress->hasTakenFoodFromCounter()) {
 					if (!_customer->foodIsServed()) {
 						_customer->getServed();
-						printf("Served\n");
 					}
 				}
- 				
 			} else {
 				_customer->order();
-				printf("Ordered\n");
 			}
 		}
 	}
 	
+	// food pickup mechanism
 	if (_waitress->getXPos() + _waitress->getWidth() >= _foodPickupBackground.getX() && _waitress->getXPos() <= _foodPickupBackground.getX() + _foodPickupBackground.getWidth()) {
 		if (_waitress->getYPos() + _waitress->getHeight() >= _foodPickupBackground.getY() + 100 && _waitress->getYPos() <= _foodPickupBackground.getY() + _foodPickupBackground.getHeight()) {
 			if (_customer->orderIsTaken()) {
-				_waitress->takeFoodFromCounter();
+				if (!_chef->isCooking()) {
+					_chef->cook();
+				} else if (_chef->isDoneCooking()) {
+					_waitress->takeFoodFromCounter();
+				}
 			}
 		}
 	}
@@ -184,9 +168,10 @@ void LevelScreen::moveCharacter() {
 #if DEBUG_MODE == 1
 	_debug.setSpritePosition(_waitress->getXPos(), _waitress->getYPos());
 	_debug.setOrderFlag(_customer->orderIsTaken());
-	_debug.setFoodFlag(_customer->foodIsServed());
+	_debug.setCookFlag(_chef->isCooking());
 	_debug.setFoodTakenFlag(_waitress->hasTakenFoodFromCounter());
->>>>>>> mummydiner/v0.6.0-alpha
+	_debug.setFoodServedFlag(_customer->foodIsServed());
+	_debug.setChefTimeLimit(_chef->getTimeLeft());
 #endif
 }
 

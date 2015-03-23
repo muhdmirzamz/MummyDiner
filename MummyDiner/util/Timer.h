@@ -19,37 +19,21 @@ class Timer {
 	public:
 		Timer();
 	
-		void startCounting();
-		void restart();
-<<<<<<< HEAD
-		void addTime();
-		void addTimeLimit(int timeAdded);
-		void stopCounting();
+		virtual void startCounting();
+		virtual void restart();
 	
-		bool hasReachedLimit();
+		virtual void addMoreTime();
+		virtual void stopCounting();
+	
+		virtual void launchTimerThread();
+	
+		virtual bool hasReachedLimit();
+		virtual bool hasAddedTime();
+	
+		virtual int getClockTime();
+		virtual int getLimit();
 		
-	private:
-		int _stillLooping;
-		bool _timerHasReachedLimit;
-		int _timeLimit;
-		Clock _clock;
-	
-		Mutex _mutex;
-	
-		bool _addedTimeNeeded;
-=======
-		void addMoreTime();
-		void stopCounting();
-	
-		bool hasReachedLimit();
-		bool hasAddedTime();
-	
-		int getClockTime();
-		int getLimit();
-		
-	private:
-		void reset();
-	
+	protected:	
 		Clock _clock;
 		Mutex _mutex;
 	
@@ -59,7 +43,6 @@ class Timer {
 	
 		bool _needTime;
 		bool _addedTime;
->>>>>>> mummydiner/v0.6.0-alpha
 };
 
 #endif /* defined(__MummyDiner__Timer__) */
