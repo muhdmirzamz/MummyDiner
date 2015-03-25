@@ -40,9 +40,6 @@ class Timer {
 		int _stillLooping;
 		bool _timerHasReachedLimit;
 		int _timeLimit;
-	
-		bool _needTime;
-		bool _addedTime;
 };
 
 #endif /* defined(__MummyDiner__Timer__) */

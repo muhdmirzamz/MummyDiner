@@ -28,6 +28,10 @@ class CustomerTimer: public Timer {
 		
 		int getClockTime();
 		int getLimit();
+	
+	private:
+		bool _needTime;
+		bool _addedTime;
 };
 
 #endif /* defined(__MummyDiner__CustomerTimer__) */
