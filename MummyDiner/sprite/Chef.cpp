@@ -12,6 +12,8 @@ static ChefTimer chefTimerObject;
 static Thread chefThread(&ChefTimer::launchTimerThread, &chefTimerObject);
 
 Chef::Chef() {
+	_smoke.set("images/smoke.bmp", 500, 10, 300, 600, SCREEN_W - 50, 350);
+
 	getReadyToCook();
 }
 
@@ -21,13 +23,17 @@ void Chef::startThread() {
 
 // reset properties
 void Chef::getReadyToCook() {
-	chefTimerObject.restart();
 	_cooking = false;
+	chefTimerObject.restart();
 }
 
 void Chef::cook() {
 	_cooking = true;
 	chefTimerObject.startCounting();
+}
+
+void Chef::renderSmoke(RenderWindow &window) {
+	_smoke.render(window); // using SpriteClass render function FYI
 }
 
 void Chef::stopThread() {

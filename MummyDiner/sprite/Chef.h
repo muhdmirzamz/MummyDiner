@@ -20,6 +20,7 @@ class Chef: public SpriteClass {
 		void startThread();
 		void getReadyToCook();
 		void cook();
+		void renderSmoke(RenderWindow &window);
 		void stopThread();
 	
 		bool isDoneCooking();
@@ -29,6 +30,8 @@ class Chef: public SpriteClass {
 	
 	private:
 		bool _cooking;
+	
+		SpriteClass _smoke;
 };
 
 #endif /* defined(__MummyDiner__Chef__) */
