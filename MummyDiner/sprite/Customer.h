@@ -17,8 +17,11 @@ class Customer: public SpriteClass {
 	
 		void startThread();
 		void spawn();
+		void renderOrderPopup(RenderWindow &window);
 		void addTime();
 		void getServed();
+		void renderFood(RenderWindow &window);
+		void renderThanksPopup(RenderWindow &window);
 		void stopThread();
 	
 		bool timeIsUp();
@@ -36,6 +39,11 @@ class Customer: public SpriteClass {
 	
 		bool _ordered;
 		bool _foodServed;
+	
+		SpriteClass _food;
+	
+		SpriteClass _orderPopup;
+		SpriteClass _thanksPopup;
 };
 
 #endif /* defined(__MummyDiner__Customer__) */
