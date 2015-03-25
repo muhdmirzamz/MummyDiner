@@ -19,7 +19,8 @@ LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
 	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 300, 10);
 	_customer = &_customerObj;
-	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, _customer->topLeftCoordinate.x, _customer->topLeftCoordinate.y);
+	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, 0, 0);
+	_customer->spawn();
 	_chef = &_chefObj;
 	_chef->set("images/chef.bmp", 450, 10, 400, 700, 500, 375, 0.15, 0.15);
 	
@@ -27,6 +28,7 @@ LevelScreen::LevelScreen() {
 	_topRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 50);
 	_bottomLeftTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 80, 200);
 	_bottomRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 200);
+	
 	_counter.set("images/counter.bmp", 0, 200, SCREEN_W, 40, 0, 330, 1.0, 1.0);
 	_stove.set("images/stove.bmp", 450, 10, 550, 650, SCREEN_W - _stove.getWidth() - 70, 400);
 	
@@ -68,6 +70,18 @@ void LevelScreen::handleEvent() {
 		if (event.type == event.MouseMoved) {
 			_debug.setMousePosition(MOUSE_X, MOUSE_Y);
 		}
+		
+		if (event.type == event.KeyPressed) {
+			if (event.key.code == Keyboard::Escape) {
+				_customer->stopThread();
+				_chef->stopThread();
+				fps.stopCounting();
+				
+				cleanup();
+				
+				setState(EXIT);
+			}
+		}
 #endif
 		
 		if (event.type == event.MouseButtonPressed) {
@@ -94,24 +108,6 @@ void LevelScreen::spawnCustomer() {
 			}
 		}
 	}
-	
-	/*
-		 if (_customer->timeIsUp()) {
-			 _customer->spawn();
-		 } else {
-			 if (_customer->orderIsTaken()) {
-				 if (_customer->foodisServed()) {
-					 if (!_customer->timeIsAdded()) {
-						 _customer->addTime();
-					 }
-				 } else if (_customer->isDoneEating()) {
-					 _customer->spawn();
-				 } else if (!_customer->timeIsAdded()) {
-					_customer->addTime();
-				 }
-			 }
-		 }
-	*/
 	
 #if DEBUG_MODE == 1
 	_debug.setTime(_customer->getTimeLeft());
@@ -207,6 +203,21 @@ void LevelScreen::render() {
 	_bottomRightTable.render(window);
 	_counter.render(window);
 	_stove.render(window);
+	
+	printf("Customer order taken: %d\n", _customer->orderIsTaken());
+	
+	if (!_customer->orderIsTaken()) {
+		_customer->renderOrderPopup(window);
+	}
+	
+	if (_customer->foodIsServed()) {
+		_customer->renderFood(window);
+		_customer->renderThanksPopup(window);
+	}
+	
+	if (_chef->isCooking() && !_chef->isDoneCooking()) {
+		_chef->renderSmoke(window);
+	}
 	
 #if DEBUG_MODE == 1
 	_debug.show(window);

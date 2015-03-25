@@ -36,6 +36,7 @@ class LevelScreen: public GameState {
 		SpriteClass _topRightTable;
 		SpriteClass _bottomLeftTable;
 		SpriteClass _bottomRightTable;
+	
 		SpriteClass _counter;
 		SpriteClass _stove;
 	
