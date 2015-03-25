@@ -1,5 +1,22 @@
 ###CHANGELOG
 
+**25 March 2015 - v0.6.0-alpha**
+- Waitress now resets every time a new customer spawns
+- Chef now has timer
+- Smoke now renders when chef is cooking
+- Added new customer images for popups
+- Customer now spawns randomly instead of starting at the top left
+- There is now a popup with the customer when they are served food
+- There is now a food icon on the table when food is delivered to customer
+- Fixed bug where chef timer would not start
+- Fixed issue where chef timer is seen as microseconds
+- Fixed a bug where waitress could take food from counter without taking orders
+- Fixed a bug where smoke only renders for a few seconds
+- Fixed a bug where smoke renders even after chef has finished cooking
+- Fixed a bug where customer popup does not render on first spawn
+- Fixed an issue where random customer spawning is not quite random
+- A bug where customer popup bubbles failed to render every time a new customer spawns is now fixed
+
 **17 March 2015 - v0.5.0-alpha**
 - Added Timer class
 - Added background to detect sprite position
