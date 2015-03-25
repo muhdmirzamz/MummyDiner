@@ -88,6 +88,10 @@ void SpriteClass::cook() {
 	
 }
 
+void SpriteClass::renderSmoke(RenderWindow &window) {
+	
+}
+
 bool SpriteClass::isCooking() {
 	return false;
 }
@@ -100,7 +104,19 @@ void SpriteClass::spawn() {
 	
 }
 
+void SpriteClass::renderOrderPopup(RenderWindow &window) {
+	
+}
+
 void SpriteClass::startThread() {
+	
+}
+
+void SpriteClass::renderFood(RenderWindow &window) {
+	
+}
+
+void SpriteClass::renderThanksPopup(RenderWindow &window) {
 	
 }
 

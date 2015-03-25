@@ -70,13 +70,17 @@ class SpriteClass {
 		// chef
 		virtual void getReadyToCook();
 		virtual void cook();
+		virtual void renderSmoke(RenderWindow &window);
 		
 		virtual bool isCooking();
 		virtual bool isDoneCooking();
 	
 		// customer
 		virtual void spawn();
+		virtual void renderOrderPopup(RenderWindow &window);
 		virtual void startThread();
+		virtual void renderFood(RenderWindow &window);
+		virtual void renderThanksPopup(RenderWindow &window);
 		virtual void stopThread();
 
 		virtual bool timeIsUp();
