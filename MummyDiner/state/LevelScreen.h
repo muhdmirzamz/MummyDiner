@@ -29,13 +29,14 @@ class LevelScreen: public GameState {
 		SpriteClass *_customer;
 		Customer _customerObj;
 	
-		SpriteClass _chefObj;
 		SpriteClass *_chef;
+		Chef _chefObj;
 	
 		SpriteClass _topLeftTable;
 		SpriteClass _topRightTable;
 		SpriteClass _bottomLeftTable;
 		SpriteClass _bottomRightTable;
+	
 		SpriteClass _counter;
 		SpriteClass _stove;
 	

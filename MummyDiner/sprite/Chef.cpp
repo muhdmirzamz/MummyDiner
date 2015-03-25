@@ -8,22 +8,46 @@
 
 #include "Chef.h"
 
-Chef::Chef() {
+static ChefTimer chefTimerObject;
+static Thread chefThread(&ChefTimer::launchTimerThread, &chefTimerObject);
 
+Chef::Chef() {
+	_smoke.set("images/smoke.bmp", 500, 10, 300, 600, SCREEN_W - 50, 350);
+
+	getReadyToCook();
+}
+
+void Chef::startThread() {
+	chefThread.launch();
+}
+
+// reset properties
+void Chef::getReadyToCook() {
+	_cooking = false;
+	chefTimerObject.restart();
 }
 
 void Chef::cook() {
-	// use a boolean flag to check if thread is running,
-	// that might help you think of something
-	// the next time you try to solve this problem
-	
-	// this function may not be needed
+	_cooking = true;
+	chefTimerObject.startCounting();
 }
 
-void Chef::startCooking() {
-	Clock clock;
-	
-	while (clock.getElapsedTime().asMilliseconds() <= 5000) {
-		printf("%d\n", clock.getElapsedTime().asMilliseconds());
-	}
+void Chef::renderSmoke(RenderWindow &window) {
+	_smoke.render(window); // using SpriteClass render function FYI
+}
+
+void Chef::stopThread() {
+	chefTimerObject.stopCounting();
+}
+
+bool Chef::isDoneCooking() {
+	return chefTimerObject.hasReachedLimit();
+}
+
+bool Chef::isCooking() {
+	return _cooking;
+}
+
+int Chef::getTimeLeft() {
+	return chefTimerObject.getClockTime();
 }

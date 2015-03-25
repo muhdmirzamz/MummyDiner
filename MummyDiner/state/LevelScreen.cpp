@@ -19,7 +19,8 @@ LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
 	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 300, 10);
 	_customer = &_customerObj;
-	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, _customer->topLeftCoordinate.x, _customer->topLeftCoordinate.y);
+	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, 0, 0);
+	_customer->spawn();
 	_chef = &_chefObj;
 	_chef->set("images/chef.bmp", 450, 10, 400, 700, 500, 375, 0.15, 0.15);
 	
@@ -27,6 +28,7 @@ LevelScreen::LevelScreen() {
 	_topRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 50);
 	_bottomLeftTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 80, 200);
 	_bottomRightTable.set("images/table.bmp", TABLE_CROP_SETTINGS, 400, 200);
+	
 	_counter.set("images/counter.bmp", 0, 200, SCREEN_W, 40, 0, 330, 1.0, 1.0);
 	_stove.set("images/stove.bmp", 450, 10, 550, 650, SCREEN_W - _stove.getWidth() - 70, 400);
 	
@@ -47,6 +49,7 @@ LevelScreen::LevelScreen() {
 	
 	fpsThread.launch();
 	_customer->startThread();
+	_chef->startThread();
 }
 
 void LevelScreen::handleEvent() {
@@ -55,6 +58,7 @@ void LevelScreen::handleEvent() {
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
 			_customer->stopThread();
+			_chef->stopThread();
 			fps.stopCounting();
 		
 			cleanup();
@@ -65,6 +69,18 @@ void LevelScreen::handleEvent() {
 #if DEBUG_MODE == 1
 		if (event.type == event.MouseMoved) {
 			_debug.setMousePosition(MOUSE_X, MOUSE_Y);
+		}
+		
+		if (event.type == event.KeyPressed) {
+			if (event.key.code == Keyboard::Escape) {
+				_customer->stopThread();
+				_chef->stopThread();
+				fps.stopCounting();
+				
+				cleanup();
+				
+				setState(EXIT);
+			}
 		}
 #endif
 		
@@ -79,6 +95,8 @@ void LevelScreen::handleEvent() {
 void LevelScreen::spawnCustomer() {
 	if (_customer->timeIsUp()) {
 		_customer->spawn();
+		_waitress->serveANewCustomer();
+		_chef->getReadyToCook();
 	} else {
 		if (_customer->foodIsServed()) { // true once the waitress has taken food from counter and served customer
 			if (!_customer->timeIsAdded()) { // to avoid multiple increases
@@ -90,24 +108,6 @@ void LevelScreen::spawnCustomer() {
 			}
 		}
 	}
-	
-	/*
-		 if (_customer->timeIsUp()) {
-			 _customer->spawn();
-		 } else {
-			 if (_customer->orderIsTaken()) {
-				 if (_customer->foodisServed()) {
-					 if (!_customer->timeIsAdded()) {
-						 _customer->addTime();
-					 }
-				 } else if (_customer->isDoneEating()) {
-					 _customer->spawn();
-				 } else if (!_customer->timeIsAdded()) {
-					_customer->addTime();
-				 }
-			 }
-		 }
-	*/
 	
 #if DEBUG_MODE == 1
 	_debug.setTime(_customer->getTimeLeft());
@@ -133,28 +133,30 @@ void LevelScreen::moveCharacter() {
 		_waitress->moveDown();
 	}
 	
-	// order testing
+	// remember to do for the other 3 locations
 	if (_waitress->getXPos() + _waitress->getWidth() >= _topLeftBackground.getX() && _waitress->getXPos() <= _topLeftBackground.getX() + _topLeftBackground.getWidth()) {
 		if (_waitress->getYPos() + _waitress->getHeight() >= _topLeftBackground.getY() && _waitress->getYPos() <= _topLeftBackground.getY() + _topLeftBackground.getHeight()) {
 			if (_customer->orderIsTaken()) {
 				if (_waitress->hasTakenFoodFromCounter()) {
 					if (!_customer->foodIsServed()) {
 						_customer->getServed();
-						printf("Served\n");
 					}
 				}
- 				
 			} else {
 				_customer->order();
-				printf("Ordered\n");
 			}
 		}
 	}
 	
+	// food pickup mechanism
 	if (_waitress->getXPos() + _waitress->getWidth() >= _foodPickupBackground.getX() && _waitress->getXPos() <= _foodPickupBackground.getX() + _foodPickupBackground.getWidth()) {
 		if (_waitress->getYPos() + _waitress->getHeight() >= _foodPickupBackground.getY() + 100 && _waitress->getYPos() <= _foodPickupBackground.getY() + _foodPickupBackground.getHeight()) {
 			if (_customer->orderIsTaken()) {
-				_waitress->takeFoodFromCounter();
+				if (!_chef->isCooking()) {
+					_chef->cook();
+				} else if (_chef->isDoneCooking()) {
+					_waitress->takeFoodFromCounter();
+				}
 			}
 		}
 	}
@@ -162,8 +164,10 @@ void LevelScreen::moveCharacter() {
 #if DEBUG_MODE == 1
 	_debug.setSpritePosition(_waitress->getXPos(), _waitress->getYPos());
 	_debug.setOrderFlag(_customer->orderIsTaken());
-	_debug.setFoodFlag(_customer->foodIsServed());
+	_debug.setCookFlag(_chef->isCooking());
 	_debug.setFoodTakenFlag(_waitress->hasTakenFoodFromCounter());
+	_debug.setFoodServedFlag(_customer->foodIsServed());
+	_debug.setChefTimeLimit(_chef->getTimeLeft());
 #endif
 }
 
@@ -199,6 +203,21 @@ void LevelScreen::render() {
 	_bottomRightTable.render(window);
 	_counter.render(window);
 	_stove.render(window);
+	
+	printf("Customer order taken: %d\n", _customer->orderIsTaken());
+	
+	if (!_customer->orderIsTaken()) {
+		_customer->renderOrderPopup(window);
+	}
+	
+	if (_customer->foodIsServed()) {
+		_customer->renderFood(window);
+		_customer->renderThanksPopup(window);
+	}
+	
+	if (_chef->isCooking() && !_chef->isDoneCooking()) {
+		_chef->renderSmoke(window);
+	}
 	
 #if DEBUG_MODE == 1
 	_debug.show(window);

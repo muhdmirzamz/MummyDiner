@@ -15,7 +15,7 @@
 #define SPRITE_HEIGHT (_sprite.getTextureRect().height * _sprite.getScale().y)
 
 Waitress::Waitress() {
-	_foodTakenFromCounter = false;
+	serveANewCustomer();
 }
 
 // function names mainly for readability in level class

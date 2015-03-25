@@ -14,7 +14,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "../util/Utility.h"
-#include "../util/Timer.h"
+#include "../util/CustomerTimer.h"
+#include "../util/ChefTimer.h"
 
 using namespace sf;
 
@@ -67,13 +68,21 @@ class SpriteClass {
 		virtual void serveANewCustomer();
 	
 		// chef
+		virtual void getReadyToCook();
 		virtual void cook();
-		virtual void startCooking();
+		virtual void renderSmoke(RenderWindow &window);
+		
+		virtual bool isCooking();
+		virtual bool isDoneCooking();
 	
 		// customer
 		virtual void spawn();
+		virtual void renderOrderPopup(RenderWindow &window);
 		virtual void startThread();
+		virtual void renderFood(RenderWindow &window);
+		virtual void renderThanksPopup(RenderWindow &window);
 		virtual void stopThread();
+
 		virtual bool timeIsUp();
 		virtual bool orderIsTaken();
 		virtual bool foodIsServed();

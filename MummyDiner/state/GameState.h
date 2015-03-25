@@ -10,9 +10,10 @@
 #define __MummyDiner__GameState__
 
 #include "../util/FramesPerSecond.h"
-#include "../util/Timer.h"
+#include "../util/CustomerTimer.h" // includes timer class
+#include "../util/ChefTimer.h"
 
-#include "../gui/ButtonClass.h" // includes text class.. also the debug class
+#include "../gui/ButtonClass.h" // includes text class.. also the utility class
 #include "../gui/BackgroundClass.h"
 
 // each of these classes includes the SpriteClass class, debug class and timer class
