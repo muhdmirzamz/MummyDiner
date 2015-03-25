@@ -43,6 +43,16 @@ void MainMenuScreen::handleEvent() {
 		if (event.type == event.MouseMoved) {
 			_debug.setMousePosition(MOUSE_X, MOUSE_Y);
 		}
+		
+		if (event.type == event.KeyPressed) {
+			if (event.key.code == Keyboard::Escape) {
+				fps.stopCounting();
+				
+				cleanup();
+				
+				setState(EXIT);
+			}
+		}
 #endif
 		
 		if (event.type == event.MouseButtonPressed) {
