@@ -11,6 +11,9 @@
 		AA248C871A5D6356006D3D13 /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C831A5D6356006D3D13 /* sfml-system.framework */; };
 		AA248C8B1A5D6370006D3D13 /* SFML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C8A1A5D6370006D3D13 /* SFML.framework */; };
 		AA248C8D1A5D6385006D3D13 /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C8C1A5D6385006D3D13 /* sfml-window.framework */; };
+		AA39A9FD1AC6601B002885EC /* LevelTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA39A9FB1AC6601B002885EC /* LevelTimer.cpp */; };
+		AA39AA001AC66DF4002885EC /* GameOverScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA39A9FE1AC66DF4002885EC /* GameOverScreen.cpp */; };
+		AA3F8B871AC7DDF70072E5D9 /* HowToPlayScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3F8B851AC7DDF70072E5D9 /* HowToPlayScreen.cpp */; };
 		AA6328A41AA88AC7005BD55C /* FramesPerSecond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA6328A21AA88AC7005BD55C /* FramesPerSecond.cpp */; };
 		AA71DEB31AB1A21800E44E37 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA71DEB11AB1A21800E44E37 /* Timer.cpp */; };
 		AA7C07011ABFE36E00D29491 /* CustomerTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7C06FF1ABFE36E00D29491 /* CustomerTimer.cpp */; };
@@ -19,6 +22,7 @@
 		AA97370C1AA8191F00D9D4A6 /* Customer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737051AA8191F00D9D4A6 /* Customer.cpp */; };
 		AA97370D1AA8191F00D9D4A6 /* SpriteClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737071AA8191F00D9D4A6 /* SpriteClass.cpp */; };
 		AA97370E1AA8191F00D9D4A6 /* Waitress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737091AA8191F00D9D4A6 /* Waitress.cpp */; };
+		AAAA166F1AC2F2ED002E6124 /* MenuSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA166D1AC2F2ED002E6124 /* MenuSystem.cpp */; };
 		AAB051271A5AB42000364D65 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB051261A5AB42000364D65 /* main.cpp */; };
 		AAD323081AB0809A00DA991F /* BackgroundClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323021AB0809A00DA991F /* BackgroundClass.cpp */; };
 		AAD323091AB0809A00DA991F /* ButtonClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323041AB0809A00DA991F /* ButtonClass.cpp */; };
@@ -47,6 +51,12 @@
 		AA248C831A5D6356006D3D13 /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
 		AA248C8A1A5D6370006D3D13 /* SFML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SFML.framework; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/SFML.framework"; sourceTree = "<group>"; };
 		AA248C8C1A5D6385006D3D13 /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/sfml-window.framework"; sourceTree = "<group>"; };
+		AA39A9FB1AC6601B002885EC /* LevelTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelTimer.cpp; sourceTree = "<group>"; };
+		AA39A9FC1AC6601B002885EC /* LevelTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelTimer.h; sourceTree = "<group>"; };
+		AA39A9FE1AC66DF4002885EC /* GameOverScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverScreen.cpp; sourceTree = "<group>"; };
+		AA39A9FF1AC66DF4002885EC /* GameOverScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScreen.h; sourceTree = "<group>"; };
+		AA3F8B851AC7DDF70072E5D9 /* HowToPlayScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HowToPlayScreen.cpp; sourceTree = "<group>"; };
+		AA3F8B861AC7DDF70072E5D9 /* HowToPlayScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToPlayScreen.h; sourceTree = "<group>"; };
 		AA6328A21AA88AC7005BD55C /* FramesPerSecond.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FramesPerSecond.cpp; sourceTree = "<group>"; };
 		AA6328A31AA88AC7005BD55C /* FramesPerSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesPerSecond.h; sourceTree = "<group>"; };
 		AA71DEB11AB1A21800E44E37 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
@@ -63,6 +73,8 @@
 		AA9737081AA8191F00D9D4A6 /* SpriteClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteClass.h; sourceTree = "<group>"; };
 		AA9737091AA8191F00D9D4A6 /* Waitress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Waitress.cpp; sourceTree = "<group>"; };
 		AA97370A1AA8191F00D9D4A6 /* Waitress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waitress.h; sourceTree = "<group>"; };
+		AAAA166D1AC2F2ED002E6124 /* MenuSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuSystem.cpp; sourceTree = "<group>"; };
+		AAAA166E1AC2F2ED002E6124 /* MenuSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuSystem.h; sourceTree = "<group>"; };
 		AAB051231A5AB42000364D65 /* MummyDiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MummyDiner; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB051261A5AB42000364D65 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AAD323021AB0809A00DA991F /* BackgroundClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BackgroundClass.cpp; sourceTree = "<group>"; };
@@ -111,6 +123,10 @@
 				AA7C07001ABFE36E00D29491 /* CustomerTimer.h */,
 				AA7C07021ABFE37400D29491 /* ChefTimer.cpp */,
 				AA7C07031ABFE37400D29491 /* ChefTimer.h */,
+				AA39A9FB1AC6601B002885EC /* LevelTimer.cpp */,
+				AA39A9FC1AC6601B002885EC /* LevelTimer.h */,
+				AAAA166D1AC2F2ED002E6124 /* MenuSystem.cpp */,
+				AAAA166E1AC2F2ED002E6124 /* MenuSystem.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -180,12 +196,16 @@
 			children = (
 				AAD3230F1AB083D000DA991F /* GameState.cpp */,
 				AAD323101AB083D000DA991F /* GameState.h */,
-				AAD323111AB083D000DA991F /* LevelScreen.cpp */,
-				AAD323121AB083D000DA991F /* LevelScreen.h */,
 				AAD323131AB083D000DA991F /* MainMenuScreen.cpp */,
 				AAD323141AB083D000DA991F /* MainMenuScreen.h */,
+				AA3F8B851AC7DDF70072E5D9 /* HowToPlayScreen.cpp */,
+				AA3F8B861AC7DDF70072E5D9 /* HowToPlayScreen.h */,
 				AAD323151AB083D000DA991F /* SettingsScreen.cpp */,
 				AAD323161AB083D000DA991F /* SettingsScreen.h */,
+				AAD323111AB083D000DA991F /* LevelScreen.cpp */,
+				AAD323121AB083D000DA991F /* LevelScreen.h */,
+				AA39A9FE1AC66DF4002885EC /* GameOverScreen.cpp */,
+				AA39A9FF1AC66DF4002885EC /* GameOverScreen.h */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -255,14 +275,18 @@
 				AAD3231A1AB083D000DA991F /* SettingsScreen.cpp in Sources */,
 				AAD323181AB083D000DA991F /* LevelScreen.cpp in Sources */,
 				AAD323091AB0809A00DA991F /* ButtonClass.cpp in Sources */,
+				AAAA166F1AC2F2ED002E6124 /* MenuSystem.cpp in Sources */,
 				AAD323191AB083D000DA991F /* MainMenuScreen.cpp in Sources */,
 				AAD323081AB0809A00DA991F /* BackgroundClass.cpp in Sources */,
 				AA97370D1AA8191F00D9D4A6 /* SpriteClass.cpp in Sources */,
+				AA39AA001AC66DF4002885EC /* GameOverScreen.cpp in Sources */,
 				AA6328A41AA88AC7005BD55C /* FramesPerSecond.cpp in Sources */,
 				AAD3230D1AB080CB00DA991F /* Utility.cpp in Sources */,
 				AA97370C1AA8191F00D9D4A6 /* Customer.cpp in Sources */,
 				AA97370B1AA8191F00D9D4A6 /* Chef.cpp in Sources */,
 				AA7C07041ABFE37400D29491 /* ChefTimer.cpp in Sources */,
+				AA39A9FD1AC6601B002885EC /* LevelTimer.cpp in Sources */,
+				AA3F8B871AC7DDF70072E5D9 /* HowToPlayScreen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
