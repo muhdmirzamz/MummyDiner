@@ -20,6 +20,8 @@ class BackgroundClass {
 		BackgroundClass();
 	
 		void set(float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b);
+		void setImageBackground(const char *file, int x, int y, int w, int h);
+		
 		void render(RenderWindow &window);
 	
 		float getX();
@@ -29,6 +31,9 @@ class BackgroundClass {
 	
 	private:
 		RectangleShape _background;
+	
+		Image _image;
+		Texture _texture;
 };
 
 #endif /* defined(__MummyDiner__BackgroundClass__) */

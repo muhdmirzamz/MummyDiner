@@ -1,5 +1,27 @@
 ###CHANGELOG
 
+**30 March 2015 - v0.7.0-alpha**
+- Food and drink items added
+- New menu system
+- New customer ordering mechanism
+- New customer timer mechanism
+- Added gameplay mechanisms to ensure food picked by waitress is correct
+- Added debug flags for waitress picking food
+- Added debug flags for food being picked
+- Added customer popup when the order is incorrect
+- Added on screen debug flags for customer spawn position
+- Added on screen debug flags for customer order
+- Added indicators for customer successful orders and fail orders
+- Added level timer
+- Added three game over screen images, one for success, one for fail, another for neutral, where there is no wins and no loss
+- Added mechanism to tell for successful or fail game for user
+- Added how to play screen
+- Added conditional macros to switch between debug statements
+- Fixed a bug that caused customers to spawn after ordering
+- Fixed a logic bug where there is conflict between the food and incorrect order customer popup
+- Fixed a bug that caused a second unresponsive window to get created after the game has finished gameplay
+- Fixed a bug that caused the game over screen to always start with the same screen due to a memory release
+
 **25 March 2015 - v0.6.0-alpha**
 - Waitress now resets every time a new customer spawns
 - Chef now has timer

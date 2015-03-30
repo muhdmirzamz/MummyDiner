@@ -12,13 +12,14 @@
 #include "../util/FramesPerSecond.h"
 #include "../util/CustomerTimer.h" // includes timer class
 #include "../util/ChefTimer.h"
+#include "../util/LevelTimer.h"
 
 #include "../gui/ButtonClass.h" // includes text class.. also the utility class
 #include "../gui/BackgroundClass.h"
 
 // each of these classes includes the SpriteClass class, debug class and timer class
 #include "../sprite/Waitress.h"
-#include "../sprite/Customer.h"
+#include "../sprite/Customer.h" // includes menu system class
 #include "../sprite/Chef.h"
 
 #define MOUSE_X event.mouseMove.x
@@ -30,14 +31,18 @@ enum state {
 	NO_STATE,
 	EXIT,
 	MAIN_MENU,
+	HOW_TO_PLAY,
 	SETTINGS,
-	LEVEL
+	LEVEL,
+	GAME_OVER
 };
 
 class GameState {
 	public:
 		GameState();
 		virtual ~GameState();
+	
+		virtual void createWindow();
 	
 		void setState(int state);
 		int getState();

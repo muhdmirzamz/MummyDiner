@@ -9,13 +9,23 @@
 #include "GameState.h"
 
 GameState::GameState() {
-	window.create(VideoMode(SCREEN_W, SCREEN_H), "MummyDiner");
+	// check to see if it is the special game over screen state
+	if (_tempState != GAME_OVER) {
+		window.create(VideoMode(SCREEN_W, SCREEN_H), "MummyDiner");
+	}
 
 	_tempState = NO_STATE;
 }
 
 GameState::~GameState() {
 
+}
+
+void GameState::createWindow() {
+	// manually create a window to avoid creating two windows(every constructor call creates a window)
+	// since you already declared an object of GameOverScreen in LevelScreen
+	// to access a public variable for passing data
+	window.create(VideoMode(SCREEN_W, SCREEN_H), "MummyDiner");
 }
 
 void GameState::setState(int state) {

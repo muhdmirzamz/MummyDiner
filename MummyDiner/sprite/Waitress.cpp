@@ -83,6 +83,22 @@ void Waitress::handleCollisionWith(SpriteClass &object) {
 	}
 }
 
+void Waitress::pickOrderFromMenu() {
+	_pickedOrderFromMenu = true;
+}
+
+bool Waitress::hasPickedOrderFromMenu() {
+	return _pickedOrderFromMenu;
+}
+
+void Waitress::setCorrectOrderFlag() {
+	_correctOrderFromMenu = true;
+}
+
+bool Waitress::gotCorrectOrder() {
+	return _correctOrderFromMenu;
+}
+
 void Waitress::takeFoodFromCounter() {
 	_foodTakenFromCounter = true;
 }
@@ -92,4 +108,6 @@ void Waitress::takeFoodFromCounter() {
 // it will just mess things up
 void Waitress::serveANewCustomer() {
 	_foodTakenFromCounter = false;
+	_pickedOrderFromMenu = false;
+	_correctOrderFromMenu = false;
 }

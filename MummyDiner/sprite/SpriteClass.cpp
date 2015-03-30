@@ -72,6 +72,22 @@ void SpriteClass::handleCollisionWith(SpriteClass &object) {
 	
 }
 
+void SpriteClass::pickOrderFromMenu() {
+	
+}
+
+bool SpriteClass::hasPickedOrderFromMenu() {
+	return false;
+}
+
+void SpriteClass::setCorrectOrderFlag() {
+	
+}
+
+bool SpriteClass::gotCorrectOrder() {
+	return false;
+}
+
 void SpriteClass::takeFoodFromCounter() { // needs integration with order list system
 
 }
@@ -108,6 +124,10 @@ void SpriteClass::renderOrderPopup(RenderWindow &window) {
 	
 }
 
+void SpriteClass::renderFoodOrderPopup(RenderWindow &window) {
+	
+}
+
 void SpriteClass::startThread() {
 	
 }
@@ -117,6 +137,14 @@ void SpriteClass::renderFood(RenderWindow &window) {
 }
 
 void SpriteClass::renderThanksPopup(RenderWindow &window) {
+	
+}
+
+void SpriteClass::setAsSuccessful() {
+	
+}
+
+void SpriteClass::setAsFailure() {
 	
 }
 
@@ -140,6 +168,22 @@ bool SpriteClass::timeIsAdded() {
 	return false;
 }
 
+int SpriteClass::getSpawnPosition() {
+	return 0;
+}
+
+int SpriteClass::getOrderedFoodItem() {
+	return false;
+}
+
+int SpriteClass::getSuccessful() {
+	return 0;
+}
+
+int SpriteClass::getFailure() {
+	return 0;
+}
+
 int SpriteClass::getTimeLeft() {
 	return false;
 }
@@ -152,6 +196,10 @@ void SpriteClass::addTime() {
 	
 }
 
+void SpriteClass::renderWrongOrderPopup(RenderWindow &window) {
+	
+}
+
 void SpriteClass::getServed() {
 	
 }
@@ -160,8 +208,12 @@ void SpriteClass::order() {
 	
 }
 
+void SpriteClass::resetForNewLevel() {
+	
+}
+
 float SpriteClass::getXPos() {
-	return _sprite.getPosition().y;
+	return _sprite.getPosition().x;
 }
 
 float SpriteClass::getYPos() {

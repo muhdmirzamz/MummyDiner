@@ -21,38 +21,12 @@ using namespace sf;
 
 class SpriteClass {
 	public:
-		struct topLeft {
-			int x = 140;
-			int y = 40;
-		} topLeftCoordinate;
-	
-		struct topRight {
-			int x = 450;
-			int y = 40;
-		} topRightCoordinate;
-		
-		struct bottomLeft{
-			int x = 140;
-			int y = 190;
-		} bottomLeftCoordinate;
-		
-		struct bottomRight {
-			int x = 460;
-			int y = 190;
-		} bottomRightCoordinate;
-	
-		enum coordinates {
-			TOP_LEFT = 1,
-			TOP_RIGHT = 2,
-			BOTTOM_LEFT = 3,
-			BOTTOM_RIGHT = 4
-		};
-	
 		SpriteClass();
 	
 		// normal sprite
 		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
 		virtual void positionSprite(float x, float y);
+	
 		// waitress
 		virtual bool hasTakenFoodFromCounter();
 	
@@ -63,6 +37,11 @@ class SpriteClass {
 	
 		virtual void handleCollisionWithWindow();
 		virtual void handleCollisionWith(SpriteClass &object);
+	
+		virtual void pickOrderFromMenu();
+		virtual bool hasPickedOrderFromMenu();
+		virtual void setCorrectOrderFlag();
+		virtual bool gotCorrectOrder();
 	
 		virtual void takeFoodFromCounter(); // needs integration with order list system
 		virtual void serveANewCustomer();
@@ -78,20 +57,29 @@ class SpriteClass {
 		// customer
 		virtual void spawn();
 		virtual void renderOrderPopup(RenderWindow &window);
+		virtual void renderFoodOrderPopup(RenderWindow &window);
 		virtual void startThread();
 		virtual void renderFood(RenderWindow &window);
 		virtual void renderThanksPopup(RenderWindow &window);
+		virtual void setAsSuccessful();
+		virtual void setAsFailure();
 		virtual void stopThread();
 
 		virtual bool timeIsUp();
 		virtual bool orderIsTaken();
 		virtual bool foodIsServed();
 		virtual bool timeIsAdded();
+		virtual int getSpawnPosition();
+		virtual int getOrderedFoodItem();
+		virtual int getSuccessful();
+		virtual int getFailure();
 		virtual int getTimeLeft();
 		virtual int getTimeLimit();
 		virtual void addTime();
+		virtual void renderWrongOrderPopup(RenderWindow &window);
 		virtual void getServed();
 		virtual void order();
+		virtual void resetForNewLevel();
 	
 		// normal sprite
 		virtual float getXPos();

@@ -8,35 +8,53 @@
 
 #include "Utility.h"
 
-#define LABEL_X_POS 10
-#define VALUE_X_POS (LABEL_X_POS + _valuePositionOffset)
-
 Utility::Utility() {
 	_font.loadFromFile(LATO_LIGHT_FONT);
 	_fontSize = 15;
 	
-	_valuePositionOffset = 150;
+	_valuePositionOffset = 200;
 }
 
 // add debug properties here
 void Utility::set() {
-	setTextAndPosition(_fps, "FPS: ", 10, _fpsValue);
+	// debug flags that are still showing when debug is off
+	setTextAndPosition(_levelTimer, "Level timer:", 380, 50, _levelTimerValue);
 	
-	setTextAndPosition(_mouseXPos, "Mouse X Pos: ", 30, _mouseXPosValue);
-	setTextAndPosition(_mouseYPos, "Mouse Y Pos: ", 50, _mouseYPosValue);
+	// next column
+	setTextAndPosition(_customerSuccess, "Customer success: ", 380 , 10, _customerSuccessValue);
+	setTextAndPosition(_customerFailure, "Customer failure: ", 380, 30, _customerFailureValue);
 	
-	setTextAndPosition(_spriteXPos, "Sprite X Pos: ", 70, _spriteXPosValue);
-	setTextAndPosition(_spriteYPos, "Sprite Y Pos: ", 90, _spriteYPosValue);
+	// normal debug flags
+	setTextAndPosition(_fps, "FPS: ", 10, 10, _fpsValue);
 	
-	setTextAndPosition(_timeLimit, "Time Limit: ", 110, _timeLimitValue);
-	setTextAndPosition(_time, "Time: ", 130, _timeValue);
+	setTextAndPosition(_mouseXPos, "Mouse X Pos: ", 10, 30, _mouseXPosValue);
+	setTextAndPosition(_mouseYPos, "Mouse Y Pos: ", 10, 50, _mouseYPosValue);
 	
-	setTextAndPosition(_chefTimeLimit, "Chef time limit: ", 150, _chefTimeLimitValue);
+	setTextAndPosition(_spriteXPos, "Sprite X Pos: ", 10, 70, _spriteXPosValue);
+	setTextAndPosition(_spriteYPos, "Sprite Y Pos: ", 10, 90, _spriteYPosValue);
 	
-	setTextAndPosition(_order, "Order: ", 170, _orderFlag);
-	setTextAndPosition(_chefCook, "Cooking: ", 190, _chefCookValue);
-	setTextAndPosition(_foodTaken, "Food taken: ", 210, _foodTakenFlag);
-	setTextAndPosition(_foodServed, "Food served: ", 230, _foodServedFlag);
+	setTextAndPosition(_timeLimit, "Customer time limit: ", 10, 110, _timeLimitValue);
+	setTextAndPosition(_time, "Customer time: ", 10, 130, _timeValue);
+	
+	setTextAndPosition(_chefTimeLimit, "Chef time limit: ", 10, 150, _chefTimeLimitValue);
+	
+	setTextAndPosition(_order, "Order: ", 10, 170, _orderFlag);
+	setTextAndPosition(_chefCook, "Cooking: ", 10 ,190, _chefCookValue);
+	setTextAndPosition(_foodTaken, "Food taken: ", 10, 210, _foodTakenFlag);
+	setTextAndPosition(_foodServed, "Food served: ", 10, 230, _foodServedFlag);
+	
+	setTextAndPosition(_customerSpawnPos, "Sprite spawn position: ", 10, 250, _customerSpawnPosValue);
+	
+	setTextAndPosition(_customerOrder, "Customer order: ", 10, 270, _customerOrderValue);
+}
+
+void Utility::setNonDebugFlags() {
+	// debug flags that are still showing when debug is off
+	setTextAndPosition(_levelTimer, "Level timer:", 380, 50, _levelTimerValue);
+	
+	// next column
+	setTextAndPosition(_customerSuccess, "Customer success: ", 380 , 10, _customerSuccessValue);
+	setTextAndPosition(_customerFailure, "Customer failure: ", 380, 30, _customerFailureValue);
 }
 
 // set the value of any changing / dynamic debug properties
@@ -79,6 +97,26 @@ void Utility::setFoodTakenFlag(bool foodIsTaken) {
 	_foodTakenFlag.setString(to_string(foodIsTaken));
 }
 
+void Utility::setCustomerSpawnPosition(int position) {
+	_customerSpawnPosValue.setString(to_string(position));
+}
+
+void Utility::setCustomerOrderValue(int order) {
+	_customerOrderValue.setString(to_string(order));
+}
+
+void Utility::setCustomerSuccessValue(int customer) {
+	_customerSuccessValue.setString(to_string(customer));
+}
+
+void Utility::setCustomerFailureValue(int customer) {
+	_customerFailureValue.setString(to_string(customer));
+}
+
+void Utility::setLevelTimerValue(int time) {
+	_levelTimerValue.setString(to_string(time));
+}
+
 void Utility::setChefTimeLimit(int time) {
 	_chefTimeLimitValue.setString(to_string(time));
 }
@@ -112,19 +150,43 @@ void Utility::show(RenderWindow &window) {
 	window.draw(_foodTakenFlag);
 	window.draw(_foodServed);
 	window.draw(_foodServedFlag);
+	
+	window.draw(_customerSpawnPos);
+	window.draw(_customerSpawnPosValue);
+	
+	window.draw(_customerOrder);
+	window.draw(_customerOrderValue);
+	
+	window.draw(_customerSuccess);
+	window.draw(_customerSuccessValue);
+	window.draw(_customerFailure);
+	window.draw(_customerFailureValue);
+	
+	window.draw(_levelTimer);
+	window.draw(_levelTimerValue);
+}
+
+void Utility::showNonDebugFlags(RenderWindow &window) {
+	window.draw(_customerSuccess);
+	window.draw(_customerSuccessValue);
+	window.draw(_customerFailure);
+	window.draw(_customerFailureValue);
+
+	window.draw(_levelTimer);
+	window.draw(_levelTimerValue);
 }
 
 // dealing with two things
 // the text and the value side by side
-void Utility::setTextAndPosition(Text &variableLabel, string label, float variableY, Text &variableValue) {
+void Utility::setTextAndPosition(Text &variableLabel, string label, float variableX, float variableY, Text &variableValue) {
 	setText(variableLabel);
 	setText(variableValue); // no need to set string for value first
 	
 	variableLabel.setString(label);
 	variableValue.setString(to_string(0)); // preset values to 0
 	
-	variableLabel.setPosition(LABEL_X_POS, variableY);
-	variableValue.setPosition(VALUE_X_POS, variableY); // set the value a bit to the right side, same y position though
+	variableLabel.setPosition(variableX, variableY);
+	variableValue.setPosition(variableX + _valuePositionOffset, variableY); // set the value a bit to the right side, same y position though
 }
 
 void Utility::setText(Text &variable) {
