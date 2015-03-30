@@ -11,4 +11,19 @@
 
 #include <stdio.h>
 
+#include "Timer.h"
+
+class LevelTimer: public Timer {
+	public:
+		LevelTimer();
+	
+		void startCounting();
+		void stopCounting();
+	
+		bool hasReachedLimit();
+	
+		int getClockTime();
+		int getLimit();
+};
+
 #endif /* defined(__MummyDiner__LevelTimer__) */
