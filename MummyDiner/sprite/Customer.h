@@ -10,6 +10,7 @@
 #define __MummyDiner__Customer__
 
 #include "SpriteClass.h"
+#include "../util/MenuSystem.h" // macros are here
 
 class Customer: public SpriteClass {
 	public:
@@ -18,10 +19,14 @@ class Customer: public SpriteClass {
 		void startThread();
 		void spawn();
 		void renderOrderPopup(RenderWindow &window);
+		void renderFoodOrderPopup(RenderWindow &window);
 		void addTime();
+		void renderWrongOrderPopup(RenderWindow &window);
 		void getServed();
 		void renderFood(RenderWindow &window);
 		void renderThanksPopup(RenderWindow &window);
+		void setAsSuccessful();
+		void setAsFailure();
 		void stopThread();
 	
 		bool timeIsUp();
@@ -29,10 +34,18 @@ class Customer: public SpriteClass {
 		bool foodIsServed();
 		bool timeIsAdded();
 	
+		int getSpawnPosition();
+		int getOrderedFoodItem();
+	
+		int getSuccessful();
+		int getFailure();
+	
 		int getTimeLeft();
 		int getTimeLimit();
 	
 		void order();
+	
+		void resetForNewLevel();
 	
 	private:
 		void reset();
@@ -44,6 +57,15 @@ class Customer: public SpriteClass {
 	
 		SpriteClass _orderPopup;
 		SpriteClass _thanksPopup;
+		SpriteClass _wrongOrderPopup;
+	
+		MenuSystem _menuSystem;
+	
+		int _randomPosition;
+		int _randomFoodAndDrinks;
+	
+		int _customerSuccess;
+		int _customerFailure;
 };
 
 #endif /* defined(__MummyDiner__Customer__) */
