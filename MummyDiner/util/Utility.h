@@ -14,7 +14,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 #define QUICKSAND_REGULAR_FONT "fonts/Quicksand-Regular.ttf"
 #define LATO_LIGHT_FONT "fonts/Lato-Light.ttf"
@@ -30,6 +30,7 @@ class Utility {
 		Utility();
 	
 		void set();
+		void setNonDebugFlags();
 	
 		void setFPSValue(int value);
 		void setMousePosition(int x, int y);
@@ -43,12 +44,22 @@ class Utility {
 		void setFoodServedFlag(bool food);
 		void setFoodTakenFlag(bool foodIsTaken);
 	
+		void setCustomerSpawnPosition(int position);
+	
+		void setCustomerOrderValue(int order);
+	
+		void setCustomerSuccessValue(int customer);
+		void setCustomerFailureValue(int customer);
+	
+		void setLevelTimerValue(int time);
+	
 		void setChefTimeLimit(int time);
 
 		void show(RenderWindow &window);
+		void showNonDebugFlags(RenderWindow &window);
 	
 	private:
-		void setTextAndPosition(Text &variable, string label, float variableY, Text &variableValue);
+		void setTextAndPosition(Text &variableLabel, string label, float variableX, float variableY, Text &variableValue);
 		void setText(Text &variable);
 	
 		Font _font;
@@ -87,6 +98,21 @@ class Utility {
 	
 		Text _chefTimeLimit;
 		Text _chefTimeLimitValue;
+	
+		Text _customerSpawnPos;
+		Text _customerSpawnPosValue;
+	
+		Text _customerOrder;
+		Text _customerOrderValue;
+	
+		Text _customerSuccess;
+		Text _customerSuccessValue;
+	
+		Text _customerFailure;
+		Text _customerFailureValue;
+	
+		Text _levelTimer;
+		Text _levelTimerValue;
 	
 		int _valuePositionOffset;
 };

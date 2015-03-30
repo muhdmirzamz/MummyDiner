@@ -12,8 +12,10 @@
 
 // game state class already included 
 #include "state/MainMenuScreen.h"
+#include "state/HowToPlayScreen.h"
 #include "state/SettingsScreen.h"
 #include "state/LevelScreen.h"
+#include "state/GameOverScreen.h"
 
 int main(int argc, const char * argv[]) {
 	// state variables declared locally
@@ -37,9 +39,15 @@ int main(int argc, const char * argv[]) {
 				delete gameState;
 			
 				switch (nextState) {
-					case MAIN_MENU:
+					case MAIN_MENU: {
 						gameState = new MainMenuScreen();
 						break;
+					}
+				
+					case HOW_TO_PLAY: {
+						gameState = new HowToPlayScreen();
+						break;
+					}
 				
 					case SETTINGS: {
 						gameState = new SettingsScreen();
@@ -48,6 +56,12 @@ int main(int argc, const char * argv[]) {
 						
 					case LEVEL: {
 						gameState = new LevelScreen();
+						break;
+					}
+					
+					case GAME_OVER: {
+						gameState = new GameOverScreen();
+						gameState->createWindow(); // see GameState class for more info on this function
 						break;
 					}
 						

@@ -31,11 +31,18 @@ class Waitress: public SpriteClass {
 		void handleCollisionWithWindow();
 		void handleCollisionWith(SpriteClass &object);
 	
-		void takeFoodFromCounter(); // needs integration with order list system
+		void pickOrderFromMenu();
+		bool hasPickedOrderFromMenu();
+		void setCorrectOrderFlag();
+		bool gotCorrectOrder();
+	
+		void takeFoodFromCounter();
 		void serveANewCustomer();
 	
 	private:
 		bool _foodTakenFromCounter;
+		bool _pickedOrderFromMenu;
+		bool _correctOrderFromMenu;
 };
 
 #endif /* defined(__MummyDiner__Waitress__) */

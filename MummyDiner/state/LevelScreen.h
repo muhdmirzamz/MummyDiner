@@ -10,6 +10,7 @@
 #define __MummyDiner__LevelScreen__
 
 #include "GameState.h"
+#include "GameOverScreen.h"
 
 class LevelScreen: public GameState {
 	public:
@@ -45,6 +46,8 @@ class LevelScreen: public GameState {
 		BackgroundClass _bottomLeftBackground;
 		BackgroundClass _bottomRightBackground;
 		BackgroundClass _foodPickupBackground;
+	
+		MenuSystem _menuSystem;
 	
 		int _mouseClickX;
 		int _mouseClickY;
