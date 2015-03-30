@@ -13,7 +13,9 @@ static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 MainMenuScreen::MainMenuScreen() {
 	_title.set(QUICKSAND_REGULAR_FONT, 80, "MummyDiner", 60, 20, 200, 0, 250);
+	
 	_startButton.set(60, 300, 100, 100, 0, 255, 0, "Start", 0, 0, 0);
+	_howToPlayButton.set(270, 300, 100, 100, 0, 255, 0, "How to \nplay", 0, 0, 0);
 	_settingsButton.set(470, 300, 100, 100, 0, 255, 0, "Settings", 0, 0, 0);
 	
 	// initialise mouse position
@@ -65,6 +67,16 @@ void MainMenuScreen::handleEvent() {
 					setState(LEVEL);
 				}
 			}
+			
+			if (MOUSE_X_CLICK >= _howToPlayButton.getLeftSide() && MOUSE_X_CLICK <= _howToPlayButton.getWidth()) {
+				if (MOUSE_Y_CLICK >= _howToPlayButton.getTop() && MOUSE_Y_CLICK <= _howToPlayButton.getHeight()) {
+					fps.stopCounting();
+					
+					cleanup();
+					
+					setState(HOW_TO_PLAY);
+				}
+			}
 		}
 	}
 }
@@ -81,7 +93,9 @@ void MainMenuScreen::update() {
 
 void MainMenuScreen::render() {
 	_title.render(window);
+	
 	_startButton.render(window);
+	_howToPlayButton.render(window);
 	_settingsButton.render(window);
 	
 #if DEBUG_MODE == 1

@@ -13,12 +13,16 @@
 static FramesPerSecond fps;
 static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
+static LevelTimer levelTimer;
+static Thread levelTimerThread(&LevelTimer::startCounting, &levelTimer);
+
 #define TABLE_CROP_SETTINGS 300, 10, 600, 700
 
 LevelScreen::LevelScreen() {
 	_waitress = &_waitressObj;
 	_waitress->set("images/waitress.bmp", 450, 10, 400, 690, 300, 10);
 	_customer = &_customerObj;
+	_customer->resetForNewLevel();
 	_customer->set("images/boy_customer.bmp", 450, 10, 400, 690, 0, 0);
 	_customer->spawn();
 	_chef = &_chefObj;
@@ -36,7 +40,8 @@ LevelScreen::LevelScreen() {
 	_topRightBackground.set(100 + SCREEN_W / 3, 10, SCREEN_W / 3, SCREEN_H / 4, 255, 0, 0);
 	_bottomLeftBackground.set(10, 50 + SCREEN_H / 4, SCREEN_W / 3, SCREEN_H / 4, 0, 0, 255);
 	_bottomRightBackground.set(100 + SCREEN_W / 3, 50 + SCREEN_H / 4, SCREEN_W / 3, SCREEN_H / 4, 100, 100, 100);
-	_foodPickupBackground.set(200, 300, 200, 50, 200, 200, 200);
+	
+	_foodPickupBackground.set(400, 280, 200, 50, 200, 200, 200);
 	
 	// use different variables for setting sprite's next position
 	// not using the variables used for tracking mouse position
@@ -45,9 +50,13 @@ LevelScreen::LevelScreen() {
 	
 #if DEBUG_MODE == 1
 	_debug.set();
+#else
+	_debug.setNonDebugFlags();
 #endif
 	
 	fpsThread.launch();
+	
+	levelTimerThread.launch();
 	_customer->startThread();
 	_chef->startThread();
 }
@@ -60,6 +69,7 @@ void LevelScreen::handleEvent() {
 			_customer->stopThread();
 			_chef->stopThread();
 			fps.stopCounting();
+			levelTimer.stopCounting();
 		
 			cleanup();
 		
@@ -76,6 +86,7 @@ void LevelScreen::handleEvent() {
 				_customer->stopThread();
 				_chef->stopThread();
 				fps.stopCounting();
+				levelTimer.stopCounting();
 				
 				cleanup();
 				
@@ -88,23 +99,61 @@ void LevelScreen::handleEvent() {
 			// set sprite destination position
 			_mouseClickX = MOUSE_X_CLICK;
 			_mouseClickY = MOUSE_Y_CLICK;
+			
+			if (_customer->orderIsTaken() && !_waitress->hasPickedOrderFromMenu()) {
+				if (_menuSystem.getMenuItemXAxis(MOUSE_X_CLICK)) {
+					if (MOUSE_Y_CLICK >= 400 && MOUSE_Y_CLICK <= SCREEN_H) {
+						printf("Food code: %d\n", _menuSystem.getFoodCode());
+						_waitress->pickOrderFromMenu();
+						printf("Picked order from menu: %d\n", _waitress->hasPickedOrderFromMenu());
+					}
+				}
+			}
 		}
 	}
 }
 
 void LevelScreen::spawnCustomer() {
+	if (levelTimer.hasReachedLimit()) {
+		_customer->stopThread();
+		_chef->stopThread();
+		fps.stopCounting();
+		levelTimer.stopCounting();
+		
+		cleanup();
+
+		if (_customer->getSuccessful() == _customer->getFailure()) { // if it is equal, go to menu
+			GameOverScreen::success = true;
+			GameOverScreen::neutral = true;
+		
+			setState(GAME_OVER);
+		} else if (_customer->getSuccessful() >= _customer->getFailure()) {
+			GameOverScreen::success = true;
+		
+			setState(GAME_OVER);
+		} else if (_customer->getSuccessful() <= _customer->getFailure()) {
+			GameOverScreen::success = false;
+			
+			setState(GAME_OVER);
+		}
+	}
+
 	if (_customer->timeIsUp()) {
 		_customer->spawn();
 		_waitress->serveANewCustomer();
 		_chef->getReadyToCook();
 	} else {
-		if (_customer->foodIsServed()) { // true once the waitress has taken food from counter and served customer
-			if (!_customer->timeIsAdded()) { // to avoid multiple increases
-				_customer->addTime();
-			}
-		} else if (_customer->orderIsTaken()) {
+		if (_customer->orderIsTaken()) {
 			if (!_customer->timeIsAdded()) {
 				_customer->addTime();
+			}
+			
+			if (_customer->getOrderedFoodItem() == _menuSystem.getFoodCode()) {
+				if (_customer->foodIsServed()) { // true once the waitress has taken food from counter and served customer
+					if (!_customer->timeIsAdded()) { // to avoid multiple increases
+						_customer->addTime();
+					}
+				}
 			}
 		}
 	}
@@ -112,6 +161,11 @@ void LevelScreen::spawnCustomer() {
 #if DEBUG_MODE == 1
 	_debug.setTime(_customer->getTimeLeft());
 	_debug.setTimeLimit(_customer->getTimeLimit());
+	_debug.setCustomerSpawnPosition(_customer->getSpawnPosition());
+	_debug.setCustomerOrderValue(_customer->getOrderedFoodItem());
+	_debug.setLevelTimerValue(levelTimer.getClockTime());
+#else 
+	_debug.setLevelTimerValue(levelTimer.getClockTime());
 #endif
 }
 
@@ -140,6 +194,13 @@ void LevelScreen::moveCharacter() {
 				if (_waitress->hasTakenFoodFromCounter()) {
 					if (!_customer->foodIsServed()) {
 						_customer->getServed();
+						
+						if (_customer->getOrderedFoodItem() == _menuSystem.getFoodCode()) {
+							_waitress->setCorrectOrderFlag();
+							_customer->setAsSuccessful();
+						} else {
+							_customer->setAsFailure();
+						}
 					}
 				}
 			} else {
@@ -150,7 +211,7 @@ void LevelScreen::moveCharacter() {
 	
 	// food pickup mechanism
 	if (_waitress->getXPos() + _waitress->getWidth() >= _foodPickupBackground.getX() && _waitress->getXPos() <= _foodPickupBackground.getX() + _foodPickupBackground.getWidth()) {
-		if (_waitress->getYPos() + _waitress->getHeight() >= _foodPickupBackground.getY() + 100 && _waitress->getYPos() <= _foodPickupBackground.getY() + _foodPickupBackground.getHeight()) {
+		if (_waitress->getYPos() + _waitress->getHeight() >= _counter.getYPos()) { // using counter is way more effective than food pickup background
 			if (_customer->orderIsTaken()) {
 				if (!_chef->isCooking()) {
 					_chef->cook();
@@ -168,6 +229,11 @@ void LevelScreen::moveCharacter() {
 	_debug.setFoodTakenFlag(_waitress->hasTakenFoodFromCounter());
 	_debug.setFoodServedFlag(_customer->foodIsServed());
 	_debug.setChefTimeLimit(_chef->getTimeLeft());
+	_debug.setCustomerSuccessValue(_customer->getSuccessful());
+	_debug.setCustomerFailureValue(_customer->getFailure());
+#else
+	_debug.setCustomerSuccessValue(_customer->getSuccessful());
+	_debug.setCustomerFailureValue(_customer->getFailure());
 #endif
 }
 
@@ -204,23 +270,33 @@ void LevelScreen::render() {
 	_counter.render(window);
 	_stove.render(window);
 	
-	printf("Customer order taken: %d\n", _customer->orderIsTaken());
+	//printf("Customer order taken: %d\n", _customer->orderIsTaken());
 	
 	if (!_customer->orderIsTaken()) {
 		_customer->renderOrderPopup(window);
-	}
-	
-	if (_customer->foodIsServed()) {
-		_customer->renderFood(window);
-		_customer->renderThanksPopup(window);
+	} else {
+		if (_customer->foodIsServed()) {
+			if (_waitress->gotCorrectOrder()) {
+				_customer->renderFood(window);
+				_customer->renderThanksPopup(window);
+			} else {
+				_customer->renderWrongOrderPopup(window);
+			}
+		} else {
+			_customer->renderFoodOrderPopup(window);
+		}
 	}
 	
 	if (_chef->isCooking() && !_chef->isDoneCooking()) {
 		_chef->renderSmoke(window);
 	}
 	
+	_menuSystem.render(window);
+	
 #if DEBUG_MODE == 1
 	_debug.show(window);
+#else
+	_debug.showNonDebugFlags(window);
 #endif
 	
 	window.display();

@@ -11,4 +11,23 @@
 
 #include <stdio.h>
 
+#include "GameState.h"
+
+class HowToPlayScreen: public GameState {
+	public:
+		HowToPlayScreen();
+		
+		void handleEvent();
+		void update();
+		void render();
+	
+	private:
+		BackgroundClass _background;
+	
+		TextClass _title;
+		TextClass _instruction;
+	
+		ButtonClass _backButton;
+};
+
 #endif /* defined(__MummyDiner__HowToPlayScreen__) */

@@ -23,6 +23,7 @@ class MainMenuScreen: public GameState {
 		TextClass _title;
 
 		ButtonClass _startButton;
+		ButtonClass _howToPlayButton;
 		ButtonClass _settingsButton;
 };
 
