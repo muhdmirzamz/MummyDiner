@@ -14,19 +14,20 @@
 
 #include <SFML/Graphics.hpp>
 
-#define DEBUG_MODE 0
-
 #define QUICKSAND_REGULAR_FONT "fonts/Quicksand-Regular.ttf"
 #define LATO_LIGHT_FONT "fonts/Lato-Light.ttf"
 
-const int SCREEN_W = 640;
-const int SCREEN_H = 480;
+const int SCREEN_W = 800; 
+const int SCREEN_H = 600;
 
 using namespace sf;
 using namespace std;
 
 class Utility {
 	public:
+		static bool debug;
+		static bool keyboardIsUsed;
+	
 		Utility();
 	
 		void set();
