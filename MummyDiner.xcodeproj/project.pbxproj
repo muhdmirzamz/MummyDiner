@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA248C861A5D6356006D3D13 /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C821A5D6356006D3D13 /* sfml-graphics.framework */; };
+		AA248C871A5D6356006D3D13 /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C831A5D6356006D3D13 /* sfml-system.framework */; };
+		AA248C8B1A5D6370006D3D13 /* SFML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C8A1A5D6370006D3D13 /* SFML.framework */; };
+		AA248C8D1A5D6385006D3D13 /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA248C8C1A5D6385006D3D13 /* sfml-window.framework */; };
+		AA39A9FD1AC6601B002885EC /* LevelTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA39A9FB1AC6601B002885EC /* LevelTimer.cpp */; };
+		AA39AA001AC66DF4002885EC /* GameOverScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA39A9FE1AC66DF4002885EC /* GameOverScreen.cpp */; };
+		AA3F8B871AC7DDF70072E5D9 /* HowToPlayScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3F8B851AC7DDF70072E5D9 /* HowToPlayScreen.cpp */; };
+		AA6328A41AA88AC7005BD55C /* FramesPerSecond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA6328A21AA88AC7005BD55C /* FramesPerSecond.cpp */; };
+		AA71DEB31AB1A21800E44E37 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA71DEB11AB1A21800E44E37 /* Timer.cpp */; };
+		AA7C07011ABFE36E00D29491 /* CustomerTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7C06FF1ABFE36E00D29491 /* CustomerTimer.cpp */; };
+		AA7C07041ABFE37400D29491 /* ChefTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7C07021ABFE37400D29491 /* ChefTimer.cpp */; };
+		AA9166D61ACA883C00DEC51C /* ToggleClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9166D41ACA883C00DEC51C /* ToggleClass.cpp */; };
+		AA97370B1AA8191F00D9D4A6 /* Chef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737031AA8191F00D9D4A6 /* Chef.cpp */; };
+		AA97370C1AA8191F00D9D4A6 /* Customer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737051AA8191F00D9D4A6 /* Customer.cpp */; };
+		AA97370D1AA8191F00D9D4A6 /* SpriteClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737071AA8191F00D9D4A6 /* SpriteClass.cpp */; };
+		AA97370E1AA8191F00D9D4A6 /* Waitress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737091AA8191F00D9D4A6 /* Waitress.cpp */; };
+		AAAA166F1AC2F2ED002E6124 /* MenuSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA166D1AC2F2ED002E6124 /* MenuSystem.cpp */; };
+		AAB051271A5AB42000364D65 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB051261A5AB42000364D65 /* main.cpp */; };
+		AAD323081AB0809A00DA991F /* BackgroundClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323021AB0809A00DA991F /* BackgroundClass.cpp */; };
+		AAD323091AB0809A00DA991F /* ButtonClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323041AB0809A00DA991F /* ButtonClass.cpp */; };
+		AAD3230A1AB0809A00DA991F /* TextClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323061AB0809A00DA991F /* TextClass.cpp */; };
+		AAD3230D1AB080CB00DA991F /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD3230B1AB080CB00DA991F /* Utility.cpp */; };
+		AAD323171AB083D000DA991F /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD3230F1AB083D000DA991F /* GameState.cpp */; };
+		AAD323181AB083D000DA991F /* LevelScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323111AB083D000DA991F /* LevelScreen.cpp */; };
+		AAD323191AB083D000DA991F /* MainMenuScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323131AB083D000DA991F /* MainMenuScreen.cpp */; };
+		AAD3231A1AB083D000DA991F /* SettingsScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD323151AB083D000DA991F /* SettingsScreen.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AAB051211A5AB42000364D65 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA248C821A5D6356006D3D13 /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
+		AA248C831A5D6356006D3D13 /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
+		AA248C8A1A5D6370006D3D13 /* SFML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SFML.framework; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/SFML.framework"; sourceTree = "<group>"; };
+		AA248C8C1A5D6385006D3D13 /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "../../../../Softwares/SFML-2.2-osx-clang-universal/Frameworks/sfml-window.framework"; sourceTree = "<group>"; };
+		AA39A9FB1AC6601B002885EC /* LevelTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelTimer.cpp; sourceTree = "<group>"; };
+		AA39A9FC1AC6601B002885EC /* LevelTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelTimer.h; sourceTree = "<group>"; };
+		AA39A9FE1AC66DF4002885EC /* GameOverScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverScreen.cpp; sourceTree = "<group>"; };
+		AA39A9FF1AC66DF4002885EC /* GameOverScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScreen.h; sourceTree = "<group>"; };
+		AA3F8B851AC7DDF70072E5D9 /* HowToPlayScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HowToPlayScreen.cpp; sourceTree = "<group>"; };
+		AA3F8B861AC7DDF70072E5D9 /* HowToPlayScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToPlayScreen.h; sourceTree = "<group>"; };
+		AA6328A21AA88AC7005BD55C /* FramesPerSecond.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FramesPerSecond.cpp; sourceTree = "<group>"; };
+		AA6328A31AA88AC7005BD55C /* FramesPerSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramesPerSecond.h; sourceTree = "<group>"; };
+		AA71DEB11AB1A21800E44E37 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		AA71DEB21AB1A21800E44E37 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		AA7C06FF1ABFE36E00D29491 /* CustomerTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomerTimer.cpp; sourceTree = "<group>"; };
+		AA7C07001ABFE36E00D29491 /* CustomerTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerTimer.h; sourceTree = "<group>"; };
+		AA7C07021ABFE37400D29491 /* ChefTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChefTimer.cpp; sourceTree = "<group>"; };
+		AA7C07031ABFE37400D29491 /* ChefTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChefTimer.h; sourceTree = "<group>"; };
+		AA9166D41ACA883C00DEC51C /* ToggleClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToggleClass.cpp; sourceTree = "<group>"; };
+		AA9166D51ACA883C00DEC51C /* ToggleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleClass.h; sourceTree = "<group>"; };
+		AA9737031AA8191F00D9D4A6 /* Chef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chef.cpp; sourceTree = "<group>"; };
+		AA9737041AA8191F00D9D4A6 /* Chef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chef.h; sourceTree = "<group>"; };
+		AA9737051AA8191F00D9D4A6 /* Customer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Customer.cpp; sourceTree = "<group>"; };
+		AA9737061AA8191F00D9D4A6 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		AA9737071AA8191F00D9D4A6 /* SpriteClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteClass.cpp; sourceTree = "<group>"; };
+		AA9737081AA8191F00D9D4A6 /* SpriteClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteClass.h; sourceTree = "<group>"; };
+		AA9737091AA8191F00D9D4A6 /* Waitress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Waitress.cpp; sourceTree = "<group>"; };
+		AA97370A1AA8191F00D9D4A6 /* Waitress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waitress.h; sourceTree = "<group>"; };
+		AAAA166D1AC2F2ED002E6124 /* MenuSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuSystem.cpp; sourceTree = "<group>"; };
+		AAAA166E1AC2F2ED002E6124 /* MenuSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuSystem.h; sourceTree = "<group>"; };
+		AAB051231A5AB42000364D65 /* MummyDiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MummyDiner; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB051261A5AB42000364D65 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		AAD323021AB0809A00DA991F /* BackgroundClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BackgroundClass.cpp; sourceTree = "<group>"; };
+		AAD323031AB0809A00DA991F /* BackgroundClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundClass.h; sourceTree = "<group>"; };
+		AAD323041AB0809A00DA991F /* ButtonClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonClass.cpp; sourceTree = "<group>"; };
+		AAD323051AB0809A00DA991F /* ButtonClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonClass.h; sourceTree = "<group>"; };
+		AAD323061AB0809A00DA991F /* TextClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextClass.cpp; sourceTree = "<group>"; };
+		AAD323071AB0809A00DA991F /* TextClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextClass.h; sourceTree = "<group>"; };
+		AAD3230B1AB080CB00DA991F /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
+		AAD3230C1AB080CB00DA991F /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		AAD3230F1AB083D000DA991F /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		AAD323101AB083D000DA991F /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		AAD323111AB083D000DA991F /* LevelScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelScreen.cpp; sourceTree = "<group>"; };
+		AAD323121AB083D000DA991F /* LevelScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelScreen.h; sourceTree = "<group>"; };
+		AAD323131AB083D000DA991F /* MainMenuScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScreen.cpp; sourceTree = "<group>"; };
+		AAD323141AB083D000DA991F /* MainMenuScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScreen.h; sourceTree = "<group>"; };
+		AAD323151AB083D000DA991F /* SettingsScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingsScreen.cpp; sourceTree = "<group>"; };
+		AAD323161AB083D000DA991F /* SettingsScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsScreen.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAB051201A5AB42000364D65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA248C8D1A5D6385006D3D13 /* sfml-window.framework in Frameworks */,
+				AA248C8B1A5D6370006D3D13 /* SFML.framework in Frameworks */,
+				AA248C861A5D6356006D3D13 /* sfml-graphics.framework in Frameworks */,
+				AA248C871A5D6356006D3D13 /* sfml-system.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA50FA591A8E4E4F00142A1B /* util */ = {
+			isa = PBXGroup;
+			children = (
+				AAD3230B1AB080CB00DA991F /* Utility.cpp */,
+				AAD3230C1AB080CB00DA991F /* Utility.h */,
+				AA6328A21AA88AC7005BD55C /* FramesPerSecond.cpp */,
+				AA6328A31AA88AC7005BD55C /* FramesPerSecond.h */,
+				AA71DEB11AB1A21800E44E37 /* Timer.cpp */,
+				AA71DEB21AB1A21800E44E37 /* Timer.h */,
+				AA7C06FF1ABFE36E00D29491 /* CustomerTimer.cpp */,
+				AA7C07001ABFE36E00D29491 /* CustomerTimer.h */,
+				AA7C07021ABFE37400D29491 /* ChefTimer.cpp */,
+				AA7C07031ABFE37400D29491 /* ChefTimer.h */,
+				AA39A9FB1AC6601B002885EC /* LevelTimer.cpp */,
+				AA39A9FC1AC6601B002885EC /* LevelTimer.h */,
+				AAAA166D1AC2F2ED002E6124 /* MenuSystem.cpp */,
+				AAAA166E1AC2F2ED002E6124 /* MenuSystem.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		AA9737021AA8191F00D9D4A6 /* sprite */ = {
+			isa = PBXGroup;
+			children = (
+				AA9737071AA8191F00D9D4A6 /* SpriteClass.cpp */,
+				AA9737081AA8191F00D9D4A6 /* SpriteClass.h */,
+				AA9737091AA8191F00D9D4A6 /* Waitress.cpp */,
+				AA97370A1AA8191F00D9D4A6 /* Waitress.h */,
+				AA9737031AA8191F00D9D4A6 /* Chef.cpp */,
+				AA9737041AA8191F00D9D4A6 /* Chef.h */,
+				AA9737051AA8191F00D9D4A6 /* Customer.cpp */,
+				AA9737061AA8191F00D9D4A6 /* Customer.h */,
+			);
+			path = sprite;
+			sourceTree = "<group>";
+		};
+		AAB0511A1A5AB42000364D65 = {
+			isa = PBXGroup;
+			children = (
+				AA248C8C1A5D6385006D3D13 /* sfml-window.framework */,
+				AA248C8A1A5D6370006D3D13 /* SFML.framework */,
+				AA248C821A5D6356006D3D13 /* sfml-graphics.framework */,
+				AA248C831A5D6356006D3D13 /* sfml-system.framework */,
+				AAB051251A5AB42000364D65 /* MummyDiner */,
+				AAB051241A5AB42000364D65 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAB051241A5AB42000364D65 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAB051231A5AB42000364D65 /* MummyDiner */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAB051251A5AB42000364D65 /* MummyDiner */ = {
+			isa = PBXGroup;
+			children = (
+				AA50FA591A8E4E4F00142A1B /* util */,
+				AA9737021AA8191F00D9D4A6 /* sprite */,
+				AAD323011AB0809A00DA991F /* gui */,
+				AAD3230E1AB083D000DA991F /* state */,
+				AAB051261A5AB42000364D65 /* main.cpp */,
+			);
+			path = MummyDiner;
+			sourceTree = "<group>";
+		};
+		AAD323011AB0809A00DA991F /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				AAD323021AB0809A00DA991F /* BackgroundClass.cpp */,
+				AAD323031AB0809A00DA991F /* BackgroundClass.h */,
+				AA9166D41ACA883C00DEC51C /* ToggleClass.cpp */,
+				AA9166D51ACA883C00DEC51C /* ToggleClass.h */,
+				AAD323041AB0809A00DA991F /* ButtonClass.cpp */,
+				AAD323051AB0809A00DA991F /* ButtonClass.h */,
+				AAD323061AB0809A00DA991F /* TextClass.cpp */,
+				AAD323071AB0809A00DA991F /* TextClass.h */,
+			);
+			path = gui;
+			sourceTree = "<group>";
+		};
+		AAD3230E1AB083D000DA991F /* state */ = {
+			isa = PBXGroup;
+			children = (
+				AAD3230F1AB083D000DA991F /* GameState.cpp */,
+				AAD323101AB083D000DA991F /* GameState.h */,
+				AAD323131AB083D000DA991F /* MainMenuScreen.cpp */,
+				AAD323141AB083D000DA991F /* MainMenuScreen.h */,
+				AA3F8B851AC7DDF70072E5D9 /* HowToPlayScreen.cpp */,
+				AA3F8B861AC7DDF70072E5D9 /* HowToPlayScreen.h */,
+				AAD323151AB083D000DA991F /* SettingsScreen.cpp */,
+				AAD323161AB083D000DA991F /* SettingsScreen.h */,
+				AAD323111AB083D000DA991F /* LevelScreen.cpp */,
+				AAD323121AB083D000DA991F /* LevelScreen.h */,
+				AA39A9FE1AC66DF4002885EC /* GameOverScreen.cpp */,
+				AA39A9FF1AC66DF4002885EC /* GameOverScreen.h */,
+			);
+			path = state;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAB051221A5AB42000364D65 /* MummyDiner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAB0512A1A5AB42000364D65 /* Build configuration list for PBXNativeTarget "MummyDiner" */;
+			buildPhases = (
+				AAB0511F1A5AB42000364D65 /* Sources */,
+				AAB051201A5AB42000364D65 /* Frameworks */,
+				AAB051211A5AB42000364D65 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MummyDiner;
+			productName = MummyDiner;
+			productReference = AAB051231A5AB42000364D65 /* MummyDiner */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAB0511B1A5AB42000364D65 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Muhd Mirza";
+				TargetAttributes = {
+					AAB051221A5AB42000364D65 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = AAB0511E1A5AB42000364D65 /* Build configuration list for PBXProject "MummyDiner" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AAB0511A1A5AB42000364D65;
+			productRefGroup = AAB051241A5AB42000364D65 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAB051221A5AB42000364D65 /* MummyDiner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAB0511F1A5AB42000364D65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA97370E1AA8191F00D9D4A6 /* Waitress.cpp in Sources */,
+				AAB051271A5AB42000364D65 /* main.cpp in Sources */,
+				AAD323171AB083D000DA991F /* GameState.cpp in Sources */,
+				AA71DEB31AB1A21800E44E37 /* Timer.cpp in Sources */,
+				AAD3230A1AB0809A00DA991F /* TextClass.cpp in Sources */,
+				AA7C07011ABFE36E00D29491 /* CustomerTimer.cpp in Sources */,
+				AAD3231A1AB083D000DA991F /* SettingsScreen.cpp in Sources */,
+				AAD323181AB083D000DA991F /* LevelScreen.cpp in Sources */,
+				AA9166D61ACA883C00DEC51C /* ToggleClass.cpp in Sources */,
+				AAD323091AB0809A00DA991F /* ButtonClass.cpp in Sources */,
+				AAAA166F1AC2F2ED002E6124 /* MenuSystem.cpp in Sources */,
+				AAD323191AB083D000DA991F /* MainMenuScreen.cpp in Sources */,
+				AAD323081AB0809A00DA991F /* BackgroundClass.cpp in Sources */,
+				AA97370D1AA8191F00D9D4A6 /* SpriteClass.cpp in Sources */,
+				AA39AA001AC66DF4002885EC /* GameOverScreen.cpp in Sources */,
+				AA6328A41AA88AC7005BD55C /* FramesPerSecond.cpp in Sources */,
+				AAD3230D1AB080CB00DA991F /* Utility.cpp in Sources */,
+				AA97370C1AA8191F00D9D4A6 /* Customer.cpp in Sources */,
+				AA97370B1AA8191F00D9D4A6 /* Chef.cpp in Sources */,
+				AA7C07041ABFE37400D29491 /* ChefTimer.cpp in Sources */,
+				AA39A9FD1AC6601B002885EC /* LevelTimer.cpp in Sources */,
+				AA3F8B871AC7DDF70072E5D9 /* HowToPlayScreen.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AAB051281A5AB42000364D65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "/Users/muhdmirzamz/Documents/Softwares/SFML-2.2-osx-clang-universal/Frameworks";
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Users/muhdmirzamz/Documents/Softwares/SFML-2.2-osx-clang-universal/include",
+					/Users/muhdmirzamz/Documents/Code/Projects/CPPProjects/MummyDiner/MummyDiner,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AAB051291A5AB42000364D65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "/Users/muhdmirzamz/Documents/Softwares/SFML-2.2-osx-clang-universal/Frameworks";
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Users/muhdmirzamz/Documents/Softwares/SFML-2.2-osx-clang-universal/include",
+					/Users/muhdmirzamz/Documents/Code/Projects/CPPProjects/MummyDiner/MummyDiner,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AAB0512B1A5AB42000364D65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/muhdmirzamz/Documents/Softwares/SFML-2.2-osx-clang-universal/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AAB0512C1A5AB42000364D65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/muhdmirzamz/Documents/Softwares/SFML-2.2-osx-clang-universal/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAB0511E1A5AB42000364D65 /* Build configuration list for PBXProject "MummyDiner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB051281A5AB42000364D65 /* Debug */,
+				AAB051291A5AB42000364D65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAB0512A1A5AB42000364D65 /* Build configuration list for PBXNativeTarget "MummyDiner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB0512B1A5AB42000364D65 /* Debug */,
+				AAB0512C1A5AB42000364D65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAB0511B1A5AB42000364D65 /* Project object */;
+}
