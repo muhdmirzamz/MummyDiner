@@ -1,5 +1,17 @@
 ###CHANGELOG
 
+**3 April 2015 - v0.8.0-alpha**
+- Added a back button in the level to go back to main menu
+- Waitress can now take orders from all four locations
+- Added a debug toggle in settings to enable easy debugging
+- Added a control toggle in settings for players to choose between keyboard and mouse or trackpad control
+- Increased the screen size for better gameplay and collision detection
+- Added two walking customers for better gameplay
+- Fixed a bug where walking customers would disappear before waitress collides with it
+- Fixed a bug where debug and control settings will always be in the same state
+- Fixed a bug where chef will cook before waitress has picked from menu
+- Fixed a bug preventing waitress from taking orders from multiple locations
+
 **30 March 2015 - v0.7.0-alpha**
 - Food and drink items added
 - New menu system
