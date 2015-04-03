@@ -44,6 +44,14 @@ void SpriteClass::positionSprite(float x, float y) {
 	_sprite.setPosition(x, y);
 }
 
+void SpriteClass::move() {
+	
+}
+
+void SpriteClass::stop() {
+	
+}
+
 bool SpriteClass::hasTakenFoodFromCounter() {
 	return false;
 }
@@ -72,6 +80,10 @@ void SpriteClass::handleCollisionWith(SpriteClass &object) {
 	
 }
 
+bool SpriteClass::handleCollisionWith(SpriteClass *customer) {
+	return false;
+}
+
 void SpriteClass::pickOrderFromMenu() {
 	
 }
@@ -85,6 +97,22 @@ void SpriteClass::setCorrectOrderFlag() {
 }
 
 bool SpriteClass::gotCorrectOrder() {
+	return false;
+}
+
+bool SpriteClass::isMovingUp() {
+	return false;
+}
+
+bool SpriteClass::isMovingDown() {
+	return false;
+}
+
+bool SpriteClass::isMovingRight() {
+	return false;
+}
+
+bool SpriteClass::isMovingLeft() {
 	return false;
 }
 

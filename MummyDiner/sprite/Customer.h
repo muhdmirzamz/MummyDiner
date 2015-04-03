@@ -18,6 +18,11 @@ class Customer: public SpriteClass {
 	
 		void startThread();
 		void spawn();
+	
+		void move();
+		void moveLeft();
+		void moveRight();
+	
 		void renderOrderPopup(RenderWindow &window);
 		void renderFoodOrderPopup(RenderWindow &window);
 		void addTime();
@@ -50,6 +55,8 @@ class Customer: public SpriteClass {
 	private:
 		void reset();
 	
+		float _customerSpeed;
+
 		bool _ordered;
 		bool _foodServed;
 	
