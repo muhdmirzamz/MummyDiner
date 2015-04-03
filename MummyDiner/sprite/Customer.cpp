@@ -94,6 +94,18 @@ void Customer::spawn() {
 	}
 }
 
+void Customer::move() {
+	_sprite.move(_customerSpeed, 0);
+}
+
+void Customer::moveLeft() {
+	_customerSpeed = -0.5;
+}
+
+void Customer::moveRight() {
+	_customerSpeed = 0.5;
+}
+
 void Customer::renderOrderPopup(RenderWindow &window) {
 	_orderPopup.render(window);
 }
@@ -202,6 +214,8 @@ int Customer::getTimeLimit() {
 
 // this class resets only when there's a new customer
 void Customer::reset() {
+	_customerSpeed = 0.5;
+
 	_ordered = false;
 	_foodServed = false;
 }

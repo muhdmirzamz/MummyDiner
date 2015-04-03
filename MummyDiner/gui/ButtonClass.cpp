@@ -32,12 +32,16 @@ void ButtonClass::set(float x, float y, float w, float h, Uint8 buttonRed, Uint8
 	_text.set(QUICKSAND_REGULAR_FONT, FONT_SIZE, text, CENTER_OF_BUTTON_X_AXIS, CENTER_OF_BUTTON_Y_AXIS, textRed, textGreen, textBlue);
 }
 
+void ButtonClass::setColour(Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue) {
+	_button.setFillColor(Color(buttonRed, buttonGreen, buttonBlue));
+}
+
 float ButtonClass::getLeftSide() {
 	return _leftOfButton;
 }
 
 float ButtonClass::getWidth() {
-	return _leftOfButton + _widthOfButton;
+	return _widthOfButton;
 }
 
 float ButtonClass::getTop() {
@@ -45,7 +49,7 @@ float ButtonClass::getTop() {
 }
 
 float ButtonClass::getHeight() {
-	return _topOfButton + _heightOfButton;
+	return _heightOfButton;
 }
 
 // dont forget to render text too

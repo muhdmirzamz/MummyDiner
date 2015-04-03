@@ -12,19 +12,19 @@ static FramesPerSecond fps;
 static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 MainMenuScreen::MainMenuScreen() {
-	_title.set(QUICKSAND_REGULAR_FONT, 80, "MummyDiner", 60, 20, 200, 0, 250);
+	_title.set(QUICKSAND_REGULAR_FONT, 80, "MummyDiner", SCREEN_W / 6, 20, 200, 0, 250);
 	
-	_startButton.set(60, 300, 100, 100, 0, 255, 0, "Start", 0, 0, 0);
-	_howToPlayButton.set(270, 300, 100, 100, 0, 255, 0, "How to \nplay", 0, 0, 0);
-	_settingsButton.set(470, 300, 100, 100, 0, 255, 0, "Settings", 0, 0, 0);
+	_startButton.set(140, 400, 100, 100, 0, 255, 0, "Start", 0, 0, 0);
+	_howToPlayButton.set(350, 400, 100, 100, 0, 255, 0, "How to \nplay", 0, 0, 0);
+	_settingsButton.set(550, 400, 100, 100, 0, 255, 0, "Settings", 0, 0, 0);
 	
 	// initialise mouse position
 	_mouseXPos = 0;
 	_mouseYPos = 0;
-	
-#if DEBUG_MODE == 1
-	_debug.set();
-#endif
+
+	if (Utility::debug) {
+		_debug.set();
+	}
 	
 	fpsThread.launch();
 }
@@ -41,25 +41,25 @@ void MainMenuScreen::handleEvent() {
 			setState(EXIT);
 		}
 
-#if DEBUG_MODE == 1
-		if (event.type == event.MouseMoved) {
-			_debug.setMousePosition(MOUSE_X, MOUSE_Y);
-		}
-		
-		if (event.type == event.KeyPressed) {
-			if (event.key.code == Keyboard::Escape) {
-				fps.stopCounting();
-				
-				cleanup();
-				
-				setState(EXIT);
+		if (Utility::debug) {
+			if (event.type == event.MouseMoved) {
+				_debug.setMousePosition(MOUSE_X, MOUSE_Y);
+			}
+			
+			if (event.type == event.KeyPressed) {
+				if (event.key.code == Keyboard::Escape) {
+					fps.stopCounting();
+					
+					cleanup();
+					
+					setState(EXIT);
+				}
 			}
 		}
-#endif
 		
 		if (event.type == event.MouseButtonPressed) {
-			if (MOUSE_X_CLICK >= _startButton.getLeftSide() && MOUSE_X_CLICK <= _startButton.getWidth()) {
-				if (MOUSE_Y_CLICK >= _startButton.getTop() && MOUSE_Y_CLICK <= _startButton.getHeight()) {
+			if (MOUSE_X_CLICK >= _startButton.getLeftSide() && MOUSE_X_CLICK <= _startButton.getLeftSide() + _startButton.getWidth()) {
+				if (MOUSE_Y_CLICK >= _startButton.getTop() && MOUSE_Y_CLICK <= _startButton.getTop() + _startButton.getHeight()) {
 					fps.stopCounting();
 					
 					cleanup();
@@ -68,13 +68,23 @@ void MainMenuScreen::handleEvent() {
 				}
 			}
 			
-			if (MOUSE_X_CLICK >= _howToPlayButton.getLeftSide() && MOUSE_X_CLICK <= _howToPlayButton.getWidth()) {
-				if (MOUSE_Y_CLICK >= _howToPlayButton.getTop() && MOUSE_Y_CLICK <= _howToPlayButton.getHeight()) {
+			if (MOUSE_X_CLICK >= _howToPlayButton.getLeftSide() && MOUSE_X_CLICK <= _howToPlayButton.getLeftSide() + _howToPlayButton.getWidth()) {
+				if (MOUSE_Y_CLICK >= _howToPlayButton.getTop() && MOUSE_Y_CLICK <= _howToPlayButton.getTop() + _howToPlayButton.getHeight()) {
 					fps.stopCounting();
 					
 					cleanup();
 					
 					setState(HOW_TO_PLAY);
+				}
+			}
+			
+			if (MOUSE_X_CLICK >= _settingsButton.getLeftSide() && MOUSE_X_CLICK <= _settingsButton.getLeftSide() + _settingsButton.getWidth()) {
+				if (MOUSE_Y_CLICK >= _settingsButton.getTop() && MOUSE_Y_CLICK <= _settingsButton.getTop() + _settingsButton.getHeight()) {
+					fps.stopCounting();
+					
+					cleanup();
+					
+					setState(SETTINGS);
 				}
 			}
 		}
@@ -86,9 +96,9 @@ void MainMenuScreen::update() {
 	
 	fps.hasReachedEndOfFrame();
 	
-#if DEBUG_MODE == 1
-	_debug.setFPSValue(fps.getFPS());
-#endif
+	if (Utility::debug) {
+		_debug.setFPSValue(fps.getFPS());
+	}
 }
 
 void MainMenuScreen::render() {
@@ -98,9 +108,9 @@ void MainMenuScreen::render() {
 	_howToPlayButton.render(window);
 	_settingsButton.render(window);
 	
-#if DEBUG_MODE == 1
-	_debug.show(window);
-#endif
+	if (Utility::debug) {
+		_debug.show(window);
+	}
 	
 	window.display();
 }

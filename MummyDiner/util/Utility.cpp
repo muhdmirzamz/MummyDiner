@@ -8,6 +8,9 @@
 
 #include "Utility.h"
 
+bool Utility::debug = false;
+bool Utility::keyboardIsUsed = false;
+
 Utility::Utility() {
 	_font.loadFromFile(LATO_LIGHT_FONT);
 	_fontSize = 15;

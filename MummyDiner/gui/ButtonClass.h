@@ -23,6 +23,7 @@ class ButtonClass {
 		ButtonClass();
 	
 		void set(float x, float y, float w, float h, Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue, string text, Uint8 textRed, Uint8 textGreen, Uint8 textBlue);
+		void setColour(Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue);
 	
 		float getLeftSide();
 		float getWidth();

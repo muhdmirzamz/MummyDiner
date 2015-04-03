@@ -12,7 +12,7 @@ static ChefTimer chefTimerObject;
 static Thread chefThread(&ChefTimer::launchTimerThread, &chefTimerObject);
 
 Chef::Chef() {
-	_smoke.set("images/smoke.bmp", 500, 10, 300, 600, SCREEN_W - 50, 350);
+	_smoke.set("images/smoke.bmp", 500, 10, 300, 600, SCREEN_W - 50, SCREEN_H - 130);
 
 	getReadyToCook();
 }

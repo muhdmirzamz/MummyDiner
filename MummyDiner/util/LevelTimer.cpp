@@ -17,7 +17,7 @@ void LevelTimer::startCounting() {
 	
 	_stillLooping = true;
 
-	_timeLimit = 20000; // try 5 min, this is 15s
+	_timeLimit = 30000; // try 5 min, this is 15s
 	
 	_clock.restart();
 	

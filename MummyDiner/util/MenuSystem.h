@@ -19,10 +19,17 @@
 #define FOOD_POS_LEFT_COLUMN(X_POS, Y_POS) X_POS - 50, Y_POS // different positions because of scaling
 #define FOOD_POS_RIGHT_COLUMN(X_POS, Y_POS) X_POS - 50, Y_POS
 
-#define MENU_ITEM_Y_POS 400 // all menu items are at the same y pos as the menu background
+#define MENU_ITEM_Y_POS SCREEN_H - 80 // all menu items are at the same y pos as the menu background
 
 class MenuSystem {
 	public:
+		enum coordinates {
+			TOP_LEFT = 1,
+			TOP_RIGHT = 2,
+			BOTTOM_LEFT = 3,
+			BOTTOM_RIGHT = 4
+		};
+	
 		struct topLeft {
 			int x = 140;
 			int y = 40;
@@ -42,13 +49,6 @@ class MenuSystem {
 			int x = 460;
 			int y = 190;
 		} bottomRightCoordinate;
-		
-		enum coordinates {
-			TOP_LEFT = 1,
-			TOP_RIGHT = 2,
-			BOTTOM_LEFT = 3,
-			BOTTOM_RIGHT = 4
-		};
 	
 		enum foodAndDrinks {
 			HAMBURGER = 1,
