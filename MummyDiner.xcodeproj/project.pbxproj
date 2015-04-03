@@ -18,6 +18,7 @@
 		AA71DEB31AB1A21800E44E37 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA71DEB11AB1A21800E44E37 /* Timer.cpp */; };
 		AA7C07011ABFE36E00D29491 /* CustomerTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7C06FF1ABFE36E00D29491 /* CustomerTimer.cpp */; };
 		AA7C07041ABFE37400D29491 /* ChefTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7C07021ABFE37400D29491 /* ChefTimer.cpp */; };
+		AA9166D61ACA883C00DEC51C /* ToggleClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9166D41ACA883C00DEC51C /* ToggleClass.cpp */; };
 		AA97370B1AA8191F00D9D4A6 /* Chef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737031AA8191F00D9D4A6 /* Chef.cpp */; };
 		AA97370C1AA8191F00D9D4A6 /* Customer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737051AA8191F00D9D4A6 /* Customer.cpp */; };
 		AA97370D1AA8191F00D9D4A6 /* SpriteClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9737071AA8191F00D9D4A6 /* SpriteClass.cpp */; };
@@ -65,6 +66,8 @@
 		AA7C07001ABFE36E00D29491 /* CustomerTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerTimer.h; sourceTree = "<group>"; };
 		AA7C07021ABFE37400D29491 /* ChefTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChefTimer.cpp; sourceTree = "<group>"; };
 		AA7C07031ABFE37400D29491 /* ChefTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChefTimer.h; sourceTree = "<group>"; };
+		AA9166D41ACA883C00DEC51C /* ToggleClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToggleClass.cpp; sourceTree = "<group>"; };
+		AA9166D51ACA883C00DEC51C /* ToggleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleClass.h; sourceTree = "<group>"; };
 		AA9737031AA8191F00D9D4A6 /* Chef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chef.cpp; sourceTree = "<group>"; };
 		AA9737041AA8191F00D9D4A6 /* Chef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chef.h; sourceTree = "<group>"; };
 		AA9737051AA8191F00D9D4A6 /* Customer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Customer.cpp; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 			children = (
 				AAD323021AB0809A00DA991F /* BackgroundClass.cpp */,
 				AAD323031AB0809A00DA991F /* BackgroundClass.h */,
+				AA9166D41ACA883C00DEC51C /* ToggleClass.cpp */,
+				AA9166D51ACA883C00DEC51C /* ToggleClass.h */,
 				AAD323041AB0809A00DA991F /* ButtonClass.cpp */,
 				AAD323051AB0809A00DA991F /* ButtonClass.h */,
 				AAD323061AB0809A00DA991F /* TextClass.cpp */,
@@ -274,6 +279,7 @@
 				AA7C07011ABFE36E00D29491 /* CustomerTimer.cpp in Sources */,
 				AAD3231A1AB083D000DA991F /* SettingsScreen.cpp in Sources */,
 				AAD323181AB083D000DA991F /* LevelScreen.cpp in Sources */,
+				AA9166D61ACA883C00DEC51C /* ToggleClass.cpp in Sources */,
 				AAD323091AB0809A00DA991F /* ButtonClass.cpp in Sources */,
 				AAAA166F1AC2F2ED002E6124 /* MenuSystem.cpp in Sources */,
 				AAD323191AB083D000DA991F /* MainMenuScreen.cpp in Sources */,
