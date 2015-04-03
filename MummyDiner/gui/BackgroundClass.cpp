@@ -42,7 +42,7 @@ float BackgroundClass::getX() {
 }
 
 float BackgroundClass::getY() {
-	return _background.getPosition().x;
+	return _background.getPosition().y;
 }
 
 float BackgroundClass::getWidth() {
