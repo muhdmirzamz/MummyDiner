@@ -25,7 +25,6 @@ class HowToPlayScreen: public GameState {
 		BackgroundClass _background;
 	
 		TextClass _title;
-		TextClass _instruction;
 	
 		ButtonClass _backButton;
 };

@@ -20,7 +20,12 @@ class SettingsScreen: public GameState {
 		void render();
 	
 	private:
-		ButtonClass _button;
+		ButtonClass _backToMainMenuButton;
+	
+		TextClass _title;
+	
+		ToggleClass _debugToggle;
+		ToggleClass _controlToggle;
 };
 
 #endif /* defined(__MummyDiner__SettingsScreen__) */

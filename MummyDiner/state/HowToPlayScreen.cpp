@@ -13,10 +13,6 @@ HowToPlayScreen::HowToPlayScreen() {
 	
 	_title.set(QUICKSAND_REGULAR_FONT, 30, "HOW TO PLAY", SCREEN_W / 3, 30, 10, 100, 255);
 	
-	_instruction.set(LATO_LIGHT_FONT, 20,
-					"Click on a customer to take their order\n\nChoose the customer's order at the bottom left of screen\n\nGo to the grey patch for the chef to cook\n\nA smoke icon indicates he is cooking\n\nWait for the smoke to disappear\n\nClick on customer to serve food",
-					 30, 150, 255, 255, 255);
-	
 	_backButton.set(10, 10, 150, 80, 0, 150, 255, "Back to \nmain menu", 0, 0, 0);
 }
 
@@ -28,11 +24,13 @@ void HowToPlayScreen::handleEvent() {
 			setState(EXIT);
 		}
 		
-		if (event.type == event.KeyPressed) {
-			if (event.key.code == Keyboard::Escape) {
-				cleanup();
-				
-				setState(EXIT);
+		if (Utility::debug) {
+			if (event.type == event.KeyPressed) {
+				if (event.key.code == Keyboard::Escape) {
+					cleanup();
+					
+					setState(EXIT);
+				}
 			}
 		}
 		
@@ -56,7 +54,6 @@ void HowToPlayScreen::render() {
 	_background.render(window);
 	
 	_title.render(window);
-	_instruction.render(window);
 	
 	_backButton.render(window);
 	

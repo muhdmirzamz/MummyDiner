@@ -14,7 +14,7 @@
 #include "../util/ChefTimer.h"
 #include "../util/LevelTimer.h"
 
-#include "../gui/ButtonClass.h" // includes text class.. also the utility class
+#include "../gui/ToggleClass.h" // includes text class, button class and utility class
 #include "../gui/BackgroundClass.h"
 
 // each of these classes includes the SpriteClass class, debug class and timer class

@@ -30,6 +30,11 @@ class LevelScreen: public GameState {
 		SpriteClass *_customer;
 		Customer _customerObj;
 	
+		SpriteClass *_topWalkingCustomer;
+		Customer _topWalkingCustomerObj;
+		SpriteClass *_bottomWalkingCustomer;
+		Customer _bottomWalkingCustomerObj;
+	
 		SpriteClass *_chef;
 		Chef _chefObj;
 	
@@ -46,6 +51,8 @@ class LevelScreen: public GameState {
 		BackgroundClass _bottomLeftBackground;
 		BackgroundClass _bottomRightBackground;
 		BackgroundClass _foodPickupBackground;
+	
+		ButtonClass _backToMenuButton;
 	
 		MenuSystem _menuSystem;
 	
