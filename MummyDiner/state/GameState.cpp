@@ -9,10 +9,7 @@
 #include "GameState.h"
 
 GameState::GameState() {
-	// check to see if it is the special game over screen state
-	if (_tempState != GAME_OVER) {
-		window.create(VideoMode(SCREEN_W, SCREEN_H), "MummyDiner");
-	}
+	window.create(VideoMode(SCREEN_W, SCREEN_H), "MummyDiner");
 
 	_tempState = NO_STATE;
 }

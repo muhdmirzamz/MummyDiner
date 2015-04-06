@@ -10,6 +10,8 @@
 //#include <math.h>
 #include "LevelScreen.h"
 
+bool LevelScreen::normalMode = false;
+
 static FramesPerSecond fps;
 static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
@@ -63,9 +65,11 @@ LevelScreen::LevelScreen() {
 		_debug.setNonDebugFlags();
 	}
 	
-	fpsThread.launch();
+	if (normalMode) {
+		levelTimerThread.launch();
+	}
 	
-	levelTimerThread.launch();
+	fpsThread.launch();
 	_customer->startThread();
 	_chef->startThread();
 }
@@ -78,7 +82,10 @@ void LevelScreen::handleEvent() {
 			_customer->stopThread();
 			_chef->stopThread();
 			fps.stopCounting();
-			levelTimer.stopCounting();
+			
+			if (normalMode) {
+				levelTimer.stopCounting();
+			}
 		
 			cleanup();
 		
@@ -95,7 +102,10 @@ void LevelScreen::handleEvent() {
 					_customer->stopThread();
 					_chef->stopThread();
 					fps.stopCounting();
-					levelTimer.stopCounting();
+					
+					if (normalMode) {
+						levelTimer.stopCounting();
+					}
 					
 					cleanup();
 					
@@ -164,7 +174,10 @@ void LevelScreen::handleEvent() {
 					_customer->stopThread();
 					_chef->stopThread();
 					fps.stopCounting();
-					levelTimer.stopCounting();
+					
+					if (normalMode) {
+						levelTimer.stopCounting();
+					}
 					
 					cleanup();
 					
@@ -176,27 +189,29 @@ void LevelScreen::handleEvent() {
 }
 
 void LevelScreen::spawnCustomer() {
-	if (levelTimer.hasReachedLimit()) {
-		_customer->stopThread();
-		_chef->stopThread();
-		fps.stopCounting();
-		levelTimer.stopCounting();
-		
-		cleanup();
-
-		if (_customer->getSuccessful() == _customer->getFailure()) { // if it is equal, go to menu
-			GameOverScreen::success = true;
-			GameOverScreen::neutral = true;
-		
-			setState(GAME_OVER);
-		} else if (_customer->getSuccessful() >= _customer->getFailure()) {
-			GameOverScreen::success = true;
-		
-			setState(GAME_OVER);
-		} else if (_customer->getSuccessful() <= _customer->getFailure()) {
-			GameOverScreen::success = false;
+	if (normalMode) {
+		if (levelTimer.hasReachedLimit()) {
+			_customer->stopThread();
+			_chef->stopThread();
+			fps.stopCounting();
+			levelTimer.stopCounting();
 			
-			setState(GAME_OVER);
+			cleanup();
+
+			if (_customer->getSuccessful() == _customer->getFailure()) { // if it is equal, go to menu
+				GameOverScreen::success = true;
+				GameOverScreen::neutral = true;
+			
+				setState(GAME_OVER);
+			} else if (_customer->getSuccessful() >= _customer->getFailure()) {
+				GameOverScreen::success = true;
+			
+				setState(GAME_OVER);
+			} else if (_customer->getSuccessful() <= _customer->getFailure()) {
+				GameOverScreen::success = false;
+				
+				setState(GAME_OVER);
+			}
 		}
 	}
 
@@ -226,9 +241,14 @@ void LevelScreen::spawnCustomer() {
 		_debug.setTimeLimit(_customer->getTimeLimit());
 		_debug.setCustomerSpawnPosition(_customer->getSpawnPosition());
 		_debug.setCustomerOrderValue(_customer->getOrderedFoodItem());
-		_debug.setLevelTimerValue(levelTimer.getClockTime());
+		
+		if (normalMode) {
+			_debug.setLevelTimerValue(levelTimer.getClockTime());
+		}
 	} else {
-		_debug.setLevelTimerValue(levelTimer.getClockTime());
+		if (normalMode) {
+			_debug.setLevelTimerValue(levelTimer.getClockTime());
+		}
 	}
 }
 
@@ -402,11 +422,14 @@ void LevelScreen::checkCollision() {
 	_waitress->handleCollisionWithWindow();
 	_waitress->handleCollisionWith(_counter);
 	
-	if (_waitress->hasTakenFoodFromCounter() && _waitress->handleCollisionWith(_topWalkingCustomer)) {
-		_customer->spawn();
-		_topWalkingCustomer->positionSprite(20, 100);
-		_waitress->serveANewCustomer();
-		_chef->getReadyToCook();
+	if (_waitress->hasTakenFoodFromCounter() && !_waitress->gotCorrectOrder()) {
+		if (_waitress->handleCollisionWith(_topWalkingCustomer) || _waitress->handleCollisionWith(_bottomWalkingCustomer)) {
+			_customer->spawn();
+			_topWalkingCustomer->positionSprite(20, 100);
+			_waitress->serveANewCustomer();
+			_chef->getReadyToCook();
+			_customer->setAsFailure();
+		}
 	}
 }
 
@@ -432,7 +455,7 @@ void LevelScreen::render() {
 	_waitress->render(window);
 	_customer->render(window);
 	
-	if (_waitress->hasTakenFoodFromCounter()) {
+	if (_waitress->hasTakenFoodFromCounter() && !_customer->foodIsServed()) {
 		_topWalkingCustomer->render(window);
 		_bottomWalkingCustomer->render(window);
 	}

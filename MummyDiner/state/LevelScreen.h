@@ -14,6 +14,8 @@
 
 class LevelScreen: public GameState {
 	public:
+		static bool normalMode;
+	
 		LevelScreen();
 		
 		void handleEvent();
