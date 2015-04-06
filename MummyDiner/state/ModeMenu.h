@@ -11,4 +11,22 @@
 
 #include <stdio.h>
 
+#include "GameState.h"
+#include "LevelScreen.h"
+
+class ModeMenu: public GameState {
+	public:
+		ModeMenu();
+	
+		void handleEvent();
+		void update();
+		void render();
+	
+	private:
+		TextClass _title;
+	
+		ButtonClass _normalMode;
+		ButtonClass _practiceMode;
+};
+
 #endif /* defined(__MummyDiner__ModeMenu__) */

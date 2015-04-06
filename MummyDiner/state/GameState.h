@@ -16,6 +16,7 @@
 
 #include "../gui/ToggleClass.h" // includes text class, button class and utility class
 #include "../gui/BackgroundClass.h"
+#include "../gui/ImageClass.h"
 
 // each of these classes includes the SpriteClass class, debug class and timer class
 #include "../sprite/Waitress.h"
@@ -31,6 +32,7 @@ enum state {
 	NO_STATE,
 	EXIT,
 	MAIN_MENU,
+	MODE_MENU,
 	HOW_TO_PLAY,
 	SETTINGS,
 	LEVEL,

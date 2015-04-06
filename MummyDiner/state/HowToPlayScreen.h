@@ -22,9 +22,31 @@ class HowToPlayScreen: public GameState {
 		void render();
 	
 	private:
+		bool _firstPage;
+		bool _secondPage;
+		bool _thirdPage;
+	
 		BackgroundClass _background;
 	
 		TextClass _title;
+	
+		ImageClass _customerOrder;
+		TextClass _customerOrderText;
+		ImageClass _menuPick;
+		TextClass _menuPickText;
+	
+		ImageClass _greyPatch;
+		TextClass _greyPatchText;
+		ImageClass _chefCook;
+		TextClass _chefCookText;
+	
+		ImageClass _serve;
+		TextClass _serveText;
+		ImageClass _customerThanks;
+		TextClass _customerThanksText;
+	
+		ButtonClass _nextButton;
+		ButtonClass _prevButton;
 	
 		ButtonClass _backButton;
 };

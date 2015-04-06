@@ -64,7 +64,7 @@ void MainMenuScreen::handleEvent() {
 					
 					cleanup();
 					
-					setState(LEVEL);
+					setState(MODE_MENU);
 				}
 			}
 			
