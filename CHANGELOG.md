@@ -1,5 +1,14 @@
 ###CHANGELOG
 
+**6 April 2015 - v0.9.0-alpha**
+- Added a mode select menu screen
+- Added normal and practice mode
+- A new how to play screen
+- Added a few things to enhance gameplay
+- Added a new image class to facilitate GUI in help screen
+- Customer failure mechanism works now  when waitress collides with walking customer
+- You can now return to main menu or retry when the game is over
+
 **3 April 2015 - v0.8.0-alpha**
 - Added a back button in the level to go back to main menu
 - Waitress can now take orders from all four locations
