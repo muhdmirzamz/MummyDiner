@@ -9,7 +9,7 @@
 #include "MenuSystem.h"
 
 MenuSystem::MenuSystem() {
-	_background.set(10, SCREEN_H - 80, 300, 80, 0, 200, 255);
+	_menuSystemBackground.setBackgroundUsingName("_menuSystemBackground");
 	
 	_menuHamburger.set("images/hamburger.bmp", 400, 10, 500, 500, 10, MENU_ITEM_Y_POS);
 	_menuFries.set("images/fries.bmp", 300, 10, 600, 670, 80, MENU_ITEM_Y_POS);
@@ -83,7 +83,7 @@ int MenuSystem::getFoodCode() {
 }
 
 void MenuSystem::render(RenderWindow &window) {
-	_background.render(window);
+	_menuSystemBackground.render(window);
 	
 	_menuHamburger.render(window);
 	_menuFries.render(window);

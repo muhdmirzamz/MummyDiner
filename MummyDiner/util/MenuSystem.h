@@ -70,7 +70,7 @@ class MenuSystem {
 		void render(RenderWindow &window);
 	
 	private:
-		BackgroundClass _background;
+		BackgroundClass _menuSystemBackground;
 	
 		SpriteClass _hamburger;
 		SpriteClass _fries;

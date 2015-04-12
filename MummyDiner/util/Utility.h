@@ -11,6 +11,8 @@
 #define __MummyDiner__DebugMode__
 
 #include <stdio.h>
+#include <fstream>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 
