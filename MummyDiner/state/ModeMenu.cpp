@@ -9,10 +9,10 @@
 #include "ModeMenu.h"
 
 ModeMenu::ModeMenu() {
-	_title.set(LATO_LIGHT_FONT, 40, "Mode Select Menu", 250, 20, 0, 0, 0);
+	_modeMenuTitle.setTextUsingName("_modeMenuTitle", "Mode Select Menu");
 
-	_normalMode.set(100, 300, 200, 100, 0, 100, 0, "Normal", 255, 255, 255);
-	_practiceMode.set(500, 300, 200, 100, 0, 100, 0, "Practice", 255, 255, 255);
+	_normalModeButton.setButtonUsingName("_normalMode", "Normal");
+	_practiceModeButton.setButtonUsingName("_practiceMode", "Practice");
 }
 
 void ModeMenu::handleEvent() {
@@ -24,24 +24,20 @@ void ModeMenu::handleEvent() {
 		}
 		
 		if (event.type == event.MouseButtonPressed) {
-			if (MOUSE_X_CLICK >= _normalMode.getLeftSide() && MOUSE_X_CLICK <= _normalMode.getLeftSide() + _normalMode.getWidth()) {
-				if (MOUSE_Y_CLICK >= _normalMode.getTop() && MOUSE_Y_CLICK <= _normalMode.getTop() + _normalMode.getHeight()) {
-					cleanup();
+			if (_normalModeButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
+				cleanup();
+			
+				LevelScreen::normalMode = true;
 				
-					LevelScreen::normalMode = true;
-					
-					setState(LEVEL);
-				}
+				setState(LEVEL);
 			}
 			
-			if (MOUSE_X_CLICK >= _practiceMode.getLeftSide() && MOUSE_X_CLICK <= _practiceMode.getLeftSide() + _practiceMode.getWidth()) {
-				if (MOUSE_Y_CLICK >= _practiceMode.getTop() && MOUSE_Y_CLICK <= _practiceMode.getTop() + _practiceMode.getHeight()) {
-					cleanup();
-					
-					LevelScreen::normalMode = false;
-					
-					setState(LEVEL);
-				}
+			if (_practiceModeButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
+				cleanup();
+				
+				LevelScreen::normalMode = false;
+				
+				setState(LEVEL);
 			}
 		}
 	}
@@ -52,10 +48,10 @@ void ModeMenu::update() {
 }
 
 void ModeMenu::render() {
-	_title.render(window);
+	_modeMenuTitle.render(window);
 
-	_normalMode.render(window);
-	_practiceMode.render(window);
+	_normalModeButton.render(window);
+	_practiceModeButton.render(window);
 
 	window.display();
 }

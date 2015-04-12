@@ -26,23 +26,23 @@ class HowToPlayScreen: public GameState {
 		bool _secondPage;
 		bool _thirdPage;
 	
-		BackgroundClass _background;
+		BackgroundClass _howToPlayBackground;
 	
-		TextClass _title;
+		TextClass _howToPlayScreenTitle;
 	
-		ImageClass _customerOrder;
+		ImageClass _customerOrderImage;
 		TextClass _customerOrderText;
-		ImageClass _menuPick;
+		ImageClass _menuPickImage;
 		TextClass _menuPickText;
 	
-		ImageClass _greyPatch;
+		ImageClass _greyPatchImage;
 		TextClass _greyPatchText;
-		ImageClass _chefCook;
+		ImageClass _chefCookImage;
 		TextClass _chefCookText;
 	
-		ImageClass _serve;
+		ImageClass _serveImage;
 		TextClass _serveText;
-		ImageClass _customerThanks;
+		ImageClass _customerThanksImage;
 		TextClass _customerThanksText;
 	
 		ButtonClass _nextButton;

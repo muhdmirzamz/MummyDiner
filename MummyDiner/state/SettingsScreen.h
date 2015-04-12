@@ -22,7 +22,7 @@ class SettingsScreen: public GameState {
 	private:
 		ButtonClass _backToMainMenuButton;
 	
-		TextClass _title;
+		TextClass _settingsScreenTitle;
 	
 		ToggleClass _debugToggle;
 		ToggleClass _controlToggle;

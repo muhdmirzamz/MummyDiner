@@ -14,12 +14,12 @@ bool GameOverScreen::neutral = false;
 GameOverScreen::GameOverScreen() {
 	if (success) {
 		if (neutral) {
-			_neutralGameOverBackground.setImageBackground("images/neutral_game_over.bmp", 0, 0, SCREEN_W, SCREEN_H);
+			_neutralGameOverBackground.setBackgroundUsingName("_neutralGameOverBackground");
 		} else {
-			_successGameOverBackground.setImageBackground("images/success_game_over.bmp", 0, 0, SCREEN_W, SCREEN_H);
+			_successGameOverBackground.setBackgroundUsingName("_successGameOverBackground");
 		}
 	} else {
-		_failGameOverBackground.setImageBackground("images/fail_game_over.bmp", 0, 0, SCREEN_W, SCREEN_H);
+		_failGameOverBackground.setBackgroundUsingName("_failGameOverBackground");
 	}
 	
 	if (Utility::debug) {

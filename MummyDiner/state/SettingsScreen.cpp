@@ -9,12 +9,12 @@
 #include "SettingsScreen.h"
 
 SettingsScreen::SettingsScreen() {
-	_backToMainMenuButton.set(10, 10, 150, 80, 0, 200, 255, "Back to\nmain menu", 0, 0, 0);
+	_backToMainMenuButton.setButtonUsingName("_backToMainMenuButton", "Back to\nmain menu");
 	
-	_title.set(LATO_LIGHT_FONT, 50, "Settings", 260, 20, 100, 100, 100);
+	_settingsScreenTitle.setTextUsingName("_settingsScreenTitle", "Settings");
 	
-	_debugToggle.setDebugToggle(100, "Debug");
-	_controlToggle.setControlToggle(150, "Use\nkeyboard");
+	_debugToggle.setToggle("Debug", 100, ToggleClass::DEBUG_TOGGLE);
+	_controlToggle.setToggle("Use\nkeyboard", 150, ToggleClass::CONTROL_TOGGLE);
 }
 
 void SettingsScreen::handleEvent() {
@@ -26,22 +26,20 @@ void SettingsScreen::handleEvent() {
 		}
 		
 		if (event.type == event.MouseButtonPressed) {
-			if (MOUSE_X_CLICK >= _backToMainMenuButton.getLeftSide() && MOUSE_X_CLICK <= _backToMainMenuButton.getLeftSide()+_backToMainMenuButton.getWidth()) {
-				if (MOUSE_Y_CLICK >= _backToMainMenuButton.getTop() && MOUSE_Y_CLICK <= _backToMainMenuButton.getTop() + _backToMainMenuButton.getHeight()) {
-					cleanup();
-					
-					setState(MAIN_MENU);
-				}
+			if (_backToMainMenuButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
+				cleanup();
+				
+				setState(MAIN_MENU);
 			}
 			
-			_debugToggle.checkDebugToggle(MOUSE_X_CLICK, MOUSE_Y_CLICK);
+			_debugToggle.checkToggle(MOUSE_X_CLICK, MOUSE_Y_CLICK, ToggleClass::DEBUG_TOGGLE);
 			if (_debugToggle.isDebugSwitchOn()) {
 				Utility::debug = true;
 			} else {
 				Utility::debug = false;
 			}
 			
-			_controlToggle.checkControlToggle(MOUSE_X_CLICK, MOUSE_Y_CLICK);
+			_controlToggle.checkToggle(MOUSE_X_CLICK, MOUSE_Y_CLICK, ToggleClass::CONTROL_TOGGLE);
 			if (_controlToggle.isControlSwitchOn()) {
 				Utility::keyboardIsUsed = true;
 			} else {
@@ -58,7 +56,7 @@ void SettingsScreen::update() {
 void SettingsScreen::render() {
 	_backToMainMenuButton.render(window);
 	
-	_title.render(window);
+	_settingsScreenTitle.render(window);
 
 	_debugToggle.render(window);
 	_controlToggle.render(window);

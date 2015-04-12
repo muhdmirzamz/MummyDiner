@@ -19,12 +19,14 @@ class MainMenuScreen: public GameState {
 		void update();
 		void render();
 	
-	private:	
-		TextClass _title;
+	private:
+		TextClass _mainMenuTitle;
 
 		ButtonClass _startButton;
 		ButtonClass _howToPlayButton;
 		ButtonClass _settingsButton;
+	
+		string _fontSize;
 };
 
 #endif /* defined(__MummyDiner__MainMenuScreen__) */

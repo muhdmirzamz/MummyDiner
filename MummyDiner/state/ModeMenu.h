@@ -23,10 +23,10 @@ class ModeMenu: public GameState {
 		void render();
 	
 	private:
-		TextClass _title;
+		TextClass _modeMenuTitle;
 	
-		ButtonClass _normalMode;
-		ButtonClass _practiceMode;
+		ButtonClass _normalModeButton;
+		ButtonClass _practiceModeButton;
 };
 
 #endif /* defined(__MummyDiner__ModeMenu__) */

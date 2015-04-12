@@ -54,7 +54,7 @@ class LevelScreen: public GameState {
 		BackgroundClass _bottomRightBackground;
 		BackgroundClass _foodPickupBackground;
 	
-		ButtonClass _backToMenuButton;
+		ButtonClass _lsBackToMenuButton;
 	
 		MenuSystem _menuSystem;
 	
