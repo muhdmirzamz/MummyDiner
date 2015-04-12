@@ -1,5 +1,10 @@
 ###CHANGELOG
 
+**12 April 2015 - v0.10.0-beta**
+- Added ability to read from text files when loading game
+- Refactored some functions in user interfaces classes
+- Fixed a bug where texts are not rendered to screen
+
 **6 April 2015 - v0.9.0-alpha**
 - Added a mode select menu screen
 - Added normal and practice mode
