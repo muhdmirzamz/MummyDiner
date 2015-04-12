@@ -13,19 +13,29 @@
 
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
-using namespace std;
+#include "../util/Utility.h"
 
 class TextClass {
 	public:
 		TextClass();
 	
-		void set(const char *file, int fontSize, string text, float x, float y, Uint8 r, Uint8 g, Uint8 b);
+		void setTextUsingName(string name, string text);
+	
+		void setTextClass(const char *fontFile, string text, float x, float y);
+		
 		void render(RenderWindow &window);
 	
 	private:
 		Font _font;
 		Text _text;
+	
+		string _tempFontFile;
+		int _tempR;
+		int _tempG;
+		int _tempB;
+		int _tempCharacterSize;
+		float _tempX;
+		float _tempY;
 };
 
 #endif /* defined(__MummyDiner__TextClass__) */

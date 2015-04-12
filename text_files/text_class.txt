@@ -1,0 +1,33 @@
+variable                  font file                       r     g   b      character size X     Y
+_mainMenuTitle            fonts/Quicksand-Regular.ttf     200   0   250    80             66    20
+_modeMenuTitle            fonts/Lato-Light.ttf            0     0   0      40             250   20    
+_howToPlayScreenTitle     fonts/Quicksand-Regular.ttf     10    100 255    30             266   30
+_customerOrderText        fonts/Lato-Light.ttf            0     0   0      20             300   150
+_menuPickText             fonts/Lato-Light.ttf            0     0   0      20             380   380
+_greyPatchText            fonts/Lato-Light.ttf            0     0   0      20             400   150
+_chefCookText             fonts/Lato-Light.ttf            0     0   0      20             300   380
+_serveText                fonts/Lato-Light.ttf            0     0   0      20             380   150
+_customerThanksText       fonts/Lato-Light.ttf            0     0   0      20             380   380
+_settingsScreenTitle      fonts/Lato-Light.ttf            100   100 100    50             260   20
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

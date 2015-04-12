@@ -15,23 +15,26 @@
 
 class ToggleClass {
 	public:
+		enum toggles {
+			DEBUG_TOGGLE,
+			CONTROL_TOGGLE
+		};
+	
 		ToggleClass();
 	
-		void setDebugToggle(float y, string text);
-		void setControlToggle(float y, string text);
-	
-		void checkDebugToggle(int mouseClickXPos, int mouseClickYPos);
-		void checkControlToggle(int mouseClickXPos, int mouseClickYPos);
+		void setToggle(string text, float y, int toggle);
+		void checkToggle(int mouseClickXPos, int mouseClickYPos, int toggle);
 	
 		bool isDebugSwitchOn();
 		bool isControlSwitchOn();
 	
 		void render(RenderWindow &window);
 	
-	private:
+	private:	
 		TextClass _property;
-		ButtonClass _propertyOffToggle;
-		ButtonClass _propertyOnToggle;
+
+		ButtonClass _offToggle;
+		ButtonClass _onToggle;
 	
 		int _yPos;
 };

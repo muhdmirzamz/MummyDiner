@@ -1,0 +1,7 @@
+variable                  image file                     X     Y      scaleX    scaleY
+_customerOrderImage       images/customer_order.png     160   150    0.6       0.6
+_menuPickImage            images/menu_pick.png          160   380    0.6       0.6
+_greyPatchImage           images/grey_patch.png         160   150    0.6       0.6
+_chefCookImage            images/chef_cook.png          160   380    0.6       0.6
+_serveImage               images/serve.png              160   150    0.6       0.6
+_customerThanksImage      images/customer_thanks.png    160   380    0.6       0.6

@@ -13,34 +13,42 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../util/Utility.h"
 #include "TextClass.h" // make use of your own text wrapper class
-
-using namespace sf;
 
 class ButtonClass {
 	public:
 		ButtonClass();
 	
-		void set(float x, float y, float w, float h, Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue, string text, Uint8 textRed, Uint8 textGreen, Uint8 textBlue);
+		void setButtonUsingName(string name, string text);
+	
+		void setButton(string text, float x, float y, float w, float h);
 		void setColour(Uint8 buttonRed, Uint8 buttonGreen, Uint8 buttonBlue);
 	
-		float getLeftSide();
-		float getWidth();
-		float getTop();
-		float getHeight();
+		bool isClicked(int mouseXClick, int mouseYClick);
 	
 		void render(RenderWindow &window);
 	
 	private:
-		TextClass _text;
+		TextClass _textClass;
+		Font _font;
+		Text _text;
 	
 		RectangleShape _button;
 	
-		float _leftOfButton;
-		float _widthOfButton;
-		float _topOfButton;
-		float _heightOfButton;
+		string _tempFontFile;
+		int _tempR;
+		int _tempG;
+		int _tempB;
+		int _tempTextR;
+		int _tempTextG;
+		int _tempTextB;
+		int _tempCharacterSize;
+		float _tempX;
+		float _tempY;
+		float _tempW;
+		float _tempH;
+	
+		bool _usingTextClass;
 };
 
 #endif /* defined(__MummyDiner__ButtonClass__) */

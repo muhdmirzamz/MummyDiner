@@ -12,29 +12,34 @@ BackgroundClass::BackgroundClass() {
 
 }
 
-void BackgroundClass::set(float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b) {
-	_background.setPosition(x, y);
-	_background.setSize(Vector2f(w, h));
+void BackgroundClass::setBackgroundUsingName(string name) {
+	fstream _file;
 	
-	_background.setFillColor(Color(r, g, b));
-}
-
-void BackgroundClass::setImageBackground(const char *file, int x, int y, int w, int h) {
-	// load file into image
-	_image.loadFromFile(file);
-	_image.createMaskFromColor(Color(255, 255, 255));
+	string line;
 	
-	// load image into texture
-	_texture.loadFromImage(_image);
+	_file.open("text_files/background_class.txt", ios::in);
 	
-	_background.setTexture(&_texture);
+	while (getline(_file, line)) {
+		_file >> line;
+		
+		if (line == name) {
+			_file >> _tempImageFile >> _tempX >> _tempY >> _tempW >> _tempH >> _tempR >> _tempG >> _tempB;
+			break;
+		}
+	}
 	
-	_background.setPosition(x, y);
-	_background.setSize(Vector2f(w, h));
-}
-
-void BackgroundClass::render(RenderWindow &window) {
-	window.draw(_background);
+	_file.close();
+	
+	if (_tempImageFile != "none") { // if image background exists
+		_image.loadFromFile(_tempImageFile);
+		_texture.loadFromImage(_image);
+		_background.setTexture(&_texture);
+	} else {
+		_background.setFillColor(Color(_tempR, _tempG, _tempB));
+	}
+	
+	_background.setPosition(_tempX, _tempY);
+	_background.setSize(Vector2f(_tempW, _tempH));
 }
 
 float BackgroundClass::getX() {
@@ -45,10 +50,16 @@ float BackgroundClass::getY() {
 	return _background.getPosition().y;
 }
 
-float BackgroundClass::getWidth() {
-	return _background.getSize().x;
+float BackgroundClass::getXEndPoint() {
+	//return _background.getSize().x;
+	return _background.getPosition().x + _background.getSize().x;
 }
 
-float BackgroundClass::getHeight() {
-	return _background.getSize().y;
+float BackgroundClass::getYEndPoint() {
+	//return _background.getSize().y;
+	return _background.getPosition().y + _background.getSize().y;
+}
+
+void BackgroundClass::render(RenderWindow &window) {
+	window.draw(_background);
 }

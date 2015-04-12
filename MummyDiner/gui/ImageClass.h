@@ -13,21 +13,29 @@
 
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
+#include "../util/Utility.h"
 
 class ImageClass {
 	public:
 		ImageClass();
 	
-		void setImage(const char *file);
+		void setImageUsingName(string name);
+		void setImage(const char *file, float x, float y);
 		void setScale(float x, float y);
 		void setPosition(float x, float y);
+		
 		void renderImage(RenderWindow &window);
 	
 	private:
 		Image _image;
 		Texture _texture;
 		Sprite _sprite;
+	
+		string _tempImageFile;
+		float _tempX;
+		float _tempY;
+		float _tempScaleX;
+		float _tempScaleY;
 };
 
 #endif /* defined(__MummyDiner__ImageClass__) */

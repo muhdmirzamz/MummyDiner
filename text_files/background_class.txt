@@ -1,0 +1,11 @@
+variable                      image                            X   Y      W      H     r    g    b
+_howToPlayBackground          none                             0   0    800    600   20   200  180
+_topLeftBackground            none                             50  10   266    120   0    255  0
+_topRightBackground           none                             406 10   266    120   255  0    0
+_bottomLeftBackground         none                             50  200  266    120   0    0    255
+_bottomRightBackground        none                             406 200  266    120   100  100  100
+_foodPickupBackground         none                             450 400  200    50    200  200  200
+_neutralGameOverBackground    images/neutral_game_over.bmp     0   0    800    600   0    0    0
+_successGameOverBackground    images/success_game_over.bmp     0   0    800    600   0    0    0
+_failGameOverBackground       images/fail_game_over.bmp        0   0    800    600   0    0    0
+_menuSystemBackground         none                             10  520  300    80    0    200  255

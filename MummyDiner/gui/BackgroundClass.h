@@ -13,27 +13,37 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../util/Utility.h"
+
 using namespace sf;
 
 class BackgroundClass {
 	public:
 		BackgroundClass();
 	
-		void set(float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b);
-		void setImageBackground(const char *file, int x, int y, int w, int h);
-		
-		void render(RenderWindow &window);
+		void setBackgroundUsingName(string name);
 	
 		float getX();
 		float getY();
-		float getWidth();
-		float getHeight();
+		float getXEndPoint();
+		float getYEndPoint();
+	
+		void render(RenderWindow &window);
 	
 	private:
 		RectangleShape _background;
 	
 		Image _image;
 		Texture _texture;
+	
+		string _tempImageFile;
+		float _tempX;
+		float _tempY;
+		float _tempW;
+		float _tempH;
+		int _tempR;
+		int _tempG;
+		int _tempB;
 };
 
 #endif /* defined(__MummyDiner__BackgroundClass__) */
