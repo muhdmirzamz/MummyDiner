@@ -16,14 +16,6 @@ class Waitress: public SpriteClass {
 	public:
 		Waitress();
 	
-		float getXPos();
-		float getYPos();
-	
-		float getWidth();
-		float getHeight();
-	
-		bool hasTakenFoodFromCounter();
-	
 		void move();
 		void moveUp();
 		void moveDown();
@@ -31,19 +23,19 @@ class Waitress: public SpriteClass {
 		void moveRight();
 		void stop();
 	
-		void handleCollisionWithWindow();
-		void handleCollisionWith(SpriteClass &object);
+		bool isMovingUp();
+		bool isMovingDown();
+		bool isMovingRight();
+		bool isMovingLeft();
+	
 		bool handleCollisionWith(SpriteClass *customer);
 	
 		void pickOrderFromMenu();
 		bool hasPickedOrderFromMenu();
 		void setCorrectOrderFlag();
 		bool gotCorrectOrder();
-	
-		bool isMovingUp();
-		bool isMovingDown();
-		bool isMovingRight();
-		bool isMovingLeft();
+		
+		bool hasTakenFoodFromCounter();
 	
 		void takeFoodFromCounter();
 		void serveANewCustomer();

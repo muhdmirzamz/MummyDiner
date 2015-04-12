@@ -48,14 +48,6 @@ void SpriteClass::move() {
 	
 }
 
-void SpriteClass::stop() {
-	
-}
-
-bool SpriteClass::hasTakenFoodFromCounter() {
-	return false;
-}
-
 void SpriteClass::moveUp() {
 	
 }
@@ -73,171 +65,31 @@ void SpriteClass::moveRight() {
 }
 
 void SpriteClass::handleCollisionWithWindow() {
+	if (SPRITE_X_POS + SPRITE_WIDTH >= SCREEN_W) {
+		// make sure sprite stays in frame
+		positionSprite(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
+	}
 	
+	if (SPRITE_X_POS <= 0) {
+		positionSprite(0, SPRITE_Y_POS);
+	}
+	
+	if (SPRITE_Y_POS <= 0) {
+		positionSprite(SPRITE_X_POS, 0);
+	}
+	
+	if (SPRITE_Y_POS + SPRITE_HEIGHT >= SCREEN_H) {
+		positionSprite(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
+	}
 }
 
-void SpriteClass::handleCollisionWith(SpriteClass &object) {
+bool SpriteClass::handleCollisionWith(SpriteClass &object) {
+	if (SPRITE_Y_POS + SPRITE_HEIGHT >= object.getYPos()) {
+		positionSprite(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
+		return true;
+	}
 	
-}
-
-bool SpriteClass::handleCollisionWith(SpriteClass *customer) {
 	return false;
-}
-
-void SpriteClass::pickOrderFromMenu() {
-	
-}
-
-bool SpriteClass::hasPickedOrderFromMenu() {
-	return false;
-}
-
-void SpriteClass::setCorrectOrderFlag() {
-	
-}
-
-bool SpriteClass::gotCorrectOrder() {
-	return false;
-}
-
-bool SpriteClass::isMovingUp() {
-	return false;
-}
-
-bool SpriteClass::isMovingDown() {
-	return false;
-}
-
-bool SpriteClass::isMovingRight() {
-	return false;
-}
-
-bool SpriteClass::isMovingLeft() {
-	return false;
-}
-
-void SpriteClass::takeFoodFromCounter() { // needs integration with order list system
-
-}
-
-void SpriteClass::serveANewCustomer() {
-	
-}
-
-void SpriteClass::getReadyToCook() {
-	
-}
-
-void SpriteClass::cook() {
-	
-}
-
-void SpriteClass::renderSmoke(RenderWindow &window) {
-	
-}
-
-bool SpriteClass::isCooking() {
-	return false;
-}
-
-bool SpriteClass::isDoneCooking() {
-	return false;
-}
-
-void SpriteClass::spawn() {
-	
-}
-
-void SpriteClass::renderOrderPopup(RenderWindow &window) {
-	
-}
-
-void SpriteClass::renderFoodOrderPopup(RenderWindow &window) {
-	
-}
-
-void SpriteClass::startThread() {
-	
-}
-
-void SpriteClass::renderFood(RenderWindow &window) {
-	
-}
-
-void SpriteClass::renderThanksPopup(RenderWindow &window) {
-	
-}
-
-void SpriteClass::setAsSuccessful() {
-	
-}
-
-void SpriteClass::setAsFailure() {
-	
-}
-
-void SpriteClass::stopThread() {
-	
-}
-
-bool SpriteClass::timeIsUp() {
-	return false;
-}
-
-bool SpriteClass::orderIsTaken() {
-	return false;
-}
-
-bool SpriteClass::foodIsServed() {
-	return false;
-}
-
-bool SpriteClass::timeIsAdded() {
-	return false;
-}
-
-int SpriteClass::getSpawnPosition() {
-	return 0;
-}
-
-int SpriteClass::getOrderedFoodItem() {
-	return false;
-}
-
-int SpriteClass::getSuccessful() {
-	return 0;
-}
-
-int SpriteClass::getFailure() {
-	return 0;
-}
-
-int SpriteClass::getTimeLeft() {
-	return false;
-}
-
-int SpriteClass::getTimeLimit() {
-	return false;
-}
-
-void SpriteClass::addTime() {
-	
-}
-
-void SpriteClass::renderWrongOrderPopup(RenderWindow &window) {
-	
-}
-
-void SpriteClass::getServed() {
-	
-}
-
-void SpriteClass::order() {
-	
-}
-
-void SpriteClass::resetForNewLevel() {
-	
 }
 
 float SpriteClass::getXPos() {

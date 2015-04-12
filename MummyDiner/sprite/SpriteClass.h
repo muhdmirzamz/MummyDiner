@@ -17,6 +17,11 @@
 #include "../util/CustomerTimer.h"
 #include "../util/ChefTimer.h"
 
+#define SPRITE_X_POS _sprite.getPosition().x
+#define SPRITE_Y_POS _sprite.getPosition().y
+#define SPRITE_WIDTH (_sprite.getTextureRect().width * _sprite.getScale().x)
+#define SPRITE_HEIGHT (_sprite.getTextureRect().height * _sprite.getScale().y)
+
 using namespace sf;
 
 class SpriteClass {
@@ -24,79 +29,25 @@ class SpriteClass {
 		SpriteClass();
 	
 		// normal sprite
-		virtual void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
-		virtual void positionSprite(float x, float y);
+		void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
+		void positionSprite(float x, float y);
+	
 		virtual void move();
-		virtual void stop();
-	
-		// waitress
-		virtual bool hasTakenFoodFromCounter();
-	
 		virtual void moveUp();
 		virtual void moveDown();
 		virtual void moveLeft();
 		virtual void moveRight();
 	
-		virtual void handleCollisionWithWindow();
-		virtual void handleCollisionWith(SpriteClass &object);
-		virtual bool handleCollisionWith(SpriteClass *customer);
+		void handleCollisionWithWindow();
+		bool handleCollisionWith(SpriteClass &object);
 	
-		virtual void pickOrderFromMenu();
-		virtual bool hasPickedOrderFromMenu();
-		virtual void setCorrectOrderFlag();
-		virtual bool gotCorrectOrder();
-	
-		virtual bool isMovingUp();
-		virtual bool isMovingDown();
-		virtual bool isMovingRight();
-		virtual bool isMovingLeft();
-	
-		virtual void takeFoodFromCounter(); // needs integration with order list system
-		virtual void serveANewCustomer();
-	
-		// chef
-		virtual void getReadyToCook();
-		virtual void cook();
-		virtual void renderSmoke(RenderWindow &window);
+		float getXPos();
+		float getYPos();
 		
-		virtual bool isCooking();
-		virtual bool isDoneCooking();
+		float getWidth();
+		float getHeight();
 	
-		// customer
-		virtual void spawn();
-		virtual void renderOrderPopup(RenderWindow &window);
-		virtual void renderFoodOrderPopup(RenderWindow &window);
-		virtual void startThread();
-		virtual void renderFood(RenderWindow &window);
-		virtual void renderThanksPopup(RenderWindow &window);
-		virtual void setAsSuccessful();
-		virtual void setAsFailure();
-		virtual void stopThread();
-
-		virtual bool timeIsUp();
-		virtual bool orderIsTaken();
-		virtual bool foodIsServed();
-		virtual bool timeIsAdded();
-		virtual int getSpawnPosition();
-		virtual int getOrderedFoodItem();
-		virtual int getSuccessful();
-		virtual int getFailure();
-		virtual int getTimeLeft();
-		virtual int getTimeLimit();
-		virtual void addTime();
-		virtual void renderWrongOrderPopup(RenderWindow &window);
-		virtual void getServed();
-		virtual void order();
-		virtual void resetForNewLevel();
-	
-		// normal sprite
-		virtual float getXPos();
-		virtual float getYPos();
-	
-		virtual float getWidth();
-		virtual float getHeight();
-	
-		virtual void render(RenderWindow &window);
+		void render(RenderWindow &window);
 	
 	protected:
 		Image _image;
