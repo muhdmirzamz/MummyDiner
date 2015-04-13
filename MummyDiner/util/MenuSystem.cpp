@@ -9,22 +9,25 @@
 #include "MenuSystem.h"
 
 MenuSystem::MenuSystem() {
-	_menuSystemBackground.setBackgroundUsingName("_menuSystemBackground");
-	
-	_menuHamburger.set("images/hamburger.bmp", 400, 10, 500, 500, 10, MENU_ITEM_Y_POS);
-	_menuFries.set("images/fries.bmp", 300, 10, 600, 670, 80, MENU_ITEM_Y_POS);
-	_menuChocolateSmoothie.set("images/chocolate_smoothie.bmp", 400, 10, 500, 677, 170, MENU_ITEM_Y_POS);
-	_menuLemonJuice.set("images/lemon_juice.bmp", 400, 10, 400, 600, 250, MENU_ITEM_Y_POS);
-	
-	_foodCode = 0;
+
 }
 
-// middle functions are for popup renders
 void MenuSystem::loadSpriteInPopup() {
 	_hamburger.set("images/hamburger.bmp", 400, 10, 500, 500, 0, 0);
 	_fries.set("images/fries.bmp", 300, 10, 600, 670, 0, 0);
 	_chocolateSmoothie.set("images/chocolate_smoothie.bmp", 400, 10, 500, 677, 0, 0);
 	_lemonJuice.set("images/lemon_juice.bmp", 400, 10, 400, 600, 0, 0);
+	
+	_foodCode = 0;
+}
+
+void MenuSystem::loadSpriteInTray() {
+	_menuSystemBackground.setBackgroundUsingName("_menuSystemBackground");
+
+	_menuHamburger.set("images/hamburger.bmp", 400, 10, 500, 500, 10, MENU_ITEM_Y_POS);
+	_menuFries.set("images/fries.bmp", 300, 10, 600, 670, 80, MENU_ITEM_Y_POS);
+	_menuChocolateSmoothie.set("images/chocolate_smoothie.bmp", 400, 10, 500, 677, 170, MENU_ITEM_Y_POS);
+	_menuLemonJuice.set("images/lemon_juice.bmp", 400, 10, 400, 600, 250, MENU_ITEM_Y_POS);
 }
 
 void MenuSystem::positionSpriteInPopup(int x, int y) {

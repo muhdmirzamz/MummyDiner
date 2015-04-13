@@ -53,6 +53,8 @@ LevelScreen::LevelScreen() {
 	_bottomRightBackground.setBackgroundUsingName("_bottomRightBackground");
 	_foodPickupBackground.setBackgroundUsingName("_foodPickupBackground");
 	
+	_menuSystem.loadSpriteInTray();
+	
 	_lsBackToMenuButton.setButtonUsingName("_lsBackToMenuButton", "Back to\nmain menu");
 	
 	// use different variables for setting sprite's next position

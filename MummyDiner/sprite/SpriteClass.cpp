@@ -67,25 +67,30 @@ void SpriteClass::moveRight() {
 void SpriteClass::handleCollisionWithWindow() {
 	if (SPRITE_X_POS + SPRITE_WIDTH >= SCREEN_W) {
 		// make sure sprite stays in frame
-		positionSprite(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
+		//positionSprite(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
+		_sprite.setPosition(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
 	}
 	
 	if (SPRITE_X_POS <= 0) {
-		positionSprite(0, SPRITE_Y_POS);
+		//positionSprite(0, SPRITE_Y_POS);
+		_sprite.setPosition(0, SPRITE_Y_POS);
 	}
 	
 	if (SPRITE_Y_POS <= 0) {
-		positionSprite(SPRITE_X_POS, 0);
+		//positionSprite(SPRITE_X_POS, 0);
+		_sprite.setPosition(SPRITE_X_POS, 0);
 	}
 	
 	if (SPRITE_Y_POS + SPRITE_HEIGHT >= SCREEN_H) {
-		positionSprite(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
+		//positionSprite(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
+		_sprite.setPosition(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
 	}
 }
 
 bool SpriteClass::handleCollisionWith(SpriteClass &object) {
 	if (SPRITE_Y_POS + SPRITE_HEIGHT >= object.getYPos()) {
-		positionSprite(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
+		//positionSprite(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
+		_sprite.setPosition(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
 		return true;
 	}
 	

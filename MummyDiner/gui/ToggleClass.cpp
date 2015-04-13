@@ -10,11 +10,10 @@
 
 #define PROPERTY_X_POS 10
 
-#define TOGGLE_W 50
-#define TOGGLE_H 50
+#define TOGGLE_SIZE 50
 
 #define OFF_TOGGLE_X_POS PROPERTY_X_POS + 100
-#define ON_TOGGLE_X_POS OFF_TOGGLE_X_POS + TOGGLE_W
+#define ON_TOGGLE_X_POS OFF_TOGGLE_X_POS + TOGGLE_SIZE
 
 static bool debugSwitchOn = false;
 static bool controlSwitchOn = false;
@@ -26,8 +25,8 @@ ToggleClass::ToggleClass() {
 void ToggleClass::setToggle(string text, float y, int toggle) {
 	_property.setTextClass(QUICKSAND_REGULAR_FONT, text, PROPERTY_X_POS, y);
 	
-	_offToggle.setButton("OFF", OFF_TOGGLE_X_POS, y, TOGGLE_W, TOGGLE_H);
-	_onToggle.setButton("ON", ON_TOGGLE_X_POS, y, TOGGLE_W, TOGGLE_H);
+	_offToggle.setButton("OFF", OFF_TOGGLE_X_POS, y, TOGGLE_SIZE, TOGGLE_SIZE);
+	_onToggle.setButton("ON", ON_TOGGLE_X_POS, y, TOGGLE_SIZE, TOGGLE_SIZE);
 	
 	if (toggle == DEBUG_TOGGLE) {
 		if (!debugSwitchOn) {

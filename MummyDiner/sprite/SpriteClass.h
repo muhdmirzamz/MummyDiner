@@ -28,10 +28,11 @@ class SpriteClass {
 	public:
 		SpriteClass();
 	
-		// normal sprite
 		void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
 		void positionSprite(float x, float y);
 	
+		// waitress and customer have different function bodies for these methods
+		// hence function being virtual
 		virtual void move();
 		virtual void moveUp();
 		virtual void moveDown();

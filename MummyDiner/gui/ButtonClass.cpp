@@ -9,13 +9,9 @@
 #include "ButtonClass.h"
 
 // place text more to the left side of the center to make it look centralised
-// name just helps with readability and abstraction 
-#define CENTER_OF_BUTTON_X_AXIS2 (_leftOfButton + (_widthOfButton / 4))
-#define CENTER_OF_BUTTON_Y_AXIS2 (_topOfButton + (_heightOfButton / 4))
-
+// name just helps with readability and abstraction
 #define CENTER_OF_BUTTON_X_AXIS (_button.getPosition().x + (_button.getSize().x / 4))
 #define CENTER_OF_BUTTON_Y_AXIS (_button.getPosition().y + (_button.getSize().y / 4))
-#define FONT_SIZE 15
 
 ButtonClass::ButtonClass() {
 	

@@ -60,11 +60,13 @@ class MenuSystem {
 		MenuSystem();
 	
 		void loadSpriteInPopup();
+		void loadSpriteInTray();
+	
 		void positionSpriteInPopup(int x, int y);
+	
 		void renderFoodAndDrinks(int number, RenderWindow &window);
 	
 		bool getMenuItemXAxis(int x);
-	
 		int getFoodCode();
 	
 		void render(RenderWindow &window);
