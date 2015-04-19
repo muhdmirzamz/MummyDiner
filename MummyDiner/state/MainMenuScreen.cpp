@@ -30,11 +30,7 @@ void MainMenuScreen::handleEvent() {
 
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
-			fps.stopCounting();
-		
-			cleanup();
-			
-			setState(EXIT);
+			cleanupMainMenuScreen(EXIT);
 		}
 
 		if (Utility::debug) {
@@ -44,38 +40,22 @@ void MainMenuScreen::handleEvent() {
 			
 			if (event.type == event.KeyPressed) {
 				if (event.key.code == Keyboard::Escape) {
-					fps.stopCounting();
-					
-					cleanup();
-					
-					setState(EXIT);
+					cleanupMainMenuScreen(EXIT);
 				}
 			}
 		}
 		
 		if (event.type == event.MouseButtonPressed) {
 			if (_startButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				fps.stopCounting();
-				
-				cleanup();
-				
-				setState(MODE_MENU);
+				cleanupMainMenuScreen(MODE_MENU);
 			}
 			
 			if (_howToPlayButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				fps.stopCounting();
-				
-				cleanup();
-				
-				setState(HOW_TO_PLAY);
+				cleanupMainMenuScreen(HOW_TO_PLAY);
 			}
 			
 			if (_settingsButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				fps.stopCounting();
-				
-				cleanup();
-				
-				setState(SETTINGS);
+				cleanupMainMenuScreen(SETTINGS);
 			}
 		}
 	}
@@ -103,4 +83,12 @@ void MainMenuScreen::render() {
 	}
 	
 	window.display();
+}
+
+void MainMenuScreen::cleanupMainMenuScreen(int state) {
+	fps.stopCounting();
+	
+	cleanup();
+	
+	setState(state);
 }

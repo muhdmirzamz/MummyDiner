@@ -13,11 +13,9 @@ bool GameOverScreen::neutral = false;
 
 GameOverScreen::GameOverScreen() {
 	if (success) {
-		if (neutral) {
-			_neutralGameOverBackground.setBackgroundUsingName("_neutralGameOverBackground");
-		} else {
-			_successGameOverBackground.setBackgroundUsingName("_successGameOverBackground");
-		}
+		_successGameOverBackground.setBackgroundUsingName("_successGameOverBackground");
+	} else if (neutral) {
+		_neutralGameOverBackground.setBackgroundUsingName("_neutralGameOverBackground");
 	} else {
 		_failGameOverBackground.setBackgroundUsingName("_failGameOverBackground");
 	}
@@ -30,16 +28,12 @@ GameOverScreen::GameOverScreen() {
 void GameOverScreen::handleEvent() {
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
-			cleanup();
-			
-			setState(EXIT);
+			cleanupGameOverScreen(EXIT);
 		}
 		
 		if (event.type == event.KeyPressed) {
 			if (event.key.code == Keyboard::C) {
-				cleanup();
-				
-				setState(MAIN_MENU);
+				cleanupGameOverScreen(MAIN_MENU);
 			}
 		}
 		
@@ -52,15 +46,11 @@ void GameOverScreen::handleEvent() {
 		if (event.type == event.MouseButtonPressed) {
 			if (MOUSE_Y_CLICK >= 340 && MOUSE_Y_CLICK <= 590) {
 				if (MOUSE_X_CLICK >= 10 && MOUSE_X_CLICK <= 330) {
-					cleanup();
-					
-					setState(MAIN_MENU);
+					cleanupGameOverScreen(MAIN_MENU);
 				}
 				
 				if (MOUSE_X_CLICK >= 430 && MOUSE_X_CLICK <= 780) {
-					cleanup();
-					
-					setState(LEVEL);
+					cleanupGameOverScreen(LEVEL);
 				}
 			}
 		}
@@ -73,11 +63,9 @@ void GameOverScreen::update() {
 
 void GameOverScreen::render() {
 	if (success) {
-		if (neutral) {
-			_neutralGameOverBackground.render(window);
-		} else {
-			_successGameOverBackground.render(window);
-		}
+		_successGameOverBackground.render(window);
+	} else if (neutral) {
+		_neutralGameOverBackground.render(window);
 	} else {
 		_failGameOverBackground.render(window);
 	}
@@ -87,4 +75,10 @@ void GameOverScreen::render() {
 	}
 	
 	window.display();
+}
+
+void GameOverScreen::cleanupGameOverScreen(int state) {
+	cleanup();
+	
+	setState(state);
 }

@@ -18,6 +18,7 @@ class MainMenuScreen: public GameState {
 		void handleEvent();
 		void update();
 		void render();
+		void cleanupMainMenuScreen(int state);
 	
 	private:
 		TextClass _mainMenuTitle;

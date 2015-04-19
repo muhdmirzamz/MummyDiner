@@ -20,6 +20,7 @@ class HowToPlayScreen: public GameState {
 		void handleEvent();
 		void update();
 		void render();
+		void cleanupHowToPlayScreen(int state);
 	
 	private:
 		bool _firstPage;

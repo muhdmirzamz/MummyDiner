@@ -44,26 +44,20 @@ HowToPlayScreen::HowToPlayScreen() {
 void HowToPlayScreen::handleEvent() {
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
-			cleanup();
-			
-			setState(EXIT);
+			cleanupHowToPlayScreen(EXIT);
 		}
 		
 		if (Utility::debug) {
 			if (event.type == event.KeyPressed) {
 				if (event.key.code == Keyboard::Escape) {
-					cleanup();
-					
-					setState(EXIT);
+					cleanupHowToPlayScreen(EXIT);
 				}
 			}
 		}
 		
 		if (event.type == event.MouseButtonPressed) {
 			if (_backButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				cleanup();
-				
-				setState(MAIN_MENU);
+				cleanupHowToPlayScreen(MAIN_MENU);
 			}
 			
 			if (_nextButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
@@ -133,4 +127,10 @@ void HowToPlayScreen::render() {
 	_backButton.render(window);
 	
 	window.display();
+}
+
+void HowToPlayScreen::cleanupHowToPlayScreen(int state) {
+	cleanup();
+	
+	setState(state);
 }

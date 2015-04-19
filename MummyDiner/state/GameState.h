@@ -44,8 +44,6 @@ class GameState {
 		GameState();
 		virtual ~GameState();
 	
-		virtual void createWindow();
-	
 		void setState(int state);
 		int getState();
 
