@@ -13,10 +13,10 @@ MenuSystem::MenuSystem() {
 }
 
 void MenuSystem::loadSpriteInPopup() {
-	_hamburger.set("images/hamburger.bmp", 400, 10, 500, 500, 0, 0);
-	_fries.set("images/fries.bmp", 300, 10, 600, 670, 0, 0);
-	_chocolateSmoothie.set("images/chocolate_smoothie.bmp", 400, 10, 500, 677, 0, 0);
-	_lemonJuice.set("images/lemon_juice.bmp", 400, 10, 400, 600, 0, 0);
+	_hamburger.setSpriteUsingName("_hamburger");
+	_fries.setSpriteUsingName("_fries");
+	_chocolateSmoothie.setSpriteUsingName("_chocolateSmoothie");
+	_lemonJuice.setSpriteUsingName("_lemonJuice");
 	
 	_foodCode = 0;
 }
@@ -24,10 +24,10 @@ void MenuSystem::loadSpriteInPopup() {
 void MenuSystem::loadSpriteInTray() {
 	_menuSystemBackground.setBackgroundUsingName("_menuSystemBackground");
 
-	_menuHamburger.set("images/hamburger.bmp", 400, 10, 500, 500, 10, MENU_ITEM_Y_POS);
-	_menuFries.set("images/fries.bmp", 300, 10, 600, 670, 80, MENU_ITEM_Y_POS);
-	_menuChocolateSmoothie.set("images/chocolate_smoothie.bmp", 400, 10, 500, 677, 170, MENU_ITEM_Y_POS);
-	_menuLemonJuice.set("images/lemon_juice.bmp", 400, 10, 400, 600, 250, MENU_ITEM_Y_POS);
+	_menuHamburger.setSpriteUsingName("_menuHamburger");
+	_menuFries.setSpriteUsingName("_menuFries");
+	_menuChocolateSmoothie.setSpriteUsingName("_menuChocolateSmoothie");
+	_menuLemonJuice.setSpriteUsingName("_menuLemonJuice");
 }
 
 void MenuSystem::positionSpriteInPopup(int x, int y) {
@@ -57,25 +57,27 @@ void MenuSystem::renderFoodAndDrinks(int number, RenderWindow &window) {
 
 // this is for menu ones, dont confuse them
 // TAKE NOTE OF THE VARIABLE NAME
-bool MenuSystem::getMenuItemXAxis(int x) {
-	if (x >= _menuHamburger.getXPos() && x <= _menuHamburger.getXPos() + _menuHamburger.getWidth()) {
-		_foodCode = HAMBURGER;
-		return true;
-	}
-	
-	if (x >= _menuFries.getXPos() && x <= _menuFries.getXPos() + _menuFries.getWidth()) {
-		_foodCode = FRIES;
-		return true;
-	}
-	
-	if (x >= _menuChocolateSmoothie.getXPos() && x <= _menuChocolateSmoothie.getXPos() + _menuChocolateSmoothie.getWidth()) {
-		_foodCode = CHOCOLATE_SMOOTHIE;
-		return true;
-	}
-	
-	if (x >= _menuLemonJuice.getXPos() && x <= _menuLemonJuice.getXPos() + _menuLemonJuice.getWidth()) {
-		_foodCode = LEMON_JUICE;
-		return true;
+bool MenuSystem::itemIsChosen(int mouseXClick, int mouseYClick) {
+	if (mouseYClick >= 400 && mouseYClick <= SCREEN_H) {
+		if (mouseXClick >= _menuHamburger.getXPos() && mouseXClick <= _menuHamburger.getXEndPos()) {
+			_foodCode = HAMBURGER;
+			return true;
+		}
+		
+		if (mouseXClick >= _menuFries.getXPos() && mouseXClick <= _menuFries.getXEndPos()) {
+			_foodCode = FRIES;
+			return true;
+		}
+		
+		if (mouseXClick >= _menuChocolateSmoothie.getXPos() && mouseXClick <= _menuChocolateSmoothie.getXEndPos()) {
+			_foodCode = CHOCOLATE_SMOOTHIE;
+			return true;
+		}
+		
+		if (mouseXClick >= _menuLemonJuice.getXPos() && mouseXClick <= _menuLemonJuice.getXEndPos()) {
+			_foodCode = LEMON_JUICE;
+			return true;
+		}
 	}
 
 	return false;

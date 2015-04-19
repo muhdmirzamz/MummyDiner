@@ -66,7 +66,7 @@ class MenuSystem {
 	
 		void renderFoodAndDrinks(int number, RenderWindow &window);
 	
-		bool getMenuItemXAxis(int x);
+		bool itemIsChosen(int mouseXClick, int mouseYClick);
 		int getFoodCode();
 	
 		void render(RenderWindow &window);
