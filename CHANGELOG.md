@@ -1,5 +1,20 @@
 ###CHANGELOG
 
+**19 April 2015 - v0.11.0-beta **
+- Customer failure now increases when waitress did not serve customer within allocated time
+- Improved customer background detection
+- Improved checking for food order
+- Improved customer popup rendering
+- Cleaned up game compilation
+- Collision with walking customers now fixed
+- Fixed alignment issues
+- Fixed a bug where waitress would spawn before serving customers
+- Fixed a bug with background detection
+- Fixed a bug where customer failure number will increment when customer is spawning
+- Standing at the food pickup point which simulates serving food to customer is now fixed
+- Customer failure leading to neutral background now fixed
+- Fixed issue involving logic bugs with regards to comparison between customer being successfully served and customer who failed to be served
+
 **12 April 2015 - v0.10.0-beta**
 - Added ability to read from text files when loading game
 - Refactored some functions in user interfaces classes
