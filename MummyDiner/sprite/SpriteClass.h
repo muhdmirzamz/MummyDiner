@@ -17,30 +17,23 @@
 #include "../util/CustomerTimer.h"
 #include "../util/ChefTimer.h"
 
-#define SPRITE_X_POS _sprite.getPosition().x
-#define SPRITE_Y_POS _sprite.getPosition().y
-#define SPRITE_WIDTH (_sprite.getTextureRect().width * _sprite.getScale().x)
-#define SPRITE_HEIGHT (_sprite.getTextureRect().height * _sprite.getScale().y)
-
 using namespace sf;
 
 class SpriteClass {
 	public:
 		SpriteClass();
 	
-		void set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX = 0.1, float scaleY = 0.1);
+		void setSpriteUsingName(string name, float scaleX = 0.1, float scaleY = 0.1);
 		void positionSprite(float x, float y);
 	
 		// waitress and customer have different function bodies for these methods
 		// hence function being virtual
-		virtual void move();
 		virtual void moveUp();
 		virtual void moveDown();
 		virtual void moveLeft();
 		virtual void moveRight();
 	
-		void handleCollisionWithWindow();
-		bool handleCollisionWith(SpriteClass &object);
+		void handleCollisionWithWindow(SpriteClass &counter); // and counter
 	
 		float getXPos();
 		float getYPos();
@@ -48,15 +41,30 @@ class SpriteClass {
 		float getWidth();
 		float getHeight();
 	
+		float getXEndPos();
+		float getYEndPos();
+	
 		void render(RenderWindow &window);
 	
 	protected:
-		Image _image;
-		Texture _texture;
-		IntRect _cropRect;
 		Sprite _sprite;
 	
 		float _speed; // maybe good for future feature in speed variations
+	
+	private:
+		Image _image;
+		Texture _texture;
+		IntRect _cropRect;
+	
+		string _tempImageFile;
+	
+		int _tempCropX;
+		int _tempCropY;
+		int _tempCropW;
+		int _tempCropH;
+	
+		float _tempX;
+		float _tempY;
 };
 
 #endif /* defined(__MummyDiner__Sprite__) */

@@ -12,13 +12,17 @@ static ChefTimer chefTimerObject;
 static Thread chefThread(&ChefTimer::launchTimerThread, &chefTimerObject);
 
 Chef::Chef() {
-	_smoke.set("images/smoke.bmp", 500, 10, 300, 600, SCREEN_W - 50, SCREEN_H - 130);
-
+	_smoke.setSpriteUsingName("_smoke");
+	
 	getReadyToCook();
 }
 
 void Chef::startThread() {
 	chefThread.launch();
+}
+
+void Chef::stopThread() {
+	chefTimerObject.stopCounting();
 }
 
 // reset properties
@@ -32,20 +36,18 @@ void Chef::cook() {
 	chefTimerObject.startCounting();
 }
 
-void Chef::renderSmoke(RenderWindow &window) {
-	_smoke.render(window); // using SpriteClass render function FYI
-}
-
-void Chef::stopThread() {
-	chefTimerObject.stopCounting();
-}
-
 bool Chef::isDoneCooking() {
 	return chefTimerObject.hasReachedLimit();
 }
 
 bool Chef::isCooking() {
 	return _cooking;
+}
+
+void Chef::renderSmoke(RenderWindow &window) {
+	if (isCooking() && !isDoneCooking()) {
+		_smoke.render(window); // using SpriteClass render function FYI
+	}
 }
 
 int Chef::getTimeLeft() {

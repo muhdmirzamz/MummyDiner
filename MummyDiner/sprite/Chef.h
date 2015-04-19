@@ -18,13 +18,15 @@ class Chef: public SpriteClass {
 		Chef();
 	
 		void startThread();
+		void stopThread();
+	
 		void getReadyToCook();
 		void cook();
-		void renderSmoke(RenderWindow &window);
-		void stopThread();
 	
 		bool isDoneCooking();
 		bool isCooking();
+	
+		void renderSmoke(RenderWindow &window);
 	
 		int getTimeLeft();
 	

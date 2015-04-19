@@ -28,18 +28,25 @@ Customer::Customer() {
 	srand((int)time(NULL));
 	reset();
 	
-	// load images first to avoid rendering problems later
-	_orderPopup.set("images/customer_order_popup.bmp", 100, 30, 1100, 600, 0, 0);
-	_thanksPopup.set("images/customer_thanks_popup.bmp", 100, 30, 1100, 600, 0, 0);
-	_wrongOrderPopup.set("images/customer_wrong_order_popup.bmp", 100, 30, 1100, 600, 0, 0);
+	_customerSuccess = 0;
+	_customerFailure = 0;
 	
-	_food.set("images/food.bmp", 100, 30, 900, 600, 0, 0, 0.05, 0.05);
+	// load images first to avoid rendering problems later
+	_orderPopup.setSpriteUsingName("_orderPopup");
+	_thanksPopup.setSpriteUsingName("_thanksPopup");
+	_wrongOrderPopup.setSpriteUsingName("_wrongOrderPopup");
+	
+	_food.setSpriteUsingName("_food", 0.05, 0.05); // food on table
 	
 	_menuSystem.loadSpriteInPopup();
 }
 
 void Customer::startThread() {
 	customerThread.launch();
+}
+
+void Customer::stopThread() {
+	customerTimerObject.stopCounting();
 }
 
 void Customer::spawn() {
@@ -49,143 +56,69 @@ void Customer::spawn() {
 	_randomPosition = rand() % 4 + 1;
 	_randomFoodAndDrinks = rand() % 4 + 1;
 	
-	if (_randomPosition == _menuSystem.TOP_LEFT) {
-		positionSprite(_menuSystem.topLeftCoordinate.x, _menuSystem.topLeftCoordinate.y);
-		_orderPopup.positionSprite(POPUP_POS(_menuSystem.topLeftCoordinate.x, _menuSystem.topLeftCoordinate.y));
-		_thanksPopup.positionSprite(POPUP_POS(_menuSystem.topLeftCoordinate.x, _menuSystem.topLeftCoordinate.y));
-		_wrongOrderPopup.positionSprite(POPUP_POS(_menuSystem.topLeftCoordinate.x, _menuSystem.topLeftCoordinate.y));
-		
-		_food.positionSprite(FOOD_POS_LEFT_COLUMN(_menuSystem.topLeftCoordinate.x, _menuSystem.topLeftCoordinate.y));
-		
-		_menuSystem.positionSpriteInPopup(POPUP_POS(_menuSystem.topLeftCoordinate.x, _menuSystem.topLeftCoordinate.y));
-	}
+	int menuSystemEnumArr[] = {_menuSystem.TOP_LEFT, _menuSystem.TOP_RIGHT, _menuSystem.BOTTOM_LEFT, _menuSystem.BOTTOM_RIGHT};
+	int menuSystemXCoord[] = {_menuSystem.topLeftCoordinate.x, _menuSystem.topRightCoordinate.x, _menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomRightCoordinate.x};
+	int menuSystemYCoord[] = {_menuSystem.topLeftCoordinate.y, _menuSystem.topRightCoordinate.y, _menuSystem.bottomLeftCoordinate.y, _menuSystem.bottomRightCoordinate.y};
 	
-	if (_randomPosition == _menuSystem.TOP_RIGHT) {
-		positionSprite(_menuSystem.topRightCoordinate.x, _menuSystem.topRightCoordinate.y);
-		_orderPopup.positionSprite(POPUP_POS(_menuSystem.topRightCoordinate.x, _menuSystem.topRightCoordinate.y));
-		_thanksPopup.positionSprite(POPUP_POS(_menuSystem.topRightCoordinate.x, _menuSystem.topRightCoordinate.y));
-		_wrongOrderPopup.positionSprite(POPUP_POS(_menuSystem.topRightCoordinate.x, _menuSystem.topRightCoordinate.y));
-		
-		_food.positionSprite(FOOD_POS_RIGHT_COLUMN(_menuSystem.topRightCoordinate.x, _menuSystem.topRightCoordinate.y));
-		
-		_menuSystem.positionSpriteInPopup(POPUP_POS(_menuSystem.topRightCoordinate.x, _menuSystem.topRightCoordinate.y));
-	}
-	
-	if (_randomPosition == _menuSystem.BOTTOM_LEFT) {
-		positionSprite(_menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomLeftCoordinate.y);
-		_orderPopup.positionSprite(POPUP_POS(_menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomLeftCoordinate.y));
-		_thanksPopup.positionSprite(POPUP_POS(_menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomLeftCoordinate.y));
-		_wrongOrderPopup.positionSprite(POPUP_POS(_menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomLeftCoordinate.y));
-		
-		_food.positionSprite(FOOD_POS_LEFT_COLUMN(_menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomLeftCoordinate.y));
-		
-		_menuSystem.positionSpriteInPopup(POPUP_POS(_menuSystem.bottomLeftCoordinate.x, _menuSystem.bottomLeftCoordinate.y));
-	}
-	
-	if (_randomPosition == _menuSystem.BOTTOM_RIGHT) {
-		positionSprite(_menuSystem.bottomRightCoordinate.x, _menuSystem.bottomRightCoordinate.y);
-		_orderPopup.positionSprite(POPUP_POS(_menuSystem.bottomRightCoordinate.x, _menuSystem.bottomRightCoordinate.y));
-		_thanksPopup.positionSprite(POPUP_POS(_menuSystem.bottomRightCoordinate.x, _menuSystem.bottomRightCoordinate.y));
-		_wrongOrderPopup.positionSprite(POPUP_POS(_menuSystem.bottomRightCoordinate.x, _menuSystem.bottomRightCoordinate.y));
-		
-		_food.positionSprite(FOOD_POS_RIGHT_COLUMN(_menuSystem.bottomRightCoordinate.x, _menuSystem.bottomRightCoordinate.y));
-		
-		_menuSystem.positionSpriteInPopup(POPUP_POS(_menuSystem.bottomRightCoordinate.x, _menuSystem.bottomRightCoordinate.y));
+	for (int i = 0; i < 4; i++) {
+		if (_randomPosition == menuSystemEnumArr[i]) {
+			positionSprite(menuSystemXCoord[i], menuSystemYCoord[i]);
+			_orderPopup.positionSprite(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
+			_thanksPopup.positionSprite(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
+			_wrongOrderPopup.positionSprite(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
+			
+			_food.positionSprite(FOOD_POS_LEFT_COLUMN(menuSystemXCoord[i], menuSystemYCoord[i]));
+			
+			_menuSystem.positionSpriteInPopup(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
+			
+			break;
+		}
 	}
 }
 
 void Customer::move() {
 	_sprite.move(_customerSpeed, 0);
-}
-
-void Customer::moveLeft() {
-	_customerSpeed = -0.5;
-}
-
-void Customer::moveRight() {
-	_customerSpeed = 0.5;
-}
-
-void Customer::renderOrderPopup(RenderWindow &window) {
-	_orderPopup.render(window);
-}
-
-void Customer::renderFoodOrderPopup(RenderWindow &window) {
-	if (_randomFoodAndDrinks == _menuSystem.HAMBURGER) {
-		_menuSystem.renderFoodAndDrinks(_menuSystem.HAMBURGER, window);
+	
+	if (getXPos() <= 0) {
+		_customerSpeed = 0.5;
 	}
 	
-	if (_randomFoodAndDrinks == _menuSystem.FRIES) {
-		_menuSystem.renderFoodAndDrinks(_menuSystem.FRIES, window);
-	}
-	
-	if (_randomFoodAndDrinks == _menuSystem.CHOCOLATE_SMOOTHIE) {
-		_menuSystem.renderFoodAndDrinks(_menuSystem.CHOCOLATE_SMOOTHIE, window);
-	}
-	
-	if (_randomFoodAndDrinks == _menuSystem.LEMON_JUICE) {
-		_menuSystem.renderFoodAndDrinks(_menuSystem.LEMON_JUICE, window);
+	if (getXPos() + getWidth() >= SCREEN_W) {
+		_customerSpeed = -0.5;
 	}
 }
 
-void Customer::renderFood(RenderWindow &window) {
-	_food.render(window);
-}
-
-void Customer::renderThanksPopup(RenderWindow &window) {
-	_thanksPopup.render(window);
-}
-
-void Customer::setAsSuccessful() {
-	++_customerSuccess;
-}
-
-void Customer::setAsFailure() {
-	++_customerFailure;
-}
-
-void Customer::stopThread() {
-	customerTimerObject.stopCounting();
-}
-
-// use this to add more time
 void Customer::order() {
 	_ordered = true;
-}
-
-void Customer::resetForNewLevel() {
-	reset();
-	
-	_customerSuccess = 0;
-	_customerFailure = 0;
-}
-
-void Customer::addTime() {
-	customerTimerObject.addMoreTime();
-}
-
-void Customer::renderWrongOrderPopup(RenderWindow &window) {
-	_wrongOrderPopup.render(window);
-}
-
-void Customer::getServed() {
-	_foodServed = true;
-}
-
-bool Customer::timeIsUp() {
-	return customerTimerObject.hasReachedLimit();
 }
 
 bool Customer::orderIsTaken() {
 	return _ordered;
 }
 
+void Customer::getServed() {
+	_foodServed = true;
+}
+
 bool Customer::foodIsServed() {
 	return _foodServed;
 }
 
-bool Customer::timeIsAdded() {
-	return customerTimerObject.hasAddedTime();
+void Customer::setAsSuccessful() {
+	_correctOrder = true;
+	++_customerSuccess;
+}
+
+int Customer::getSuccessful() {
+	return _customerSuccess;
+}
+
+void Customer::setAsFailure() {
+	++_customerFailure;
+}
+
+int Customer::getFailure() {
+	return _customerFailure;
 }
 
 int Customer::getSpawnPosition() {
@@ -196,12 +129,44 @@ int Customer::getOrderedFoodItem() {
 	return _randomFoodAndDrinks;
 }
 
-int Customer::getSuccessful() {
-	return _customerSuccess;
+bool Customer::didGetCorrectFood(int foodCode) {
+	return (_randomFoodAndDrinks == foodCode);
 }
 
-int Customer::getFailure() {
-	return _customerFailure;
+void Customer::renderPopup(RenderWindow &window) {
+	if (!orderIsTaken()) {
+		_orderPopup.render(window);
+	} else {
+		if (foodIsServed()) {
+			if (_correctOrder) {
+				_food.render(window);
+				_thanksPopup.render(window);
+			} else {
+				_wrongOrderPopup.render(window);
+			}
+		} else {
+			int menuSystemPopupArr[] = {_menuSystem.HAMBURGER, _menuSystem.FRIES, _menuSystem.CHOCOLATE_SMOOTHIE, _menuSystem.LEMON_JUICE};
+			
+			for (int i = 0; i < 4; i++) {
+				if (_randomFoodAndDrinks == menuSystemPopupArr[i]) {
+					_menuSystem.renderFoodAndDrinks(menuSystemPopupArr[i], window);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Customer::addTime() {
+	customerTimerObject.addMoreTime();
+}
+
+bool Customer::timeIsAdded() {
+	return customerTimerObject.hasAddedTime();
+}
+
+bool Customer::timeIsUp() {
+	return customerTimerObject.hasReachedLimit();
 }
 
 int Customer::getTimeLeft() {
@@ -218,4 +183,5 @@ void Customer::reset() {
 
 	_ordered = false;
 	_foodServed = false;
+	_correctOrder = false; // this flag has no specific functions, used in this class only
 }

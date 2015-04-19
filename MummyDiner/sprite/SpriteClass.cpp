@@ -8,17 +8,37 @@
 
 #include "SpriteClass.h"
 
+#define SPRITE_X_POS _sprite.getPosition().x
+#define SPRITE_Y_POS _sprite.getPosition().y
+#define SPRITE_WIDTH (_sprite.getTextureRect().width * _sprite.getScale().x)
+#define SPRITE_HEIGHT (_sprite.getTextureRect().height * _sprite.getScale().y)
+
 SpriteClass::SpriteClass() {
 
 }
 
-// coordinates in float
-// special case scenario since it is declared at the library level
-void SpriteClass::set(const char *file, int cropX, int cropY, int cropW, int cropH, float x, float y, float scaleX, float scaleY) {
+void SpriteClass::setSpriteUsingName(string name, float scaleX, float scaleY) {
+	fstream _file;
+	
+	string line;
+	
+	_file.open("text_files/sprite_class.txt", ios::in);
+	
+	while (getline(_file, line)) {
+		_file >> line;
+	
+		if (line == name) {
+			_file >> _tempImageFile >> _tempCropX >> _tempCropY >> _tempCropW >> _tempCropH >> _tempX >> _tempY;
+			break;
+		}
+	}
+	
+	_file.close();
+	
 	_speed = 1;
-
+	
 	// load file into image
-	_image.loadFromFile(file);
+	_image.loadFromFile(_tempImageFile);
 	_image.createMaskFromColor(Color(255, 255, 255));
 	
 	// load image into texture
@@ -28,24 +48,20 @@ void SpriteClass::set(const char *file, int cropX, int cropY, int cropW, int cro
 	_sprite.setTexture(_texture);
 	
 	// crop and scale sprite using rectangle
-	_cropRect.left = cropX;
-	_cropRect.top = cropY;
-	_cropRect.width = cropW;
-	_cropRect.height = cropH;
+	_cropRect.left = _tempCropX;
+	_cropRect.top = _tempCropY;
+	_cropRect.width = _tempCropW;
+	_cropRect.height = _tempCropH;
 	_sprite.scale(scaleX, scaleY); // use default perimeters for sprites which does not use 0.1 as scale(in header)
 	
 	// apply rectangle to texture
 	_sprite.setTextureRect(_cropRect);
 	
-	_sprite.setPosition(x, y);
+	_sprite.setPosition(_tempX, _tempY);
 }
 
 void SpriteClass::positionSprite(float x, float y) {
 	_sprite.setPosition(x, y);
-}
-
-void SpriteClass::move() {
-	
 }
 
 void SpriteClass::moveUp() {
@@ -64,37 +80,23 @@ void SpriteClass::moveRight() {
 	
 }
 
-void SpriteClass::handleCollisionWithWindow() {
+void SpriteClass::handleCollisionWithWindow(SpriteClass &counter) {
 	if (SPRITE_X_POS + SPRITE_WIDTH >= SCREEN_W) {
-		// make sure sprite stays in frame
-		//positionSprite(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
 		_sprite.setPosition(SCREEN_W - SPRITE_WIDTH, SPRITE_Y_POS);
 	}
 	
 	if (SPRITE_X_POS <= 0) {
-		//positionSprite(0, SPRITE_Y_POS);
 		_sprite.setPosition(0, SPRITE_Y_POS);
 	}
 	
 	if (SPRITE_Y_POS <= 0) {
-		//positionSprite(SPRITE_X_POS, 0);
 		_sprite.setPosition(SPRITE_X_POS, 0);
 	}
 	
-	if (SPRITE_Y_POS + SPRITE_HEIGHT >= SCREEN_H) {
-		//positionSprite(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
-		_sprite.setPosition(SPRITE_X_POS, SCREEN_H - SPRITE_HEIGHT);
+	// window height limit is the counter
+	if (SPRITE_Y_POS + SPRITE_HEIGHT >= counter.getYPos()) {
+		_sprite.setPosition(SPRITE_X_POS, counter.getYPos() - SPRITE_HEIGHT);
 	}
-}
-
-bool SpriteClass::handleCollisionWith(SpriteClass &object) {
-	if (SPRITE_Y_POS + SPRITE_HEIGHT >= object.getYPos()) {
-		//positionSprite(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
-		_sprite.setPosition(SPRITE_X_POS, object.getYPos() - SPRITE_HEIGHT);
-		return true;
-	}
-	
-	return false;
 }
 
 float SpriteClass::getXPos() {
@@ -113,6 +115,14 @@ float SpriteClass::getWidth() {
 
 float SpriteClass::getHeight() {
 	return _sprite.getTextureRect().height * _sprite.getScale().y;
+}
+
+float SpriteClass::getXEndPos() {
+	return _sprite.getPosition().x + (_sprite.getTextureRect().width * _sprite.getScale().x);
+}
+
+float SpriteClass::getYEndPos() {
+	return _sprite.getPosition().y + (_sprite.getTextureRect().height * _sprite.getScale().y);
 }
 
 void SpriteClass::render(RenderWindow &window) {

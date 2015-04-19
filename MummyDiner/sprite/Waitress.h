@@ -10,47 +10,48 @@
 #define __MummyDiner__Waitress__
 
 #include "SpriteClass.h"
-#include "Chef.h"
+#include "Customer.h"
+#include "../gui/BackgroundClass.h"
 
 class Waitress: public SpriteClass {
 	public:
 		Waitress();
 	
-		void move();
+		void serveANewCustomer();
+	
+		void move(int mouseXClick, int mouseYClick);
+	
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		void stop();
 	
 		bool isMovingUp();
 		bool isMovingDown();
 		bool isMovingRight();
 		bool isMovingLeft();
 	
-		bool handleCollisionWith(SpriteClass *customer);
-	
-		void pickOrderFromMenu();
-		bool hasPickedOrderFromMenu();
-		void setCorrectOrderFlag();
-		bool gotCorrectOrder();
-		
-		bool hasTakenFoodFromCounter();
+		void stop();
 	
 		void takeFoodFromCounter();
-		void serveANewCustomer();
+		bool hasTakenFoodFromCounter();
+		void pickOrderFromMenu(Customer &customer, MenuSystem &menuSystem, int mouseXClick, int mouseYClick);
+		bool hasPickedOrderFromMenu();
+	
+		bool handleCollisionWith(Customer &customer);
+		bool isInBackground(BackgroundClass &background);
+		void interactWithCustomerAtTable(Customer &customer, MenuSystem &menuSystem, BackgroundClass backgroundArr[]);
 	
 	private:
+		void executeCustomerMechanism(Customer &customer, MenuSystem &menuSystem);
+	
+		bool _foodTakenFromCounter;
+		bool _pickedOrderFromMenu;
+	
 		bool _movingLeft;
 		bool _movingRight;
 		bool _movingUp;
 		bool _movingDown;
-	
-		bool _foodTakenFromCounter;
-		bool _pickedOrderFromMenu;
-		bool _correctOrderFromMenu;
-	
-		Chef _chef;
 };
 
 #endif /* defined(__MummyDiner__Waitress__) */
