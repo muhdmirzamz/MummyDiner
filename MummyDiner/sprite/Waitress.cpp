@@ -12,17 +12,42 @@ Waitress::Waitress() {
 	serveANewCustomer();
 }
 
-bool Waitress::hasTakenFoodFromCounter() {
-	return _foodTakenFromCounter;
+// resets properties
+void Waitress::serveANewCustomer() {
+	_foodTakenFromCounter = false;
+	_pickedOrderFromMenu = false;
+	
+	_movingUp = false;
+	_movingDown = false;
+	_movingLeft = false;
+	_movingRight = false;
 }
 
-void Waitress::move() {
-	if (_movingUp || _movingDown) {
-		_sprite.move(0, _speed);
-	}
-	
-	if (_movingLeft || _movingRight) {
-		_sprite.move(_speed, 0);
+void Waitress::move(int mouseXClick, int mouseYClick) {
+	if (Utility::keyboardIsUsed) {
+		if (_movingUp || _movingDown) {
+			_sprite.move(0, _speed);
+		}
+		
+		if (_movingLeft || _movingRight) {
+			_sprite.move(_speed, 0);
+		}
+	} else {
+		if (getXPos() >= mouseXClick) {
+			_sprite.move(-_speed, 0);
+		}
+		
+		if (getXPos() <= mouseXClick) {
+			_sprite.move(_speed, 0);
+		}
+		
+		if (getYPos() >= mouseYClick) {
+			_sprite.move(0, -_speed);
+		}
+		
+		if (getYPos() <= mouseYClick) {
+			_sprite.move(0, _speed);
+		}
 	}
 }
 
@@ -32,10 +57,8 @@ void Waitress::moveUp() {
 		_movingUp = true;
 		_movingRight = false;
 		_movingLeft = false;
-	
+		
 		_speed = -1;
-	} else {
-		_sprite.move(0, -_speed);
 	}
 }
 
@@ -47,8 +70,6 @@ void Waitress::moveDown() {
 		_movingLeft = false;
 		
 		_speed = 1;
-	} else {
-		_sprite.move(0, _speed);
 	}
 }
 
@@ -60,8 +81,6 @@ void Waitress::moveLeft() {
 		_movingRight = false;
 		
 		_speed = -1;
-	} else {
-		_sprite.move(-_speed, 0);
 	}
 }
 
@@ -73,39 +92,7 @@ void Waitress::moveRight() {
 		_movingLeft = false;
 		
 		_speed = 1;
-	} else {
-		_sprite.move(_speed, 0);
 	}
-}
-
-void Waitress::stop() {
-	_speed = 0;
-}
-
-bool Waitress::handleCollisionWith(SpriteClass *customer) {
-	if (getXPos() + getWidth() >= customer->getXPos() && getXPos() <= customer->getXPos() + customer->getWidth()) {
-		if (getYPos() + getHeight() >= customer->getYPos() && getYPos() <= customer->getYPos() + customer->getHeight()) {
-			return true;
-		}
-	}
-	
-	return false;
-}
-
-void Waitress::pickOrderFromMenu() {
-	_pickedOrderFromMenu = true;
-}
-
-bool Waitress::hasPickedOrderFromMenu() {
-	return _pickedOrderFromMenu;
-}
-
-void Waitress::setCorrectOrderFlag() {
-	_correctOrderFromMenu = true;
-}
-
-bool Waitress::gotCorrectOrder() {
-	return _correctOrderFromMenu;
 }
 
 bool Waitress::isMovingUp() {
@@ -124,20 +111,77 @@ bool Waitress::isMovingLeft() {
 	return _movingLeft;
 }
 
+void Waitress::stop() {
+	_speed = 0;
+}
+
 void Waitress::takeFoodFromCounter() {
 	_foodTakenFromCounter = true;
 }
 
-// another way of declaring a function that resets properties
-// did not want to make a virtual reset() function
-// it will just mess things up
-void Waitress::serveANewCustomer() {
-	_foodTakenFromCounter = false;
-	_pickedOrderFromMenu = false;
-	_correctOrderFromMenu = false;
+bool Waitress::hasTakenFoodFromCounter() {
+	return _foodTakenFromCounter;
+}
+
+void Waitress::pickOrderFromMenu(Customer &customer, MenuSystem &menuSystem, int mouseXClick, int mouseYClick) {
+	if (customer.orderIsTaken() && !hasPickedOrderFromMenu()) {
+		if (menuSystem.itemIsChosen(mouseXClick, mouseYClick)) {
+			_pickedOrderFromMenu = true;
+		}
+	}
+}
+
+bool Waitress::hasPickedOrderFromMenu() {
+	return _pickedOrderFromMenu;
+}
+
+bool Waitress::handleCollisionWith(Customer &customer) {
+	if (getXEndPos() >= customer.getXPos() && getXPos() <= customer.getXEndPos()) {
+		if (getYEndPos() >= customer.getYPos() && getYPos() <= customer.getYEndPos()) {
+			return true;
+		}
+	}
 	
-	_movingUp = false;
-	_movingDown = false;
-	_movingLeft = false;
-	_movingRight = false;
+	return false;
+}
+
+bool Waitress::isInBackground(BackgroundClass &background) {
+	if (getXEndPos() >= background.getX() && getXPos() <= background.getXEndPoint()) {
+		if (getYEndPos() >= background.getY() && getYPos() <= background.getYEndPoint()) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+void Waitress::interactWithCustomerAtTable(Customer &customer, MenuSystem &menuSystem, BackgroundClass backgroundArr[]) {
+	int coord[] = {menuSystem.TOP_LEFT, menuSystem.TOP_RIGHT, menuSystem.BOTTOM_LEFT, menuSystem.BOTTOM_RIGHT};
+	
+	for (int i = 0; i < 4; i++) { // remember background has five elements but only first four is needed
+		if (isInBackground(backgroundArr[i])) {
+			if (customer.getSpawnPosition() == coord[i]) {
+				executeCustomerMechanism(customer, menuSystem);
+				break;
+			}
+		}
+	}
+}
+
+void Waitress::executeCustomerMechanism(Customer &customer, MenuSystem &menuSystem) {
+	if (customer.orderIsTaken()) {
+		if (hasTakenFoodFromCounter()) {
+			if (!customer.foodIsServed()) {
+				customer.getServed();
+				
+				if (customer.getOrderedFoodItem() == menuSystem.getFoodCode()) {
+					customer.setAsSuccessful();
+				} else {
+					customer.setAsFailure();
+				}
+			}
+		}
+	} else {
+		customer.order();
+	}
 }

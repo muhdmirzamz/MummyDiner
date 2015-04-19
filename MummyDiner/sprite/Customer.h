@@ -17,48 +17,44 @@ class Customer: public SpriteClass {
 		Customer();
 	
 		void startThread();
+		void stopThread();
 		void spawn();
 	
 		void move();
-		void moveLeft();
-		void moveRight();
 	
-		void renderOrderPopup(RenderWindow &window);
-		void renderFoodOrderPopup(RenderWindow &window);
-		void addTime();
-		void renderWrongOrderPopup(RenderWindow &window);
-		void getServed();
-		void renderFood(RenderWindow &window);
-		void renderThanksPopup(RenderWindow &window);
-		void setAsSuccessful();
-		void setAsFailure();
-		void stopThread();
-	
-		bool timeIsUp();
+		void order();
 		bool orderIsTaken();
+	
+		void getServed();
 		bool foodIsServed();
-		bool timeIsAdded();
+	
+		void setAsSuccessful();
+		int getSuccessful();
+		void setAsFailure();
+		int getFailure();
 	
 		int getSpawnPosition();
 		int getOrderedFoodItem();
+		bool didGetCorrectFood(int foodCode);
 	
-		int getSuccessful();
-		int getFailure();
+		void renderPopup(RenderWindow &window);
+	
+		void addTime();
+		bool timeIsAdded();
+		bool timeIsUp();
 	
 		int getTimeLeft();
 		int getTimeLimit();
 	
-		void order();
-	
-		void resetForNewLevel();
-	
 	private:
 		void reset();
-	
-		float _customerSpeed;
 
 		bool _ordered;
 		bool _foodServed;
+		bool _correctOrder;
+	
+		int _customerSuccess;
+		int _customerFailure;
 	
 		SpriteClass _food;
 	
@@ -68,11 +64,9 @@ class Customer: public SpriteClass {
 	
 		MenuSystem _menuSystem;
 	
+		float _customerSpeed;
 		int _randomPosition;
 		int _randomFoodAndDrinks;
-	
-		int _customerSuccess;
-		int _customerFailure;
 };
 
 #endif /* defined(__MummyDiner__Customer__) */

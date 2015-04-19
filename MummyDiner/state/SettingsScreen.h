@@ -18,7 +18,8 @@ class SettingsScreen: public GameState {
 		void handleEvent();
 		void update();
 		void render();
-	
+		void cleanupSettingsScreen(int state);
+
 	private:
 		ButtonClass _backToMainMenuButton;
 	

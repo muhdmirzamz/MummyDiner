@@ -6,52 +6,52 @@
 //  Copyright (c) 2015 Muhd Mirza. All rights reserved.
 //
 
-#include "ModeMenu.h"
+#include "ModeMenuScreen.h"
 
-ModeMenu::ModeMenu() {
-	_modeMenuTitle.setTextUsingName("_modeMenuTitle", "Mode Select Menu");
+ModeMenuScreen::ModeMenuScreen() {
+	_modeMenuScreenTitle.setTextUsingName("_modeMenuScreenTitle", "Mode Select Menu");
 
 	_normalModeButton.setButtonUsingName("_normalMode", "Normal");
 	_practiceModeButton.setButtonUsingName("_practiceMode", "Practice");
 }
 
-void ModeMenu::handleEvent() {
+void ModeMenuScreen::handleEvent() {
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
-			cleanup();
-			
-			setState(EXIT);
+			cleanupModeMenuScreen(EXIT);
 		}
 		
 		if (event.type == event.MouseButtonPressed) {
 			if (_normalModeButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				cleanup();
-			
 				LevelScreen::normalMode = true;
 				
-				setState(LEVEL);
+				cleanupModeMenuScreen(LEVEL);
 			}
 			
 			if (_practiceModeButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				cleanup();
-				
 				LevelScreen::normalMode = false;
 				
-				setState(LEVEL);
+				cleanupModeMenuScreen(LEVEL);
 			}
 		}
 	}
 }
 
-void ModeMenu::update() {
+void ModeMenuScreen::update() {
 	window.clear(color.White);
 }
 
-void ModeMenu::render() {
-	_modeMenuTitle.render(window);
+void ModeMenuScreen::render() {
+	_modeMenuScreenTitle.render(window);
 
 	_normalModeButton.render(window);
 	_practiceModeButton.render(window);
 
 	window.display();
+}
+
+void ModeMenuScreen::cleanupModeMenuScreen(int state) {
+	cleanup();
+	
+	setState(state);
 }

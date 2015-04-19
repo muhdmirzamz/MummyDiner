@@ -12,7 +12,7 @@
 
 // game state class already included 
 #include "state/MainMenuScreen.h"
-#include "state/ModeMenu.h"
+#include "state/ModeMenuScreen.h"
 #include "state/HowToPlayScreen.h"
 #include "state/SettingsScreen.h"
 #include "state/LevelScreen.h"
@@ -46,7 +46,7 @@ int main(int argc, const char * argv[]) {
 					}
 					
 					case MODE_MENU: {
-						gameState = new ModeMenu();
+						gameState = new ModeMenuScreen();
 						break;
 					}
 				
@@ -67,7 +67,6 @@ int main(int argc, const char * argv[]) {
 					
 					case GAME_OVER: {
 						gameState = new GameOverScreen();
-						gameState->createWindow(); // see GameState class for more info on this function
 						break;
 					}
 						

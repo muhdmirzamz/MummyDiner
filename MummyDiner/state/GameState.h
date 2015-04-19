@@ -20,7 +20,7 @@
 
 // each of these classes includes the SpriteClass class, debug class and timer class
 #include "../sprite/Waitress.h"
-#include "../sprite/Customer.h" // includes menu system class
+#include "../sprite/Customer.h" // includes menu system
 #include "../sprite/Chef.h"
 
 #define MOUSE_X event.mouseMove.x
@@ -43,8 +43,6 @@ class GameState {
 	public:
 		GameState();
 		virtual ~GameState();
-	
-		virtual void createWindow();
 	
 		void setState(int state);
 		int getState();

@@ -24,6 +24,7 @@ class LevelScreen: public GameState {
 		void checkCollision();
 		void update();
 		void render();
+		void cleanupLevelScreen(int state);
 	
 	private:
 		SpriteClass *_waitress;
@@ -48,6 +49,7 @@ class LevelScreen: public GameState {
 		SpriteClass _counter;
 		SpriteClass _stove;
 	
+		BackgroundClass _backgroundArr[5];
 		BackgroundClass _topLeftBackground;
 		BackgroundClass _topRightBackground;
 		BackgroundClass _bottomLeftBackground;

@@ -2,8 +2,8 @@ variable              font file                       r     g   b     textR    t
 _startButton          fonts/Quicksand-Regular.ttf     0   255   0     0        0        0        12                140   400   100  100
 _howToPlayButton      fonts/Quicksand-Regular.ttf     0   255   0     0        0        0        12                350   400   100  100 
 _settingsButton       fonts/Quicksand-Regular.ttf     0   255   0     0        0        0        12                550   400   100  100
-_normalMode           fonts/Quicksand-Regular.ttf     0   100   0     255      255      255      12                180   300   200  100
-_practiceMode         fonts/Quicksand-Regular.ttf     0   100   0     255      255      255      12                500   300   200  100
+_normalMode           fonts/Quicksand-Regular.ttf     0   0     100   255      255      255      18                120   300   200  100
+_practiceMode         fonts/Quicksand-Regular.ttf     0   0     100   255      255      255      18                500   300   200  100
 _nextButton           fonts/Quicksand-Regular.ttf     255 255   255   0        0        0        12                700   300   100  50
 _prevButton           fonts/Quicksand-Regular.ttf     255 255   255   0        0        0        12                0     300   100  50
 _backButton           fonts/Quicksand-Regular.ttf     0   150   255   0        0        0        12                10    10    150  80

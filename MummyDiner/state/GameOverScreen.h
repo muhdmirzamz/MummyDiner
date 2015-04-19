@@ -15,14 +15,15 @@
 
 class GameOverScreen: public GameState {
 	public:
+		static bool success;
+		static bool neutral;
+	
 		GameOverScreen();
 		
 		void handleEvent();
 		void update();
 		void render();
-	
-		static bool success;
-		static bool neutral;
+		void cleanupGameOverScreen(int state);
 	
 	private:
 		BackgroundClass _successGameOverBackground;

@@ -20,16 +20,12 @@ SettingsScreen::SettingsScreen() {
 void SettingsScreen::handleEvent() {
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
-			cleanup();
-			
-			setState(EXIT);
+			cleanupSettingsScreen(EXIT);
 		}
 		
 		if (event.type == event.MouseButtonPressed) {
 			if (_backToMainMenuButton.isClicked(MOUSE_X_CLICK, MOUSE_Y_CLICK)) {
-				cleanup();
-				
-				setState(MAIN_MENU);
+				cleanupSettingsScreen(MAIN_MENU);
 			}
 			
 			_debugToggle.checkToggle(MOUSE_X_CLICK, MOUSE_Y_CLICK, ToggleClass::DEBUG_TOGGLE);
@@ -62,4 +58,10 @@ void SettingsScreen::render() {
 	_controlToggle.render(window);
 
 	window.display();
+}
+
+void SettingsScreen::cleanupSettingsScreen(int state) {
+	cleanup();
+	
+	setState(state);
 }

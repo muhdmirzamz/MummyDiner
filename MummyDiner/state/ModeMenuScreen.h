@@ -14,16 +14,17 @@
 #include "GameState.h"
 #include "LevelScreen.h"
 
-class ModeMenu: public GameState {
+class ModeMenuScreen: public GameState {
 	public:
-		ModeMenu();
+		ModeMenuScreen();
 	
 		void handleEvent();
 		void update();
 		void render();
+		void cleanupModeMenuScreen(int state);
 	
 	private:
-		TextClass _modeMenuTitle;
+		TextClass _modeMenuScreenTitle;
 	
 		ButtonClass _normalModeButton;
 		ButtonClass _practiceModeButton;
