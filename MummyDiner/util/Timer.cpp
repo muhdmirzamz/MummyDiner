@@ -16,28 +16,16 @@ void Timer::startCounting() {
 
 }
 
+void Timer::stopCounting() {
+	_stillLooping = false;
+}
+
 void Timer::restart() {
 
 }
 
-void Timer::addMoreTime() {
-
-}
-
-void Timer::stopCounting() {
-
-}
-
-void Timer::launchTimerThread() {
-	
-}
-
 bool Timer::hasReachedLimit() {
-	return false;
-}
-
-bool Timer::hasAddedTime() {
-	return false;
+	return _timerHasReachedLimit;
 }
 
 int Timer::getClockTime() {
@@ -45,5 +33,5 @@ int Timer::getClockTime() {
 }
 
 int Timer::getLimit() {
-	return 0;
+	return _timeLimit;
 }

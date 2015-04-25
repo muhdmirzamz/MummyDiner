@@ -18,12 +18,8 @@ class LevelTimer: public Timer {
 		LevelTimer();
 	
 		void startCounting();
-		void stopCounting();
-	
-		bool hasReachedLimit();
 	
 		int getClockTime();
-		int getLimit();
 };
 
 #endif /* defined(__MummyDiner__LevelTimer__) */

@@ -30,18 +30,6 @@ void LevelTimer::startCounting() {
 	}
 }
 
-void LevelTimer::stopCounting() {
-	_stillLooping = false;
-}
-
-bool LevelTimer::hasReachedLimit() {
-	return _timerHasReachedLimit;
-}
-
 int LevelTimer::getClockTime() {
 	return _timeLimit - _clock.getElapsedTime().asMilliseconds();
-}
-
-int LevelTimer::getLimit() {
-	return _timeLimit;
 }
