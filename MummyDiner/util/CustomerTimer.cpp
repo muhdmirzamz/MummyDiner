@@ -25,6 +25,8 @@ void CustomerTimer::startCounting() {
 		} else {
 			_timerHasReachedLimit = false;
 			
+			
+			printf("Time: %d && Time Limit: %d\n", _timeLimit - _clock.getElapsedTime().asMilliseconds(), _timeLimit);
 			// need more time?
 			// have you added more time?
 			
@@ -37,9 +39,9 @@ void CustomerTimer::startCounting() {
 			// _addedTime = true
 			if (_needTime) {
 				// might want to add a variable for 5000, depending on difficulty level
-				_timeLimit = (_timeLimit - _clock.getElapsedTime().asMilliseconds()) + 5000;
+				_timeLimit += 5000;
 				_needTime = false;
-				_addedTime = true; // signals to level class that time has been added to avoid multiple adding
+				_addedTime = true; // to avoid multiple increases
 			}
 		}
 	}
@@ -56,30 +58,16 @@ void CustomerTimer::restart() {
 }
 
 // opens up the flags to enable adding of time
-// the only two flags that do not require a new customer to be switched back and forth
 void CustomerTimer::addMoreTime() {
 	_needTime = true;
 	_addedTime = false;
 }
 
-void CustomerTimer::stopCounting() {
-	_stillLooping = false;
-}
-
-bool CustomerTimer::hasReachedLimit() {
-	return _timerHasReachedLimit;
-}
-
-// entry point
-// check if time has been increased to avoid multiple increases - this is a key variable
+// check if time has been increased to avoid multiple increases
 bool CustomerTimer::hasAddedTime() {
 	return _addedTime;
 }
 
 int CustomerTimer::getClockTime() {
 	return _timeLimit - _clock.getElapsedTime().asMilliseconds();
-}
-
-int CustomerTimer::getLimit() {
-	return _timeLimit;
 }

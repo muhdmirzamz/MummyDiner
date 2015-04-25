@@ -21,13 +21,9 @@ class CustomerTimer: public Timer {
 		void restart();
 		
 		void addMoreTime();
-		void stopCounting();
-		
-		bool hasReachedLimit();
 		bool hasAddedTime();
 		
 		int getClockTime();
-		int getLimit();
 	
 	private:
 		bool _needTime;

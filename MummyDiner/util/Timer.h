@@ -20,18 +20,13 @@ class Timer {
 		Timer();
 	
 		virtual void startCounting();
+		void stopCounting();
 		virtual void restart();
 	
-		virtual void addMoreTime();
-		virtual void stopCounting();
-	
-		virtual void launchTimerThread();
-	
-		virtual bool hasReachedLimit();
-		virtual bool hasAddedTime();
+		bool hasReachedLimit();
 	
 		virtual int getClockTime();
-		virtual int getLimit();
+		int getLimit();
 		
 	protected:	
 		Clock _clock;

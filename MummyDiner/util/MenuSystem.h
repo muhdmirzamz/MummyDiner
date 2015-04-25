@@ -12,14 +12,7 @@
 #include <stdio.h>
 
 #include "../sprite/SpriteClass.h"
-#include "../gui/BackgroundClass.h" 
-
-// macros here since both menu system and customer class use them
-#define POPUP_POS(X_POS, Y_POS) X_POS + 50, Y_POS - 50
-#define FOOD_POS_LEFT_COLUMN(X_POS, Y_POS) X_POS - 50, Y_POS // different positions because of scaling
-#define FOOD_POS_RIGHT_COLUMN(X_POS, Y_POS) X_POS - 50, Y_POS
-
-#define MENU_ITEM_Y_POS SCREEN_H - 80 // all menu items are at the same y pos as the menu background
+#include "../gui/BackgroundClass.h"
 
 class MenuSystem {
 	public:

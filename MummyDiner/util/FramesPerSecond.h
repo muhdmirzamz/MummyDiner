@@ -13,37 +13,28 @@
 
 #include <SFML/System.hpp>
 
+#include "Timer.h"
+
 using namespace sf;
 
-class FramesPerSecond {
+class FramesPerSecond: public Timer {
 	public:
 		FramesPerSecond();
 	
 		void startCounting();
-		void stopCounting();
 	
-		void hasReachedStartOfFrame();
-		void hasReachedEndOfFrame();
+		void setFrameStartPoint();
+		void setFrameEndPoint();
 	
 		float getFPS();
 	
 	private:
-		void calculateStartTime();
-		void calculateEndTime();
-		void incrementFrames();
-		void calculateFPS();
-		void capFPS();
-	
-		int _stillLooping;
-		Clock _clock;
-	
 		float _frames;
+		
 		Time _startTime;
 		Time _endTime;
 	
 		bool _endOfFrameReached;
-	
-		Mutex _mutex;
 };
 
 #endif /* defined(__MummyDiner__FramesPerSecond__) */

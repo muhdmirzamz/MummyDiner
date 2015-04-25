@@ -8,7 +8,6 @@
 
 #include "FramesPerSecond.h"
 
-// declare this as static and not a private class member
 // threads dont handle well with private class member outside of threads
 // values dont change even if references are used
 static float fps;
@@ -26,55 +25,38 @@ void FramesPerSecond::startCounting() {
 		// let this run
 		// putting an if statement on this causes FPS to go haywire
 		// issue fixed
-		calculateStartTime();
+		
+		// calculate time, reference for start time
+		_startTime = _clock.getElapsedTime();
 		
 		if (_endOfFrameReached) {
-			calculateEndTime();
+			// calculate end time
+			_endTime = _clock.getElapsedTime();
 			
-			incrementFrames();
-			calculateFPS();
-			capFPS();
+			// increment frames
+			++_frames;
+			
+			// calculate fps
+			fps = _frames / (_clock.getElapsedTime().asMilliseconds() / 1000);
+			
+			// if frame finishes early, cap fps
+			if ((_endTime.asMilliseconds() - _startTime.asMilliseconds()) < (1000 / 60)) {
+				sleep(milliseconds((1000 / 60) - (_endTime.asMilliseconds() - _startTime.asMilliseconds())));
+			}
 		}
 	}
 }
 
-void FramesPerSecond::stopCounting() {
-	_stillLooping = false;
-}
-
 // using one private variable for two functions
 // to determine if the start and/or end of the frame is reached
-void FramesPerSecond::hasReachedStartOfFrame() {
+void FramesPerSecond::setFrameStartPoint() {
 	_endOfFrameReached = false;
 }
 
-void FramesPerSecond::hasReachedEndOfFrame() {
+void FramesPerSecond::setFrameEndPoint() {
 	_endOfFrameReached = true;
 }
 
 float FramesPerSecond::getFPS(){
 	return fps;
-}
-
-void FramesPerSecond::calculateStartTime() {
-	_startTime = _clock.getElapsedTime();
-}
-
-void FramesPerSecond::calculateEndTime() {
-	_endTime = _clock.getElapsedTime();
-}
-
-void FramesPerSecond::incrementFrames() {
-	++_frames;
-}
-
-void FramesPerSecond::calculateFPS() {
-	fps = _frames / (_clock.getElapsedTime().asMilliseconds() / 1000);
-}
-
-void FramesPerSecond::capFPS() {
-	// if frame finishes early
-	if ((_endTime.asMilliseconds() - _startTime.asMilliseconds()) < (1000 / 60)) {
-		sleep(milliseconds((1000 / 60) - (_endTime.asMilliseconds() - _startTime.asMilliseconds())));
-	}
 }

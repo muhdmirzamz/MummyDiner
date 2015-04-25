@@ -11,6 +11,7 @@
 
 #include "SpriteClass.h"
 #include "Customer.h"
+#include "Chef.h"
 #include "../gui/BackgroundClass.h"
 
 class Waitress: public SpriteClass {
@@ -33,7 +34,7 @@ class Waitress: public SpriteClass {
 	
 		void stop();
 	
-		void takeFoodFromCounter();
+		void takeFoodFromCounter(Chef &chef);
 		bool hasTakenFoodFromCounter();
 		void pickOrderFromMenu(Customer &customer, MenuSystem &menuSystem, int mouseXClick, int mouseYClick);
 		bool hasPickedOrderFromMenu();

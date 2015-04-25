@@ -19,12 +19,8 @@ class ChefTimer: public Timer {
 	
 		void launchTimerThread();
 		void startCounting();
-		void stopCounting();
-		
-		bool hasReachedLimit();
 		
 		int getClockTime();
-		int getLimit();
 	
 		void restart();
 	

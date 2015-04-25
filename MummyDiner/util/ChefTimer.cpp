@@ -14,6 +14,12 @@ ChefTimer::ChefTimer() {
 	restart();
 }
 
+// reason for this function
+// chef sprite is unlike any other
+// they dont start counting straight away
+// they wait for the input from other sprites
+// example: they wait for waitress to give them the orders
+//			before cooking, which starts the timer
 void ChefTimer::launchTimerThread() {
 	Lock lock(_mutex);
 	
@@ -32,25 +38,16 @@ void ChefTimer::launchTimerThread() {
 	}
 }
 
+// this function does things different from the other sprite classes
+// simply because of the launchTimerThread function
+// and the nature of the chef sprite
 void ChefTimer::startCounting() {
 	_clock.restart();
 	_timerIsStarted = true; // start the actual counting
 }
 
-void ChefTimer::stopCounting() {
-	_stillLooping = false; // stop the whole thread
-}
-
-bool ChefTimer::hasReachedLimit() {
-	return _timerHasReachedLimit;
-}
-
 int ChefTimer::getClockTime() {
 	return (int)_clock.getElapsedTime().asMilliseconds();
-}
-
-int ChefTimer::getLimit() {
-	return _timeLimit;
 }
 
 void ChefTimer::restart() {
