@@ -8,8 +8,13 @@
 
 #include "Customer.h"
 
-static CustomerTimer customerTimerObject;
-static Thread customerThread(&CustomerTimer::startCounting, &customerTimerObject);
+// macros here since both menu system and customer class use them
+#define POPUP_POS(X_POS, Y_POS) X_POS + 50, Y_POS - 50
+#define FOOD_POS(X_POS, Y_POS) X_POS - 50, Y_POS // different positions because of scaling
+
+static CustomerTimer customerTimer;
+static Timer *customerTimerPointer = &customerTimer;
+static Thread customerThread(&CustomerTimer::startCounting, &customerTimer);
 
 /*
 	Treat this customer class as a "wrapper" class 
@@ -46,11 +51,11 @@ void Customer::startThread() {
 }
 
 void Customer::stopThread() {
-	customerTimerObject.stopCounting();
+	customerTimerPointer->stopCounting();
 }
 
 void Customer::spawn() {
-	customerTimerObject.restart();
+	customerTimer.restart();
 	reset();
 	
 	_randomPosition = rand() % 4 + 1;
@@ -67,7 +72,7 @@ void Customer::spawn() {
 			_thanksPopup.positionSprite(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
 			_wrongOrderPopup.positionSprite(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
 			
-			_food.positionSprite(FOOD_POS_LEFT_COLUMN(menuSystemXCoord[i], menuSystemYCoord[i]));
+			_food.positionSprite(FOOD_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
 			
 			_menuSystem.positionSpriteInPopup(POPUP_POS(menuSystemXCoord[i], menuSystemYCoord[i]));
 			
@@ -83,7 +88,7 @@ void Customer::move() {
 		_customerSpeed = 0.5;
 	}
 	
-	if (getXPos() + getWidth() >= SCREEN_W) {
+	if (getXEndPos() >= SCREEN_W) {
 		_customerSpeed = -0.5;
 	}
 }
@@ -158,23 +163,23 @@ void Customer::renderPopup(RenderWindow &window) {
 }
 
 void Customer::addTime() {
-	customerTimerObject.addMoreTime();
+	customerTimer.addMoreTime();
 }
 
 bool Customer::timeIsAdded() {
-	return customerTimerObject.hasAddedTime();
+	return customerTimer.hasAddedTime();
 }
 
 bool Customer::timeIsUp() {
-	return customerTimerObject.hasReachedLimit();
+	return customerTimerPointer->hasReachedLimit();
 }
 
 int Customer::getTimeLeft() {
-	return customerTimerObject.getClockTime();
+	return customerTimerPointer->getClockTime();
 }
 
 int Customer::getTimeLimit() {
-	return customerTimerObject.getLimit();
+	return customerTimerPointer->getLimit();
 }
 
 // this class resets only when there's a new customer

@@ -8,8 +8,9 @@
 
 #include "Chef.h"
 
-static ChefTimer chefTimerObject;
-static Thread chefThread(&ChefTimer::launchTimerThread, &chefTimerObject);
+static ChefTimer chefTimer;
+static Timer *chefTimerPointer = &chefTimer;
+static Thread chefThread(&ChefTimer::launchTimerThread, &chefTimer);
 
 Chef::Chef() {
 	_smoke.setSpriteUsingName("_smoke");
@@ -22,22 +23,26 @@ void Chef::startThread() {
 }
 
 void Chef::stopThread() {
-	chefTimerObject.stopCounting();
+	chefTimerPointer->stopCounting();
 }
 
 // reset properties
 void Chef::getReadyToCook() {
 	_cooking = false;
-	chefTimerObject.restart();
+	
+	chefTimer.restart();
 }
 
 void Chef::cook() {
-	_cooking = true;
-	chefTimerObject.startCounting();
+	if (!_cooking) {
+		_cooking = true;
+		
+		chefTimerPointer->startCounting();
+	}
 }
 
 bool Chef::isDoneCooking() {
-	return chefTimerObject.hasReachedLimit();
+	return chefTimerPointer->hasReachedLimit();
 }
 
 bool Chef::isCooking() {
@@ -45,11 +50,11 @@ bool Chef::isCooking() {
 }
 
 void Chef::renderSmoke(RenderWindow &window) {
-	if (isCooking() && !isDoneCooking()) {
+	if (_cooking && !isDoneCooking()) {
 		_smoke.render(window); // using SpriteClass render function FYI
 	}
 }
 
 int Chef::getTimeLeft() {
-	return chefTimerObject.getClockTime();
+	return chefTimerPointer->getClockTime();
 }

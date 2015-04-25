@@ -115,8 +115,10 @@ void Waitress::stop() {
 	_speed = 0;
 }
 
-void Waitress::takeFoodFromCounter() {
-	_foodTakenFromCounter = true;
+void Waitress::takeFoodFromCounter(Chef &chef) {
+	if (chef.isDoneCooking()) {
+		_foodTakenFromCounter = true;
+	}
 }
 
 bool Waitress::hasTakenFoodFromCounter() {
