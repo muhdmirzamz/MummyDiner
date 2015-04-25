@@ -1,6 +1,12 @@
 ###CHANGELOG
 
-**19 April 2015 - v0.11.0-beta **
+**25 April 2015 - v1.0.0**
+- Removed redundant code in menu system
+- Removed unnecessary adding of customer time
+- Refactored timer code
+- Fixed bug with adding time
+
+**19 April 2015 - v0.11.0-beta**
 - Customer failure now increases when waitress did not serve customer within allocated time
 - Improved customer background detection
 - Improved checking for food order
