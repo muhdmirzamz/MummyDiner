@@ -26,7 +26,7 @@ MainMenuScreen::MainMenuScreen() {
 }
 
 void MainMenuScreen::handleEvent() {
-	fps.hasReachedStartOfFrame();
+	fps.setFrameStartPoint();
 
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
@@ -64,7 +64,7 @@ void MainMenuScreen::handleEvent() {
 void MainMenuScreen::update() {
 	window.clear(color.White);
 	
-	fps.hasReachedEndOfFrame();
+	fps.setFrameEndPoint();
 	
 	if (Utility::debug) {
 		_debug.setFPSValue(fps.getFPS());

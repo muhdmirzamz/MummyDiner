@@ -11,9 +11,11 @@
 bool LevelScreen::normalMode = false;
 
 static FramesPerSecond fps;
+static Timer *fpsPointer = &fps;
 static Thread fpsThread(&FramesPerSecond::startCounting, &fps);
 
 static LevelTimer levelTimer;
+static Timer *levelTimerPointer = &levelTimer;
 static Thread levelTimerThread(&LevelTimer::startCounting, &levelTimer);
 
 LevelScreen::LevelScreen() {
@@ -78,7 +80,7 @@ LevelScreen::LevelScreen() {
 }
 
 void LevelScreen::handleEvent() {
-	fps.hasReachedStartOfFrame();
+	fps.setFrameStartPoint();
 
 	while (window.pollEvent(event)) {
 		if (event.type == event.Closed) {
@@ -149,7 +151,9 @@ void LevelScreen::handleEvent() {
 
 void LevelScreen::spawnCustomer() {
 	if (normalMode) {
-		if (levelTimer.hasReachedLimit()) {
+		_debug.setLevelTimerValue(levelTimerPointer->getClockTime());
+		
+		if (levelTimerPointer->hasReachedLimit()) {
 			if (_customerObj.getSuccessful() == _customerObj.getFailure()) {
 				GameOverScreen::success = false;
 				GameOverScreen::neutral = true;
@@ -179,14 +183,6 @@ void LevelScreen::spawnCustomer() {
 			if (!_customerObj.timeIsAdded()) {
 				_customerObj.addTime();
 			}
-			
-			if (_customerObj.didGetCorrectFood(_menuSystem.getFoodCode())) {
-				if (_customerObj.foodIsServed()) {
-					if (!_customerObj.timeIsAdded()) {
-						_customerObj.addTime();
-					}
-				}
-			}
 		}
 	}
 	
@@ -195,14 +191,6 @@ void LevelScreen::spawnCustomer() {
 		_debug.setTimeLimit(_customerObj.getTimeLimit());
 		_debug.setCustomerSpawnPosition(_customerObj.getSpawnPosition());
 		_debug.setCustomerOrderValue(_customerObj.getOrderedFoodItem());
-		
-		if (normalMode) {
-			_debug.setLevelTimerValue(levelTimer.getClockTime());
-		}
-	} else {
-		if (normalMode) {
-			_debug.setLevelTimerValue(levelTimer.getClockTime());
-		}
 	}
 }
 
@@ -218,11 +206,8 @@ void LevelScreen::moveCharacter() {
 	
 	if (_waitressObj.isInBackground(_foodPickupBackground)) {
 		if (_customerObj.orderIsTaken() && _waitressObj.hasPickedOrderFromMenu()) {
-			if (!_chefObj.isCooking()) {
-				_chefObj.cook();
-			} else if (_chefObj.isDoneCooking()) {
-				_waitressObj.takeFoodFromCounter();
-			}
+			_chefObj.cook();
+			_waitressObj.takeFoodFromCounter(_chefObj);
 		}
 	}
 	
@@ -259,7 +244,7 @@ void LevelScreen::checkCollision() {
 void LevelScreen::update() {
 	window.clear(color.White);
 	
-	fps.hasReachedEndOfFrame();
+	fps.setFrameEndPoint();
 
 	if (Utility::debug) {
 		_debug.setFPSValue(fps.getFPS());
@@ -280,7 +265,7 @@ void LevelScreen::render() {
 	_customerObj.renderPopup(window);
 	_chefObj.renderSmoke(window);
 	
-	if (_waitressObj.hasTakenFoodFromCounter() && !_customerObj.foodIsServed()) {
+	if (_waitressObj.hasTakenFoodFromCounter() && _chefObj.isDoneCooking() && !_customerObj.foodIsServed()) {
 		_topWalkingCustomer->render(window);
 		_bottomWalkingCustomer->render(window);
 	}
@@ -306,10 +291,10 @@ void LevelScreen::render() {
 void LevelScreen::cleanupLevelScreen(int state) {
 	_customerObj.stopThread();
 	_chefObj.stopThread();
-	fps.stopCounting();
+	fpsPointer->stopCounting();
 	
 	if (normalMode) {
-		levelTimer.stopCounting();
+		levelTimerPointer->stopCounting();
 	}
 	
 	cleanup();
