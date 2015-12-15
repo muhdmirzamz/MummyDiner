@@ -1,5 +1,8 @@
 ###CHANGELOG
 
+**15 December 2015 - v1.0.1**
+- Fixed compilation error
+
 **25 April 2015 - v1.0.0**
 - Removed redundant code in menu system
 - Removed unnecessary adding of customer time
